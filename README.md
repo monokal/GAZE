@@ -2,13 +2,13 @@
 
 ## What's GAZE?
 It's a true turnkey open-source media centre solution. It will deploy, configure and network the following services, making use of Docker's ecosystem:
-- Sonarr, to manage TV series downloads.
-- Radarr, to manage movie downloads.
-- Transmission, a torrent client.
-- Plex Media Server, to encode and stream your media to devices.
-- PlexPy, a Plex monitoring dashboard.
-- Ombi, a single web-UI to tie all of the above together.
-- GazeRouter, a proxy service and web-UI to provide easy access to all of the above.
+- **Sonarr**, to manage TV series downloads.
+- **Radarr**, to manage movie downloads.
+- **Transmission**, a torrent client.
+- **Plex Media Server**, to encode and stream media to devices.
+- **PlexPy**, a Plex monitoring dashboard.
+- **Ombi**, a unified web-UI for managing Sonarr/Radarr/Plex/etc.
+- **GazeRouter**, a proxy service and web-UI to provide easy access to all of the above.
 
 ## Installation (Linux)
 To install the `gaze` command-line tool and deploy the full GAZE stack in one shot, just paste the following in to a shell:
