@@ -17,6 +17,8 @@ curl -X GET -H "Content-Type: application/json" https://raw.githubusercontent.co
 
 ## Usage
 
-## Issues
+## Issues / Feature Requests
+If you experiance any problems, bugs or would like to request a new feature, please first search for duplicates then raise a ticket here: https://github.com/monokal/GAZE/issues
 
 ## Contributions
+If you'd like to contribute to the GAZE project, simply fork the `master` branch, make and test your changes then open a Pull Request here: https://github.com/monokal/GAZE/pulls
