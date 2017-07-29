@@ -10,7 +10,7 @@ GAZE is a true turnkey open-source media centre solution. It will deploy, config
 - Ombi, a single web-UI to tie all of the above together.
 
 ## Installation (Linux)
-To install the `gaze` command-line tool and deploy the full GAZE stack, just paste this in to a shell:
+To install the `gaze` command-line tool and deploy the full GAZE stack in one shot, just paste the following in to a shell:
 ```sh
 curl -X GET -H "Content-Type: application/json" https://raw.githubusercontent.com/monokal/GAZE/master/gaze.py > /usr/local/bin/gaze && chmod +x /usr/local/bin/gaze && gaze up
 ```
