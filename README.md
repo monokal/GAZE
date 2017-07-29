@@ -1,12 +1,4 @@
 # GAZE
-Media Centre Stack
-<pre>
- =o 0=        __        .-.
-          .-"` .`'.    /\\|
-  _(\-/)_" ,  .   ,\  /\\\/     =o O=
- {(=o^O=)} .   ./,  |/\\\/
- `-.(Y).-`  ,  |  , |\.-`
-      /~/,_/~~~\,__.-`   =O o=
-     ////~    // ~\\
-   ==`==`   ==`   ==`
-</pre>
+Open Media Centre Stack
+
+![GAZE project logo](docs/raccoon.png "GAZE project")
