@@ -4,6 +4,7 @@
 It's a true turnkey open-source media centre solution. It will deploy, configure and network the following services, making use of Docker's ecosystem:
 - **Sonarr**, to manage TV series downloads.
 - **Radarr**, to manage movie downloads.
+- **Jackett**, to manage torrent trackers.
 - **Transmission**, a torrent client.
 - **Plex Media Server**, to encode and stream media to devices.
 - **PlexPy**, a Plex monitoring dashboard.
