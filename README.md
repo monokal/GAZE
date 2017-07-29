@@ -1,3 +1,3 @@
 ![GAZE project logo](docs/raccoon.png "GAZE project")
 
-Open Media Centre Stack
+The Turnkey Open Media Centre Stack
