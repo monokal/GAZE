@@ -1,7 +1,5 @@
 ![GAZE project logo](docs/raccoon.png "GAZE project")
 
-Turnkey Open Media Centre
-
 ## What is it?
 GAZE is a true turnkey open-source media centre solution. With a single command, GAZE will configure, pipe together and deploy the following services:
 - Sonarr, to manage TV series downloads.
