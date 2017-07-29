@@ -7,7 +7,7 @@ GAZE is a true turnkey open-source media centre solution. It will deploy, config
 - Transmission, a torrent client.
 - Plex Media Server, to encode and stream your media to devices.
 - PlexPy, a Plex monitoring dashboard.
-- Ombi, a single web-UI to all of the above together.
+- Ombi, a single web-UI to tie all of the above together.
 
 ## Installation (Linux)
 ```sh
