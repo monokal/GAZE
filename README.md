@@ -16,7 +16,7 @@ curl -X GET -H "Content-Type: application/json" https://raw.githubusercontent.co
 ```
 
 ## Usage
-To make life easy, we provide the `gaze` command-line tool to manage the full stack of services. If you followed the Installation section above, you already have it! Usage is as follows:
+To make life easy, we provide the `gaze` command-line tool to manage the full stack of services. If you followed the Installation section above, you already have it! Usage can be seen using the following command:
 ```sh
 gaze --help
 ...
