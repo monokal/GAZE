@@ -17,4 +17,6 @@ curl -X GET -H "Content-Type: application/json" https://raw.githubusercontent.co
 
 ## Usage
 
-## Contribute
+## Issues
+
+## Contributions
