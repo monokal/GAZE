@@ -16,6 +16,11 @@ curl -X GET -H "Content-Type: application/json" https://raw.githubusercontent.co
 ```
 
 ## Usage
+To make life easy, we provide the `gaze` command-line tool to manage the full stack of services. If you followed the Installation section above, you already have it! Usage is as follows:
+```sh
+gaze --help
+...
+```
 
 ## Issues / Feature Requests
 If you experiance any problems, bugs or would like to request a new feature, please first search for duplicates then raise a ticket here: https://github.com/monokal/GAZE/issues
