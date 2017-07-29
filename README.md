@@ -1,7 +1,7 @@
 ![GAZE project logo](docs/raccoon.png "GAZE project")
 
 ## What's GAZE?
-It's a true turnkey open-source media centre solution. It will deploy, configure and pipe together the following services, making use of Docker's ecosystem:
+It's a true turnkey open-source media centre solution. It will deploy, configure and network the following services, making use of Docker's ecosystem:
 - Sonarr, to manage TV series downloads.
 - Radarr, to manage movie downloads.
 - Transmission, a torrent client.
