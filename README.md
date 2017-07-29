@@ -10,8 +10,13 @@ GAZE is a true turnkey open-source media centre solution. It will deploy, config
 - Ombi, a single web-UI to tie all of the above together.
 
 ## Installation (Linux)
+Just fire up a shell and paste the following:
 ```sh
-source <(curl -s https://raw.githubusercontent.com/monokal/GAZE/master/install.sh)
+curl -X GET -H "Content-Type: application/json" \
+https://raw.githubusercontent.com/monokal/GAZE/master/gaze.sh \
+> /usr/local/bin/gaze && \
+chmod +x /usr/local/bin/gaze && \
+gaze up
 ```
 
 ## Usage
