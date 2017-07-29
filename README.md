@@ -12,7 +12,7 @@ GAZE is a true turnkey open-source media centre solution. It will deploy, config
 ## Installation (Linux)
 To install the `gaze` command-line tool and deploy the full GAZE stack, just paste this in to a shell:
 ```sh
-curl -X GET -H "Content-Type: application/json" https://raw.githubusercontent.com/monokal/GAZE/master/gaze.sh > /usr/local/bin/gaze && chmod +x /usr/local/bin/gaze && gaze up
+curl -X GET -H "Content-Type: application/json" https://raw.githubusercontent.com/monokal/GAZE/master/gaze.py > /usr/local/bin/gaze && chmod +x /usr/local/bin/gaze && gaze up
 ```
 
 ## Usage
