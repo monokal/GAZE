@@ -16,7 +16,13 @@ NAMESPACE=${GAZE_CLI_NAMESPACE:=monokal}
 IMAGE=${GAZE_CLI_IMAGE:=gaze}
 TAG=${GAZE_CLI_VERSION:=latest}
 
-docker pull "${NAMESPACE}/${IMAGE}:${TAG}" && \
+if ! hash docker 2>/dev/null; then
+    echo 'Docker is required to run GAZE. Please install it then run "gaze init" again.'
+    exit 1
+fi
+
+docker pull "${NAMESPACE}/${IMAGE}:${TAG}"
+
 docker run \
     -ti \
     --name GAZE \
