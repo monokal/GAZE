@@ -1,4 +1,4 @@
-![GAZE project logo](docs/raccoon.png "GAZE project")
+![GAZE project logo](docs/images/raccoon.png "GAZE project")
 
 ## What's GAZE?
 It's a true turnkey open-source media centre solution. It will deploy, configure and network the following services, making use of Docker's ecosystem:
