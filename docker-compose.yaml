@@ -1,5 +1,5 @@
 #            GAZE
-#    Open Media Centre Stack
+#  Turnkey Open Media Centre
 #              __        .-.
 #          .-"` .`'.    /\\|
 #  _(\-/)_" ,  .   ,\  /\\\/     =o O=
@@ -9,16 +9,6 @@
 #     ////~    // ~\\
 #   ==`==`   ==`   ==`
 #          monokal.io
-#
-# The following services are supported:
-#   - GAZE
-#   - Plex
-#   - PlexPy
-#   - Transmission
-#   - Sonarr
-#   - Radarr
-#   - Jackett
-#   - Ombi
 
 version: '3'
 
