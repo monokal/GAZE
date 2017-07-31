@@ -11,9 +11,9 @@ It's a true turnkey open-source media centre solution. It will deploy, configure
 - **Ombi**, a unified web-UI for managing Sonarr/Radarr/Plex/etc.
 - **cAdvisor**, to provide resource usage and performance metrics of services.
 
-Additionally, to package all of the above in to a user-friendly service, we also provide:
+Additionally, to aggregate all of the above in to a single user-friendly service, we also provide:
 - **GAZE Router**, a proxy service and web-UI to provide easy access to all of the above.
-- **GAZE Monitor**, a shiny Grafana dashboard to display the metrics from cAdvisor and other services.
+- **GAZE Monitor**, a Grafana dashboard to display service metrics.
 - **GAZE CLI**, a command-line tool to manage the full stack.
 
 ## Installation (Linux)
