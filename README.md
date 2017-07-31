@@ -17,11 +17,13 @@ Additionally, to aggregate all of the above in to a single user-friendly service
 - **GAZE CLI**, a command-line tool to manage the full stack.
 
 ## Installation (Linux)
+### Full installation
 To install the `gaze` command-line tool and deploy the full GAZE stack in one shot, just paste the following command in to a shell. On completion, you will be presented with all the details you need to access the services.
 ```sh
 curl -X GET -H "Content-Type: application/json" https://raw.githubusercontent.com/monokal/GAZE/master/gaze.py > /usr/local/bin/gaze && chmod +x /usr/local/bin/gaze && gaze up
 ```
-If you'd like to pick and choose which services to install instead, use this command instead:
+### Custom installation
+If you'd like to pick and choose which services to install instead, use this command:
 ```sh
 curl -X GET -H "Content-Type: application/json" https://raw.githubusercontent.com/monokal/GAZE/master/gaze.py > /usr/local/bin/gaze && chmod +x /usr/local/bin/gaze && gaze up --ask
 ```
