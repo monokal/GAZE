@@ -34,7 +34,7 @@ gaze up --ask
 ```
 
 ## Usage
-To make life easy, we provide the `gaze` command-line tool to manage the full stack of services. Usage can be seen using the following command:
+To make life easy, the `gaze` command-line tool can be used to manage the full stack of media centre services. Usage can be seen using the following command:
 ```sh
 gaze --help
 ```
