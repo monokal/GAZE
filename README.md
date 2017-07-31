@@ -18,7 +18,7 @@ Additionally, to aggregate all of the above in to a single user-friendly service
 
 ## Installation (Linux)
 #### Full installation
-To install the `gaze` command-line tool and deploy the full GAZE stack in one shot, just paste the following command in to a shell. On completion, you will be presented with all the details you need to access the services.
+To install the full GAZE stack in one shot, just paste the following command in to a shell. On completion, you will be presented with all the details you need to access your services.
 ```sh
 curl -X GET -H "Content-Type: application/json" https://raw.githubusercontent.com/monokal/GAZE/master/gaze.py > /usr/local/bin/gaze && chmod +x /usr/local/bin/gaze && gaze up
 ```
