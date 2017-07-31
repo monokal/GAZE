@@ -23,7 +23,7 @@ curl -X GET -H "Content-Type: application/json" https://raw.githubusercontent.co
 ```
 
 #### Full deployment (all services)
-To deploy the full GAZE stack in one shot, just paste the following command in to a shell. On completion, you will be presented with all the details you need to access your services. That's it!
+To deploy the full GAZE stack in one shot, just paste the following command in to a shell.
 ```sh
 gaze up
 ```
@@ -32,6 +32,8 @@ If you'd like to pick and choose which services to deploy instead, use this comm
 ```sh
 gaze up --ask
 ```
+
+On completion, you will be presented with all the details you need to access your services. That's it!
 
 ## Usage
 To make life easy, the `gaze` command-line tool can be used to manage the full stack of media centre services. Usage can be seen using the following command:
