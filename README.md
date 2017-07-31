@@ -23,7 +23,7 @@ curl -X GET -H "Content-Type: application/json" https://raw.githubusercontent.co
 ```
 
 #### Full deployment
-To deploy the full GAZE stack in one shot, just paste the following command in to a shell.
+To deploy the full GAZE stack in one shot, just use the following command:
 ```sh
 gaze up
 ```
