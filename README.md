@@ -9,7 +9,12 @@ It's a true turnkey open-source media centre solution. It will deploy, configure
 - **Plex Media Server**, to encode and stream media to devices.
 - **PlexPy**, a Plex monitoring dashboard.
 - **Ombi**, a unified web-UI for managing Sonarr/Radarr/Plex/etc.
+- **cAdvisor**, to provide resource usage and performance metrics of services.
+
+Additionally, to package all of the above in to a user-friendly service, we also provide:
 - **GAZE Router**, a proxy service and web-UI to provide easy access to all of the above.
+- **GAZE Monitor**, a shiny Grafana dashboard to display the metrics from cAdvisor and other services.
+- **GAZE CLI**, a command-line tool to manage the full stack.
 
 ## Installation (Linux)
 To install the `gaze` command-line tool and deploy the full GAZE stack in one shot, just paste the following in to a shell:
