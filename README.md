@@ -17,19 +17,24 @@ Additionally, to aggregate all of the above in to a single user-friendly service
 - **GAZE CLI**, a command-line tool to manage the full stack.
 
 ## Installation (Linux)
-#### Full installation
-To install the full GAZE stack in one shot, just paste the following command in to a shell. On completion, you will be presented with all the details you need to access your services.
+To install the `gaze` command-line tool which is used to deploy and manage all media centre services, just paste the following command in to a shell:
 ```sh
-curl -X GET -H "Content-Type: application/json" https://raw.githubusercontent.com/monokal/GAZE/master/gaze-wrapper.sh > /usr/local/bin/gaze && chmod +x /usr/local/bin/gaze && gaze up
+curl -X GET -H "Content-Type: application/json" https://raw.githubusercontent.com/monokal/GAZE/master/gaze-wrapper.sh > /usr/local/bin/gaze && chmod +x /usr/local/bin/gaze && gaze init
 ```
-#### Custom installation
-If you'd like to pick and choose which services to install instead, use this command:
+
+#### Full deployment
+To deploy the full GAZE stack in one shot, just paste the following command in to a shell. On completion, you will be presented with all the details you need to access your services. That's it!
 ```sh
-curl -X GET -H "Content-Type: application/json" https://raw.githubusercontent.com/monokal/GAZE/master/gaze-wrapper.sh > /usr/local/bin/gaze && chmod +x /usr/local/bin/gaze && gaze up --ask
+gaze up
+```
+#### Custom deployment
+If you'd like to pick and choose which services to deploy instead, use this command:
+```sh
+gaze up --ask
 ```
 
 ## Usage
-To make life easy, we provide the `gaze` command-line tool to manage the full stack of services. If you followed the Installation section above, you already have it! Usage can be seen using the following command:
+To make life easy, we provide the `gaze` command-line tool to manage the full stack of services. Usage can be seen using the following command:
 ```sh
 gaze --help
 ```
