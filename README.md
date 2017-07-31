@@ -9,7 +9,7 @@ It's a true turnkey open-source media centre solution. It will deploy, configure
 - **Plex Media Server**, to encode and stream media to devices.
 - **PlexPy**, a Plex monitoring dashboard.
 - **Ombi**, a unified web-UI for managing Sonarr/Radarr/Plex/etc.
-- **cAdvisor**, to provide resource usage and performance metrics of services.
+- **Prometheus**, to provide resource usage, performance metrics and alerts for services.
 
 Additionally, to aggregate all of the above in to a single user-friendly service, we also provide:
 - **GAZE Router**, a proxy service and web-UI to provide easy access to all of the above.
