@@ -13,7 +13,7 @@ It's a true turnkey open-source media centre solution. It will deploy, configure
 
 Additionally, to aggregate all of the above in to a single user-friendly service, we also provide:
 - **GAZE Router**, a proxy service and web-UI to provide easy access to all of the above.
-- **GAZE Monitor**, a Grafana dashboard to display service metrics.
+- **GAZE Monitor**, a Grafana dashboard to display service metrics and alerts.
 - **GAZE CLI**, a command-line tool to manage the full stack.
 
 ## Installation (Linux)
