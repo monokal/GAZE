@@ -20,12 +20,12 @@ Additionally, to aggregate all of the above in to a single user-friendly service
 #### Full installation
 To install the full GAZE stack in one shot, just paste the following command in to a shell. On completion, you will be presented with all the details you need to access your services.
 ```sh
-curl -X GET -H "Content-Type: application/json" https://raw.githubusercontent.com/monokal/GAZE/master/gaze.py > /usr/local/bin/gaze && chmod +x /usr/local/bin/gaze && gaze up
+curl -X GET -H "Content-Type: application/json" https://raw.githubusercontent.com/monokal/GAZE/master/gaze-wrapper.sh > /usr/local/bin/gaze && chmod +x /usr/local/bin/gaze && gaze up
 ```
 #### Custom installation
 If you'd like to pick and choose which services to install instead, use this command:
 ```sh
-curl -X GET -H "Content-Type: application/json" https://raw.githubusercontent.com/monokal/GAZE/master/gaze.py > /usr/local/bin/gaze && chmod +x /usr/local/bin/gaze && gaze up --ask
+curl -X GET -H "Content-Type: application/json" https://raw.githubusercontent.com/monokal/GAZE/master/gaze-wrapper.sh > /usr/local/bin/gaze && chmod +x /usr/local/bin/gaze && gaze up --ask
 ```
 
 ## Usage
