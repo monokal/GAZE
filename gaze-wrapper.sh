@@ -26,8 +26,9 @@ docker pull "${NAMESPACE}/${IMAGE}:${TAG}"
 # Mount the host Docker daemon's socket so we can manage host containers from
 # within the "gaze" container.
 docker run \
-    -ti \
     --name GAZE \
+    -ti \
+    --rm \
     -v /var/run/docker.sock:/var/run/docker.sock \
     "${NAMESPACE}/${IMAGE}:${TAG}" \
     "${@}"
