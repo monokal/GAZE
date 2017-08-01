@@ -12,9 +12,10 @@
 #   ==`==`   ==`   ==`
 #          monokal.io
 
-NAMESPACE=${GAZE_CLI_NAMESPACE:=monokal}
-IMAGE=${GAZE_CLI_IMAGE:=gaze}
-TAG=${GAZE_CLI_VERSION:=latest}
+NAMESPACE=${GAZECTL_NAMESPACE:='monokal'}
+IMAGE=${GAZECTL_IMAGE:='gazectl'}
+TAG=${GAZECTL_VERSION:='latest'}
+SOCKET=${GAZECTL_SOCKET:='/var/run/docker.sock'}
 
 if ! hash docker 2>/dev/null; then
     echo 'Docker is required to run GAZE. Please install it then run "gaze init" again.'
@@ -24,11 +25,11 @@ fi
 docker pull "${NAMESPACE}/${IMAGE}:${TAG}"
 
 # Mount the host Docker daemon's socket so we can manage host containers from
-# within the "gaze" container.
+# within the "gazectl" container.
 docker run \
-    --name GAZE \
+    --name gazectl \
     -ti \
     --rm \
-    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v "${GAZECTL_SOCKET}:/var/run/docker.sock" \
     "${NAMESPACE}/${IMAGE}:${TAG}" \
     "${@}"
