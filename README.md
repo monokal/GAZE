@@ -40,15 +40,14 @@ To make life easy, the `gaze` command-line tool can be used to manage the full s
 ```sh
 gaze --help
 ```
-
 The `gaze` command-line tool also supports overriding various default runtime arguments using environment variables. Sane defaults have been chosen so you shouldn't need to, but if you do:
-- `GAZECTL_NAMESPACE` - The Docker Namespace of the `gazectl` container (default: "monokal").
-- `GAZECTL_IMAGE` - The Docker Image of the `gazectl` container (default: "gazectl").
-- `GAZECTL_VERSION` - The Docker Image Tag of the `gazectl` container (default: "latest").
-- `GAZECTL_SOCKET` - The Docker socket of the host (default: "/var/run/docker.sock").
+- `GAZECTL_NAMESPACE` - The Docker Namespace of the `gazectl` container (default: `monokal`).
+- `GAZECTL_IMAGE` - The Docker Image of the `gazectl` container (default: `gazectl`).
+- `GAZECTL_VERSION` - The Docker Image Tag of the `gazectl` container (default: `latest`).
+- `GAZECTL_SOCKET` - The Docker socket of the host (default: `/var/run/docker.sock`).
 
 ## Issues / Feature Requests
-If you experiance any problems, bugs or would like to request a new feature, please first search for duplicates then raise a ticket here: https://github.com/monokal/GAZE/issues
+If you experience any problems, bugs or would like to request a new feature, please first search for duplicates then raise a ticket here: https://github.com/monokal/GAZE/issues
 
 ## Contributions
 If you'd like to contribute to the GAZE project, simply fork the `master` branch, make and test your changes then open a Pull Request here: https://github.com/monokal/GAZE/pulls
