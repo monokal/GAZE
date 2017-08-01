@@ -19,8 +19,7 @@ ENV APK_PACKAGES \
     tzdata
 
 ENV PIP_PACKAGES \
-    docker \
-    pyyaml
+    docker
 
 RUN apk --no-cache add $APK_PACKAGES
 
@@ -31,10 +30,10 @@ RUN apk add tzdata && \
 
 RUN pip install $PIP_PACKAGES
 
-RUN mkdir -p /opt/gaze
+RUN mkdir -p /opt/gazectl
 
-WORKDIR /opt/gaze
+WORKDIR /opt/gazectl
 
-COPY gaze .
+COPY gazectl .
 
-ENTRYPOINT ["python", "gaze.py"]
+ENTRYPOINT ["python", "gazectl.py"]
