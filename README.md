@@ -14,12 +14,12 @@ It's a true turnkey open-source media centre solution. It will deploy, configure
 Additionally, to aggregate all of the above in to a single user-friendly service, we also provide:
 - **GAZE Router**, a proxy service and web-UI to provide easy access to all of the above.
 - **GAZE Monitor**, a Grafana dashboard to display service metrics and alerts.
-- **GAZE CLI**, a command-line tool to manage the full stack.
+- **GAZE Control**, a command-line tool to manage the full stack.
 
 ## Installation (Linux)
 To install the `gaze` command-line tool which is used to deploy and manage all media centre services, just paste the following command in to a shell:
 ```sh
-curl -X GET -H "Content-Type: application/json" https://raw.githubusercontent.com/monokal/GAZE/master/gaze-wrapper.sh > /usr/local/bin/gaze && chmod +x /usr/local/bin/gaze && gaze init
+curl -X GET -H "Content-Type: application/json" https://raw.githubusercontent.com/monokal/GAZE/master/gazectl-wrapper.sh > /usr/local/bin/gaze && chmod +x /usr/local/bin/gaze && gaze init
 ```
 
 #### Full deployment
