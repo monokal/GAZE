@@ -24,12 +24,12 @@ To install the `gaze` command-line tool which is used to deploy and manage all m
 curl -X GET -H "Content-Type: application/json" https://raw.githubusercontent.com/monokal/GAZE/master/gazectl/gazectl-wrapper.sh > /usr/local/bin/gaze && chmod +x /usr/local/bin/gaze && gaze init
 ```
 
-#### Full deployment
+### Full deployment
 To deploy the full GAZE stack in one shot, just use the following command:
 ```sh
 gaze up
 ```
-#### Custom deployment
+### Custom deployment
 If you'd like to cherry-pick which services to deploy instead, use this command:
 ```sh
 gaze up --ask
