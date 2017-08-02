@@ -20,14 +20,11 @@ __email__ = "d@monokal.io"
 
 import argparse
 import logging
-import signal
 import sys
-
-import yaml
 
 # Initialise a global logger.
 try:
-    logger = logging.getLogger('Gaze')
+    logger = logging.getLogger('GAZE')
     logger.setLevel(logging.INFO)
 
     # We're in Docker, so just log to stdout.
@@ -64,23 +61,6 @@ class Gaze(object):
 
         # TODO
 
-    def load_config(self, path):
-        """ Load GAZE config from a YAML file.
-
-        :param path: The path of the YAML config file.
-        :return config_dict: A Dict of the parsed config.
-        """
-
-        try:
-            config_file = open(path[0])
-            config_dict = yaml.safe_load(config_file)
-            config_file.close()
-
-            return config_dict
-
-        except Exception:
-            logger.exception("Failed to load config ({}).".format(path[0]))
-
 
 class Init(object):
     def __init__(self):
@@ -104,11 +84,6 @@ class Init(object):
 
 
 def main():
-    # If CapReport is used as a module accept an arguments list, otherwise
-    # have argparse use command-line args.
-    if argv is None:
-        argv = sys.argv[1:]
-
     # Configure argument parsing.
     parser = argparse.ArgumentParser(
         prog="GAZE",
@@ -161,7 +136,7 @@ def main():
         '--ask',
         required=False,
         action="store_true",
-        help="cherry-pick which services to install"
+        help="cherry-pick services to install"
     )
 
     parser_init.set_defaults(func=Init)
