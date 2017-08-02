@@ -30,7 +30,7 @@ To deploy the full GAZE stack in one shot, just use the following command:
 gaze up
 ```
 #### Custom deployment
-If you'd like to pick and choose which services to deploy instead, use this command:
+If you'd like to cherry-pick which services to deploy instead, use this command:
 ```sh
 gaze up --ask
 ```
