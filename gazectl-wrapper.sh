@@ -22,6 +22,11 @@ if ! hash docker 2>/dev/null; then
     exit 1
 fi
 
+if [ ! -S $SOCKET ]; then
+    echo "The Docker daemon socket (${SOCKET}) could not be found. Please ensure it's running then run \"gaze init\" again."
+    exit 1
+fi
+
 docker pull "${NAMESPACE}/${IMAGE}:${TAG}"
 
 # Mount the host Docker daemon's socket so we can manage host containers from
@@ -30,6 +35,6 @@ docker run \
     --name gazectl \
     -ti \
     --rm \
-    -v "${GAZECTL_SOCKET}:/var/run/docker.sock" \
+    -v "${SOCKET}:/var/run/docker.sock" \
     "${NAMESPACE}/${IMAGE}:${TAG}" \
     "${@}"
