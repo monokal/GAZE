@@ -88,21 +88,21 @@ class Bootstrap(object):
 
         logger.info("Checking Docker host:")
         logger.info(
-            "  * System time: {}".format(self.docker_info['SystemTime']))
+            "    * System time: {}".format(self.docker_info['SystemTime']))
         logger.info(
-            "  * Server version: {}".format(self.docker_info['ServerVersion']))
-        logger.info("  * Operating System: {}".format(
+            "    * Server version: {}".format(self.docker_info['ServerVersion']))
+        logger.info("    * Operating System: {}".format(
             self.docker_info['OperatingSystem']))
         logger.info(
-            "  * Architecture: {}".format(self.docker_info['Architecture']))
+            "    * Architecture: {}".format(self.docker_info['Architecture']))
         logger.info(
-            "  * Kernel version: {}".format(self.docker_info['KernelVersion']))
-        logger.info("  * CPUs: {}".format(self.docker_info['NCPU']))
-        logger.info("  * Memory: {}".format(self.docker_info['MemTotal']))
-        logger.info("  * Driver: {}".format(self.docker_info['Driver']))
-        logger.info("  * Default Runtime: {}".format(
+            "    * Kernel version: {}".format(self.docker_info['KernelVersion']))
+        logger.info("    * CPUs: {}".format(self.docker_info['NCPU']))
+        logger.info("    * Memory: {}".format(self.docker_info['MemTotal']))
+        logger.info("    * Driver: {}".format(self.docker_info['Driver']))
+        logger.info("    * Default Runtime: {}".format(
             self.docker_info['DefaultRuntime']))
-        logger.info("  * Debug: {}".format(self.docker_info['Debug']))
+        logger.info("    * Debug: {}".format(self.docker_info['Debug']))
 
 
 def main():
