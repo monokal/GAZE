@@ -24,7 +24,7 @@ import sys
 
 # Initialise a global logger.
 try:
-    logger = logging.getLogger('GAZE')
+    logger = logging.getLogger('gaze')
     logger.setLevel(logging.INFO)
 
     # We're in Docker, so just log to stdout.
@@ -59,12 +59,12 @@ class Gaze(object):
         """
 
         # Instanciate and call the given class.
-        target_class = self.args.func()
+        target_class = self.args.func(self.args)
         return target_class()
 
 
-class Init(object):
-    def __init__(self):
+class Bootstrap(object):
+    def __init__(self, args):
         pass
 
     def __call__(self):
@@ -87,13 +87,11 @@ class Init(object):
 def main():
     # Configure argument parsing.
     parser = argparse.ArgumentParser(
-        prog="GAZE",
+        prog="gaze",
         description="Turnkey Open Media Centre."
     )
 
-    #
     # Top-level arguments.
-    #
     parser.add_argument(
         "-d",
         "--debug",
@@ -102,47 +100,28 @@ def main():
         help="output in debug verbosity"
     )
 
-    parser.add_argument(
-        "-c",
-        "--config",
-        default=['./config.yaml'],
-        required=False,
-        type=str,
-        nargs=1,
-        metavar='PATH',
-        help="path of the GAZE config file"
-    )
-
+    # Subparser arguments.
     subparsers = parser.add_subparsers()
 
     #
-    # "init" parser.
-    #
-    parser_init = subparsers.add_parser(
-        'init',
+    # Start "bootstrap" subparser.
+    parser_bootstrap = subparsers.add_parser(
+        'bootstrap',
         help='bootstrap a GAZE host'
     )
 
-    parser_init.set_defaults(func=Init)
+    group_bootstrap = parser_bootstrap.add_argument_group('required arguments')
 
-    #
-    # "up" parser.
-    #
-    parser_up = subparsers.add_parser(
-        'up',
-        help='deploy GAZE services'
-    )
-
-    group_up = parser_up.add_argument_group('required arguments')
-
-    group_up.add_argument(
-        '--ask',
+    group_bootstrap.add_argument(
+        '--noup',
         required=False,
         action="store_true",
-        help="cherry-pick services to install"
+        help="don't run \"gaze up\" after bootstrapping"
     )
 
-    parser_init.set_defaults(func=Init)
+    parser_bootstrap.set_defaults(func=Bootstrap)
+    # End "bootstrap" subparser.
+    #
 
     try:
         args = parser.parse_args()
@@ -156,7 +135,7 @@ def main():
         logger.setLevel(logging.DEBUG)
 
     client = Gaze(args)
-    client()
+    return client()
 
 
 if __name__ == "__main__":
