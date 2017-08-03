@@ -55,6 +55,8 @@ class Gaze(object):
 
 class Bootstrap(object):
     def __init__(self, args):
+        self.args = args
+
         try:
             self.docker_client = docker.DockerClient(
                 base_url='unix://var/run/docker.sock')
