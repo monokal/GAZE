@@ -49,22 +49,23 @@ class Gaze(object):
         :param args: A Dict of arguments from the command-line.
         """
 
-        self.config = self.load_config(args.config)
-        logger.debug("Loaded config: {}".format(self.config))
+        self.args = args
 
-    def __call__(self, args):
+    def __call__(self):
         """ Orchestrate GAZE execution.
 
         :param args: A Dict of arguments from the command-line.
         :return:
         """
 
-        # TODO
+        # Instanciate and call the given class.
+        target_class = self.args.func()
+        return target_class()
 
 
 class Init(object):
     def __init__(self):
-        # TODO
+        pass
 
     def __call__(self):
         print("""
@@ -132,6 +133,8 @@ def main():
         help='deploy GAZE services'
     )
 
+    group_up = parser_up.add_argument_group('required arguments')
+
     group_up.add_argument(
         '--ask',
         required=False,
@@ -153,7 +156,7 @@ def main():
         logger.setLevel(logging.DEBUG)
 
     client = Gaze(args)
-    client(args)
+    client()
 
 
 if __name__ == "__main__":
