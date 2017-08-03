@@ -46,20 +46,9 @@ except:
 
 class Gaze(object):
     def __init__(self, args):
-        """ Initialise GAZE. Load config, etc.
-
-        :param args: A Dict of arguments from the command-line.
-        """
-
         self.args = args
 
     def __call__(self):
-        """ Orchestrate GAZE execution.
-
-        :param args: A Dict of arguments from the command-line.
-        :return:
-        """
-
         # Instanciate and call the given class.
         target_class = self.args.func(self.args)
         return target_class()
@@ -67,9 +56,13 @@ class Gaze(object):
 
 class Bootstrap(object):
     def __init__(self, args):
-        self.docker_client = docker.DockerClient(base_url='unix://var/run/docker.sock')
+        try:
+            self.docker_client = docker.DockerClient(base_url='unix://var/run/docker.sock')
+            self.docker_info = self.docker_client.info()
 
-        self.docker_info = self.docker_client.info()
+        except Exception as e:
+            logger.exception("Failed to connect to the Docker daemon (unix://var/run/docker.sock). Are you using the \"gaze\" command?)
+            sys.exit(1)
 
     def __call__(self):
         print("""
@@ -88,10 +81,16 @@ class Bootstrap(object):
         logger.info("Welcome to GAZE! Let's check a few things...")
 
         logger.info("Checking Docker host:")
-        logger.info("    Server version: {}".format(self.docker_info['ServerVersion']))
-        logger.info("    Operating System: {}".format(self.docker_info['OperatingSystem']))
-        logger.info("    Architecture: {}".format(self.docker_info['Architecture']))
-        logger.info("    CPUs: {}".format(self.docker_info['NCPU']))
+        logger.info("  * System time: {}".format(self.docker_info['SystemTime']))
+        logger.info("  * Server version: {}".format(self.docker_info['ServerVersion']))
+        logger.info("  * Operating System: {}".format(self.docker_info['OperatingSystem']))
+        logger.info("  * Architecture: {}".format(self.docker_info['Architecture']))
+        logger.info("  * Kernel version: {}".format(self.docker_info['KernelVersion']))
+        logger.info("  * CPUs: {}".format(self.docker_info['NCPU']))
+        logger.info("  * Memory: {}".format(self.docker_info['MemTotal']))
+        logger.info("  * Driver: {}".format(self.docker_info['Driver']))
+        logger.info("  * Default Runtime: {}".format(self.docker_info['DefaultRuntime']))
+        logger.info("  * Debug: {}".format(self.docker_info['Debug']))
 
 
 def main():
