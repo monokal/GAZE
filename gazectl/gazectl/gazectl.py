@@ -22,6 +22,8 @@ import argparse
 import logging
 import sys
 
+import docker
+
 # Initialise a global logger.
 try:
     logger = logging.getLogger('gaze')
@@ -81,7 +83,13 @@ class Bootstrap(object):
       ==`==`   ==`   ==`
              monokal.io\n""")
 
-        logger.info("Bootstrapping GAZE...")
+        logger.info("Welcome to GAZE! Let's check a few things...")
+
+        # Check the host's Docker socket as mounted by gazectl-wrapper.sh
+        docker_client = docker.DockerClient(base_url='unix://var/run/docker.sock')
+        docker_info = docker_client.info()
+
+        logger.info(docker_info)
 
 
 def main():
