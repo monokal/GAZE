@@ -67,7 +67,9 @@ class Gaze(object):
 
 class Bootstrap(object):
     def __init__(self, args):
-        pass
+        self.docker_client = docker.DockerClient(base_url='unix://var/run/docker.sock')
+
+        self.docker_info = self.docker_client.info()
 
     def __call__(self):
         print("""
@@ -85,11 +87,11 @@ class Bootstrap(object):
 
         logger.info("Welcome to GAZE! Let's check a few things...")
 
-        # Check the host's Docker socket as mounted by gazectl-wrapper.sh
-        docker_client = docker.DockerClient(base_url='unix://var/run/docker.sock')
-        docker_info = docker_client.info()
-
-        logger.info(docker_info)
+        logger.info("Checking Docker host:")
+        logger.info("    Server version: {}".format(self.docker_info['ServerVersion']))
+        logger.info("    Operating System: {}".format(self.docker_info['OperatingSystem']))
+        logger.info("    Architecture: {}".format(self.docker_info['Architecture']))
+        logger.info("    CPUs: {}".format(self.docker_info['NCPU']))
 
 
 def main():
