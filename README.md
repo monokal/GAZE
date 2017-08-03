@@ -21,7 +21,7 @@ Although we make an effort to be Operating System agnostic, we test builds on **
 
 To install the `gaze` command-line tool which is used to deploy and manage all media centre services, just paste the following command in to a shell. This will also trigger the bootstrapping process which will allow you to choose which media centre services to deploy. On completion, you will be presented with all the details you need to access your services:
 ```sh
-curl -X GET -H "Content-Type: application/json" https://raw.githubusercontent.com/monokal/GAZE/master/gazectl/gazectl-wrapper.sh > /usr/local/bin/gaze && chmod +x /usr/local/bin/gaze && gaze init
+curl -X GET -H "Content-Type: application/json" https://raw.githubusercontent.com/monokal/GAZE/master/gazectl/gazectl-wrapper.sh > /usr/local/bin/gaze && chmod +x /usr/local/bin/gaze && gaze bootstrap
 ```
 That's it!
 
