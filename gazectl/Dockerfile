@@ -22,7 +22,8 @@ ENV APK_PACKAGES \
 # PyPI packages to install.
 ENV PIP_PACKAGES \
     docker \
-    docker-compose
+    docker-compose \
+    termcolor
 
 # Install the Alpine packages.
 RUN apk --no-cache add $APK_PACKAGES

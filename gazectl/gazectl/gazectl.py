@@ -19,9 +19,11 @@ __author__ = "Daniel Middleton"
 __email__ = "d@monokal.io"
 
 import argparse
-import docker
 import logging
 import sys
+
+from termcolor import colored, cprint
+import docker
 
 # Initialise a global logger.
 try:
@@ -31,10 +33,7 @@ try:
     # We're in Docker, so just log to stdout.
     out = logging.StreamHandler(sys.stdout)
     out.setLevel(logging.DEBUG)
-    formatter = logging.Formatter(
-        "[%(asctime)s][%(name)s][%(levelname)s] %(message)s",
-        "%d-%m-%Y %H:%M:%S"
-    )
+    formatter = logging.Formatter(" %(message)s")
     out.setFormatter(formatter)
     logger.addHandler(out)
 
@@ -57,52 +56,76 @@ class Bootstrap(object):
     def __init__(self, args):
         self.args = args
 
+        # Instantiate a Docker client.
         try:
             self.docker_client = docker.DockerClient(
-                base_url='unix://var/run/docker.sock')
-            self.docker_info = self.docker_client.info()
+                base_url='unix://var/run/docker.sock'
+            )
 
-        except Exception as e:
+        except docker.errors.APIError:
             logger.exception(
-                "Failed to connect to the Docker daemon "
-                "(unix://var/run/docker.sock). Are you using the \"gaze\" "
-                "command?")
+                colored("Failed to instantiate the Docker client.", 'red'))
+            sys.exit(1)
+
+        # Ensure we can ping to host's Docker daemon.
+        try:
+            self.docker_client.ping()
+
+        except docker.errors.APIError:
+            logger.exception(colored(
+                "Failed to ping the Docker daemon (unix://var/run/docker.sock)."
+                "Are you using the \"gaze\" command?", 'red'))
 
             sys.exit(1)
 
     def __call__(self):
-        print("""
-               GAZE
-     Turnkey Open Media Centre
-                 __        .-.
-             .-"` .`'.    /\\|
-     _(\-/)_" ,  .   ,\  /\\\/     =o O=
-    {(=o^O=)} .   ./,  |/\\\/
-    `-.(Y).-`  ,  |  , |\.-`
-         /~/,_/~~~\,__.-`   =O o=
-        ////~    // ~\\
-      ==`==`   ==`   ==`
-             monokal.io\n""")
+        logger.info(colored(r'''
+                                 __        .-.
+                             .-"` .`'.    /\\|
+                     _(\-/)_" ,  .   ,\  /\\\/
+                    {(=o^O=)} .   ./,  |/\\\/
+                    `-.(Y).-`  ,  |  , |\.-`
+                         /~/,_/~~~\,__.-`
+                        ////~    // ~\\
+                      ==`==`   ==`   ==`
+  ██████╗    █████╗   ███████╗  ███████╗
+ ██╔════╝   ██╔══██╗  ╚══███╔╝  ██╔════╝
+ ██║  ███╗  ███████║    ███╔╝   █████╗  
+ ██║   ██║  ██╔══██║   ███╔╝    ██╔══╝  
+ ╚██████╔╝  ██║  ██║  ███████╗  ███████╗
+  ╚═════╝   ╚═╝  ╚═╝  ╚══════╝  ╚══════╝
+   Turnkey Open Media Centre
+    ''', 'blue'))
 
-        logger.info("Welcome to GAZE! Let's check a few things...")
+        logger.info(
+            colored("Welcome to GAZE! Let's prepare your system...", 'blue'))
 
-        logger.info("Checking Docker host:")
-        logger.info(
-            "    * System time: {}".format(self.docker_info['SystemTime']))
-        logger.info(
-            "    * Server version: {}".format(self.docker_info['ServerVersion']))
-        logger.info("    * Operating System: {}".format(
-            self.docker_info['OperatingSystem']))
-        logger.info(
-            "    * Architecture: {}".format(self.docker_info['Architecture']))
-        logger.info(
-            "    * Kernel version: {}".format(self.docker_info['KernelVersion']))
-        logger.info("    * CPUs: {}".format(self.docker_info['NCPU']))
-        logger.info("    * Memory: {}".format(self.docker_info['MemTotal']))
-        logger.info("    * Driver: {}".format(self.docker_info['Driver']))
-        logger.info("    * Default Runtime: {}".format(
-            self.docker_info['DefaultRuntime']))
-        logger.info("    * Debug: {}".format(self.docker_info['Debug']))
+        logger.info(colored("Checking Docker configuration...", 'blue'))
+        try:
+            docker_info = self.docker_client.info()
+
+        except:
+            logger.exception(
+                colored("Failed to retrieve Docker system info from host.",
+                        'red'))
+            sys.exit(1)
+
+        info_items = [
+            ['System time', 'SystemTime'],
+            ['Server version', 'ServerVersion'],
+            ['Operating System', 'OperatingSystem'],
+            ['Architecture', 'Architecture'],
+            ['Kernel version', 'KernelVersion'],
+            ['CPUs', 'NCPU'],
+            ['Memory', 'MemTotal'],
+            ['Driver', 'Driver'],
+            ['Runtime', 'DefaultRuntime'],
+            ['Debug', 'Debug']
+        ]
+
+        for i in info_items:
+            logger.info(
+                colored("    * {}: {}", 'blue').format(i[0], docker_info[i[1]]))
 
 
 def main():
@@ -148,7 +171,7 @@ def main():
         args = parser.parse_args()
 
     except Exception:
-        logger.exception("Failed to parse arguments.")
+        logger.exception(colored("Failed to parse arguments.", 'red'))
         sys.exit(1)
 
     # Turn on debug output if -d/--debug was passed.
