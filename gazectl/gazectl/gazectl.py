@@ -177,15 +177,11 @@ class Compose(object):
     def __init__(self):
         self.clog = Clog()
 
-    def __call__(
-            self,
-            compose_cmd,
-            cmd_args='-d',
-            compose_file='docker-compose.yaml',
-            project_name='gaze',
-            docker_host='unix://var/run/docker.sock',
-            project_dir=os.path.dirname(os.path.realpath(__file__))
-    ):
+    def __call__(self, compose_cmd, cmd_args=None,
+                 compose_file='docker-compose.yaml', project_name='gaze',
+                 docker_host='unix://var/run/docker.sock',
+                 project_dir=os.path.dirname(os.path.realpath(__file__))):
+
         try:
             subprocess.check_output([
                 'docker-compose',
@@ -208,8 +204,21 @@ class Up(object):
         self.compose = Compose()
 
     def __call__(self):
-        self.clog("Provisioning media centre services...", 'info')
-        self.compose('up')
+        self.clog("Provisioning GAZE services...", 'info')
+        self.compose('up', '-d')
+        self.clog("Done!", 'ok')
+
+
+class Down(object):
+    def __init__(self, args):
+        self.args = args
+        self.clog = Clog()
+        self.compose = Compose()
+
+    def __call__(self):
+        self.clog("Removing GAZE services...", 'info')
+        self.compose('down')
+        self.clog("Done!", 'ok')
 
 
 def main():
@@ -260,15 +269,21 @@ def main():
 
     group_up = parser_up.add_argument_group('required arguments')
 
-    # group_up.add_argument(
-    #     '--noup',
-    #     required=False,
-    #     action="store_true",
-    #     help="don't run \"gaze up\" after bootstrapping"
-    # )
-
     parser_up.set_defaults(func=Up)
     # End "up" subparser.
+    #
+
+    #
+    # Start "down" subparser.
+    parser_down = subparsers.add_parser(
+        'down',
+        help='remove media centre services'
+    )
+
+    group_down = parser_down.add_argument_group('required arguments')
+
+    parser_down.set_defaults(func=Down)
+    # End "down" subparser.
     #
 
     try:
