@@ -167,6 +167,8 @@ class Bootstrap(object):
                 colored("    * {}: {}", 'green').format(i[0], docker_info[i[1]])
             )
 
+        self.clog("Bootstrapping complete!", 'info')
+
         if not self.args.noup:
             self.up()
 
