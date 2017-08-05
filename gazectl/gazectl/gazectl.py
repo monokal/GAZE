@@ -198,7 +198,7 @@ class Compose(object):
             subprocess.check_output(
                 compose_command,
                 shell=True,
-                stderr=subprocess.STDOUT
+                stderr=subprocess.STDOUT,
             )
 
         except subprocess.CalledProcessError as e:
