@@ -233,7 +233,7 @@ class Up(object):
         """
         self.clog("Deploying GAZE services...", 'info')
         self.compose('up', '-d')
-        self.clog("    * That's it! Your GAZE Web URL is: "
+        self.clog("    * That's it! You can access GAZE Web at: "
                   "http://localhost", 'success')
 
 
