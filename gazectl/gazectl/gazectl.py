@@ -225,8 +225,7 @@ class Compose(object):
 
     def render_compose_file(self, template):
         j2_env = Environment(
-            loader=FileSystemLoader("templates"),
-            trim_blocks=True
+            loader=FileSystemLoader("templates")
         )
 
         rendered = j2_env.get_template(template).render(
@@ -239,7 +238,7 @@ class Compose(object):
         self.clog("Rendered Docker Compose file:\n{}".format(rendered), 'debug')
 
         with open("/opt/gazectl/gaze-compose.yaml", "wb") as fh:
-            fh.write(str(rendered))
+            fh.write(rendered)
 
 
 class Up(object):
