@@ -22,8 +22,8 @@ import argparse
 import logging
 import sys
 
-from termcolor import colored, cprint
 import docker
+from termcolor import colored
 
 # Initialise a global logger.
 try:
@@ -42,9 +42,35 @@ except:
     sys.exit(1)
 
 
+class Clog(object):
+    def __init__(self):
+        pass
+
+    def __call__(self, message, level):
+        """
+
+        :param message:
+        :param level:
+        :return: None
+        """
+
+        if level == 'info':
+            colour = 'blue'
+        elif level == 'warning':
+            colour = 'yellow'
+        elif level == 'debug':
+            colour = 'grey'
+        else:
+            colour = 'red'
+
+        target_method = getattr(logger, level)
+        target_method(colored(message, colour))
+
+
 class Gaze(object):
     def __init__(self, args):
         self.args = args
+        self.clog = Clog()
 
     def __call__(self):
         # Instantiate and call the given class.
@@ -54,7 +80,13 @@ class Gaze(object):
 
 class Bootstrap(object):
     def __init__(self, args):
+        """
+
+        :param args:
+        """
+
         self.args = args
+        self.clog = Clog()
 
         # Instantiate a Docker client.
         try:
@@ -63,8 +95,8 @@ class Bootstrap(object):
             )
 
         except docker.errors.APIError:
-            logger.exception(
-                colored("Failed to instantiate the Docker client.", 'red'))
+            self.clog("Failed to instantiate the Docker client.", 'exception')
+
             sys.exit(1)
 
         # Ensure we can ping to host's Docker daemon.
@@ -72,23 +104,29 @@ class Bootstrap(object):
             self.docker_client.ping()
 
         except docker.errors.APIError:
-            logger.exception(colored(
-                "Failed to ping the Docker daemon (unix://var/run/docker.sock)."
-                "Are you using the \"gaze\" command?", 'red'))
+            self.clog("Failed to ping the Docker daemon "
+                      "(unix://var/run/docker.sock). Are you using the "
+                      "\"gaze\" command?", 'exception')
 
             sys.exit(1)
 
     def __call__(self):
+        """
+
+        :return:
+        """
+
         logger.info(colored(r'''
-                                 __        .-.
-                             .-"` .`'.    /\\|
-                     _(\-/)_" ,  .   ,\  /\\\/
-                    {(=o^O=)} .   ./,  |/\\\/
-                    `-.(Y).-`  ,  |  , |\.-`
-                         /~/,_/~~~\,__.-`
-                        ////~    // ~\\
-                      ==`==`   ==`   ==`
-  ██████╗    █████╗   ███████╗  ███████╗
+                                  __        .-.
+                              .-"` .`'.    /\\|
+                      _(\-/)_" ,  .   ,\  /\\\/
+                     {(=o^O=)} .   ./,  |/\\\/
+                     `-.(Y).-`  ,  |  , |\.-`
+                          /~/,_/~~~\,__.-`
+                         ////~    // ~\\
+                       ==`==`   ==`   ==`''', 'magenta'))
+
+        logger.info(colored(r''' ██████╗    █████╗   ███████╗  ███████╗
  ██╔════╝   ██╔══██╗  ╚══███╔╝  ██╔════╝
  ██║  ███╗  ███████║    ███╔╝   █████╗  
  ██║   ██║  ██╔══██║   ███╔╝    ██╔══╝  
@@ -97,17 +135,16 @@ class Bootstrap(object):
    Turnkey Open Media Centre
     ''', 'blue'))
 
-        logger.info(
-            colored("Welcome to GAZE! Let's prepare your system...", 'blue'))
+        self.clog("Welcome to GAZE! Let's prepare your system...", 'info')
+        self.clog("Checking Docker configuration...", 'info')
 
-        logger.info(colored("Checking Docker configuration...", 'blue'))
         try:
             docker_info = self.docker_client.info()
 
         except:
-            logger.exception(
-                colored("Failed to retrieve Docker system info from host.",
-                        'red'))
+            self.clog(
+                "Failed to retrieve Docker system info from host.", 'exception'
+            )
             sys.exit(1)
 
         info_items = [
@@ -125,7 +162,8 @@ class Bootstrap(object):
 
         for i in info_items:
             logger.info(
-                colored("    * {}: {}", 'blue').format(i[0], docker_info[i[1]]))
+                colored("    * {}: {}", 'green').format(i[0], docker_info[i[1]])
+            )
 
 
 def main():
