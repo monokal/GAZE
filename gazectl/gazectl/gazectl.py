@@ -175,9 +175,9 @@ class Bootstrap(object):
         ]
 
         for i in info_items:
-            self.clog("    * {}: {}".format(i[0], docker_info[i[1]]), 'success')
+            self.clog("    * {}: {}".format(i[0], docker_info[i[1]]), 'info')
 
-        self.clog("Bootstrapping complete!", 'info')
+        self.clog("Bootstrapping complete!", 'success')
 
         if self.args.noup:
             self.clog("To deploy GAZE services, use the \"gaze up\" command.",
@@ -233,8 +233,8 @@ class Up(object):
         """
         self.clog("Deploying GAZE services...", 'info')
         self.compose('up', '-d')
-        self.clog("\nThat's it! Your GAZE services can be found here:\n    "
-                  "* http://localhost\n", 'success')
+        self.clog("\n    * That's it! Your GAZE services can be found here:\n    "
+                  "http://localhost\n", 'success')
 
 
 class Down(object):
