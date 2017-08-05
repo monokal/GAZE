@@ -62,8 +62,6 @@ class Clog(object):
             colour = 'yellow'
         elif level == 'debug':
             colour = 'magenta'
-        elif level == 'ok':
-            colour = 'green'
         else:
             colour = 'red'
 
@@ -211,7 +209,7 @@ class Up(object):
     def __call__(self):
         self.clog("Provisioning GAZE services...", 'info')
         self.compose('up', '-d')
-        self.clog("Done!", 'ok')
+        self.clog("Done!", 'info')
 
 
 class Down(object):
@@ -223,7 +221,7 @@ class Down(object):
     def __call__(self):
         self.clog("Removing GAZE services...", 'info')
         self.compose('down')
-        self.clog("Done!", 'ok')
+        self.clog("Done!", 'info')
 
 
 def main():
