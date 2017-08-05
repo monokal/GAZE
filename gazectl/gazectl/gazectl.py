@@ -58,10 +58,17 @@ class Clog(object):
 
         if level == 'info':
             colour = 'blue'
+
         elif level == 'warning':
             colour = 'yellow'
+
         elif level == 'debug':
             colour = 'magenta'
+
+        elif level == 'success':
+            level = 'info'
+            colour = 'green'
+
         else:
             colour = 'red'
 
@@ -101,17 +108,6 @@ class Bootstrap(object):
             self.clog("Failed to instantiate the Docker client.", 'exception')
             sys.exit(1)
 
-        # Ensure we can ping to host's Docker daemon.
-        try:
-            self.docker_client.ping()
-
-        except docker.errors.APIError:
-            self.clog("Failed to ping the Docker daemon "
-                      "(unix://var/run/docker.sock). Are you using the "
-                      "\"gaze\" command?", 'exception')
-
-            sys.exit(1)
-
     def __call__(self):
         """
 
@@ -140,6 +136,21 @@ class Bootstrap(object):
         self.clog("Welcome to GAZE! Let's prepare your system...", 'info')
         self.clog("Checking Docker configuration...", 'info')
 
+        # Ensure we can ping to host's Docker daemon.
+        self.clog("Checking Docker daemon connectivity...", 'info')
+
+        try:
+            self.docker_client.ping()
+
+        except docker.errors.APIError:
+            self.clog("Failed to ping the Docker daemon "
+                      "(unix://var/run/docker.sock). Are you using the "
+                      "\"gaze\" command?", 'exception')
+
+            sys.exit(1)
+
+        self.clog("    * Success!", 'success')
+
         try:
             docker_info = self.docker_client.info()
 
@@ -163,11 +174,9 @@ class Bootstrap(object):
         ]
 
         for i in info_items:
-            logger.info(
-                colored("    * {}: {}", 'green').format(i[0], docker_info[i[1]])
-            )
+            self.clog("    * {}: {}", 'info').format(i[0], docker_info[i[1]])
 
-        self.clog("Bootstrapping complete!", 'info')
+        self.clog("Bootstrapping complete!", 'success')
 
         if not self.args.noup:
             self.up()
