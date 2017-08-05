@@ -25,8 +25,8 @@ import subprocess
 import sys
 
 import docker
-from termcolor import colored
 from jinja2 import Environment, FileSystemLoader
+from termcolor import colored
 
 # Initialise a global logger.
 try:
