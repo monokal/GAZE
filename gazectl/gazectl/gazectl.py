@@ -35,7 +35,7 @@ try:
     # We're in Docker, so just log to stdout.
     out = logging.StreamHandler(sys.stdout)
     out.setLevel(logging.DEBUG)
-    formatter = logging.Formatter(" %(message)s")
+    formatter = logging.Formatter("%(message)s")
     out.setFormatter(formatter)
     logger.addHandler(out)
 
