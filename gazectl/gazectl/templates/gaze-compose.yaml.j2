@@ -17,7 +17,7 @@ networks:
 
 services:
   # gaze:
-  #   image: monokal/gaze:latest
+  #   image: monokal/gazeweb:latest
   #   networks:
   #     - gaze
   #   ports:
@@ -27,8 +27,8 @@ services:
   plex:
     image: plexinc/pms-docker:latest
     environment:
-      - PLEX_CLAIM="${PLEX_CLAIM}"
-      - ADVERTISE_IP="${PLEX_IP}"
+      - PLEX_CLAIM="{{plex_claim}}"
+      - ADVERTISE_IP="{{plex_ip}}"
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./media/radarr/movies:/data/movies
@@ -59,8 +59,8 @@ services:
     networks:
       - gaze
     environment:
-      - PUID=${USER_ID}
-      - PGID=${GROUP_ID}
+      - PUID={{uid}}
+      - PGID={{gid}}
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./media/transmission/config/:/config
@@ -80,8 +80,8 @@ services:
       - ./media/sonarr/config:/config
       - ./media/transmission/downloads/:/downloads
     environment:
-      - PUID=${USER_ID}
-      - PGID=${GROUP_ID}
+      - PUID={{uid}
+      - PGID={{gid}}
     depends_on:
       - transmission
     restart: always
@@ -99,8 +99,8 @@ services:
       - ./media/radarr/config:/config
       - ./media/transmission/downloads/:/downloads
     environment:
-      - PUID=${USER_ID}
-      - PGID=${GROUP_ID}
+      - PUID={{uid}}
+      - PGID={{gid}}
     depends_on:
       - transmission
     restart: always
@@ -115,8 +115,8 @@ services:
       - ./media/jackett/config/:/config
       - ./media/transmission/downloads/:/downloads
     environment:
-      - PUID=${USER_ID}
-      - PGID=${GROUP_ID}
+      - PUID={{uid}}
+      - PGID={{gid}}
     restart: always
     ports:
       - "9117:9117"
@@ -129,8 +129,8 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - ./media/ombi/config:/config
     environment:
-      - PUID=${USER_ID}
-      - PGID=${GROUP_ID}
+      - PUID={{uid}}
+      - PGID={{gid}}
     depends_on:
       - plex
       - sonarr

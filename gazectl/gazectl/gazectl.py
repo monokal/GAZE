@@ -26,6 +26,7 @@ import sys
 
 import docker
 from termcolor import colored
+from jinja2 import Environment, FileSystemLoader
 
 # Initialise a global logger.
 try:
@@ -191,15 +192,18 @@ class Compose(object):
         self.clog = Clog()
 
     def __call__(self, action, action_args=None,
-                 compose_file='docker-compose.yaml', project_name='gaze',
-                 docker_host='unix://var/run/docker.sock',
+                 template='gaze-compose.yaml.j2', project_name='gaze',
+                 host='unix://var/run/docker.sock',
                  project_dir=os.path.dirname(os.path.realpath(__file__))):
+
+        # Render the GAZE Docker Compose file.
+        compose_file = self.render_compose_file(template=template)
 
         compose_command = [
             'docker-compose',
             '-f', compose_file,
             '-p', project_name,
-            '-H', docker_host,
+            '-H', host,
             '--project-directory', project_dir,
             action
         ]
@@ -209,8 +213,7 @@ class Compose(object):
 
         try:
             subprocess.check_output(
-                compose_command,
-                # stderr=subprocess.STDOUT
+                compose_command
             )
 
         except subprocess.CalledProcessError as e:
@@ -219,6 +222,24 @@ class Compose(object):
                 "{}.".format(e.output), 'exception'
             )
             sys.exit(1)
+
+    def render_compose_file(self, template):
+        cwd = os.path.dirname(os.path.abspath(__file__))
+
+        j2_env = Environment(
+            loader=FileSystemLoader("{}/templates".format(cwd)),
+            trim_blocks=True
+        )
+
+        rendered = j2_env.get_template(template).render(
+            plex_claim="",
+            plex_ip="",
+            uid="",
+            gid=""
+        )
+
+        self.clog("Rendered Docker Compose file:\n{}".format(rendered), 'debug')
+        return rendered
 
 
 class Up(object):
