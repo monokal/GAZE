@@ -151,7 +151,7 @@ class Bootstrap(object):
 
         self.clog("    * Success!", 'success')
 
-        self.clog("Checking Docker system configuration...")
+        self.clog("Checking Docker system configuration...", 'info')
         try:
             docker_info = self.docker_client.info()
 
