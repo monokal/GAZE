@@ -233,8 +233,8 @@ class Up(object):
         """
         self.clog("Deploying GAZE services...", 'info')
         self.compose('up', '-d')
-        self.clog("\n    * That's it! Your GAZE services can be found here:\n    "
-                  "http://localhost\n", 'success')
+        self.clog("    * That's it! Your GAZE services can be found here: "
+                  "http://localhost", 'success')
 
 
 class Down(object):
