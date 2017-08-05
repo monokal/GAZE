@@ -21,9 +21,12 @@ __email__ = "d@monokal.io"
 import argparse
 import logging
 import sys
+import subprocess
+import os
 
 import docker
 from termcolor import colored
+import compose.cli.command
 
 # Initialise a global logger.
 try:
@@ -100,7 +103,6 @@ class Bootstrap(object):
 
         except docker.errors.APIError:
             self.clog("Failed to instantiate the Docker client.", 'exception')
-
             sys.exit(1)
 
         # Ensure we can ping to host's Docker daemon.
@@ -170,6 +172,45 @@ class Bootstrap(object):
             )
 
 
+class Compose(object):
+    def __init__(self):
+        self.clog = Clog()
+
+    def __call__(
+            self,
+            compose_cmd,
+            cmd_args='',
+            compose_file='docker-compose.yml',
+            project_name='gaze',
+            docker_host='unix://var/run/docker.sock',
+            project_dir=os.path.dirname(os.path.realpath(__file__))
+    ):
+        try:
+            subprocess.check_output([
+                'docker-compose',
+                '-f', compose_file,
+                '-p', project_name,
+                '-H', docker_host,
+                '--project-directory', project_dir,
+                compose_cmd, cmd_args
+            ])
+
+        except:
+            self.clog("Failed to execute Docker Compose command.", 'exception')
+            sys.exit(1)
+
+
+class Up(object):
+    def __init__(self, args):
+        self.args = args
+        self.clog = Clog()
+        self.compose = Compose()
+
+    def __call__(self):
+        self.compose('up')
+
+
+
 def main():
     # Configure argument parsing.
     parser = argparse.ArgumentParser(
@@ -207,6 +248,26 @@ def main():
 
     parser_bootstrap.set_defaults(func=Bootstrap)
     # End "bootstrap" subparser.
+    #
+
+    #
+    # Start "up" subparser.
+    parser_up = subparsers.add_parser(
+        'up',
+        help='deploy media centre services'
+    )
+
+    group_up = parser_up.add_argument_group('required arguments')
+
+    # group_up.add_argument(
+    #     '--noup',
+    #     required=False,
+    #     action="store_true",
+    #     help="don't run \"gaze up\" after bootstrapping"
+    # )
+
+    parser_up.set_defaults(func=Up)
+    # End "up" subparser.
     #
 
     try:
