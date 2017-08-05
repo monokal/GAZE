@@ -203,7 +203,7 @@ class Compose(object):
 
         except subprocess.CalledProcessError as e:
             self.clog("Failed to execute Docker Compose with exception: "
-                      "\n{}.".format(e), 'exception')
+                      "\n{}.".format(e.output), 'exception')
 
             sys.exit(1)
 
