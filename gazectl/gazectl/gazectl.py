@@ -195,10 +195,16 @@ class Compose(object):
             compose_command.append(action_args)
 
         try:
-            subprocess.check_output(compose_command)
+            subprocess.check_output(
+                compose_command,
+                shell=True,
+                stderr=subprocess.STDOUT
+            )
 
-        except:
-            self.clog("Failed to execute Docker Compose command.", 'exception')
+        except subprocess.CalledProcessError as e:
+            self.clog("Failed to execute Docker Compose with exception: "
+                      "\n{}.".format(e), 'exception')
+
             sys.exit(1)
 
 
