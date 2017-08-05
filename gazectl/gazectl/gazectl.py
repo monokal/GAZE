@@ -177,20 +177,25 @@ class Compose(object):
     def __init__(self):
         self.clog = Clog()
 
-    def __call__(self, compose_cmd, cmd_args=None,
+    def __call__(self, action, action_args=None,
                  compose_file='docker-compose.yaml', project_name='gaze',
                  docker_host='unix://var/run/docker.sock',
                  project_dir=os.path.dirname(os.path.realpath(__file__))):
 
+        compose_command = [
+            'docker-compose',
+            '-f', compose_file,
+            '-p', project_name,
+            '-H', docker_host,
+            '--project-directory', project_dir,
+            action
+        ]
+
+        if action_args is not None:
+            compose_command.append(action_args)
+
         try:
-            subprocess.check_output([
-                'docker-compose',
-                '-f', compose_file,
-                '-p', project_name,
-                '-H', docker_host,
-                '--project-directory', project_dir,
-                compose_cmd, cmd_args
-            ])
+            subprocess.check_output(compose_command)
 
         except:
             self.clog("Failed to execute Docker Compose command.", 'exception')
