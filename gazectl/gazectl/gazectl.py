@@ -210,7 +210,7 @@ class Compose(object):
         try:
             subprocess.check_output(
                 compose_command,
-                stderr=subprocess.STDOUT
+                # stderr=subprocess.STDOUT
             )
 
         except subprocess.CalledProcessError as e:
@@ -228,9 +228,6 @@ class Up(object):
         self.compose = Compose()
 
     def __call__(self):
-        """
-        Deploy GAZE containers via Docker Compose.
-        """
         self.clog("Deploying GAZE services...", 'info')
         self.compose('up', '-d')
         self.clog("    * That's it! You can access GAZE Web at: "
