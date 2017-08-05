@@ -201,7 +201,7 @@ class Compose(object):
 
         compose_command = [
             'docker-compose',
-            '-f', '/opt/gazectl/gaze-compose-yaml',
+            '-f', '/opt/gazectl/gaze-compose.yaml',
             '-p', project_name,
             '-H', host,
             '--project-directory', project_dir,
