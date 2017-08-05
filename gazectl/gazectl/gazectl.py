@@ -177,7 +177,7 @@ class Bootstrap(object):
         for i in info_items:
             self.clog("    * {}: {}".format(i[0], docker_info[i[1]]), 'info')
 
-        self.clog("Bootstrapping complete!", 'success')
+        self.clog("Bootstrapping complete.", 'info')
 
         if self.args.noup:
             self.clog("To deploy GAZE services, use the \"gaze up\" command.",
