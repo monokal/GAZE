@@ -211,7 +211,8 @@ class Up(object):
     def __call__(self):
         self.clog("Provisioning GAZE services...", 'info')
         self.compose('up', '-d')
-        self.clog("Done!", 'info')
+        self.clog("\nThat's it! Go to \"http://localhost\" to view your media "
+                  "centre services.\n", 'info')
 
 
 class Down(object):
