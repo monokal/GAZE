@@ -176,7 +176,7 @@ class Bootstrap(object):
         ]
 
         for i in info_items:
-            self.clog("    * {}: {}".format(i[0], docker_info[i[1]]), 'info')
+            self.clog("    * {}: {}".format(i[0], docker_info[i[1]]), 'success')
 
         self.clog("Bootstrapping complete.", 'info')
 
