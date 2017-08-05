@@ -59,7 +59,9 @@ class Clog(object):
         elif level == 'warning':
             colour = 'yellow'
         elif level == 'debug':
-            colour = 'grey'
+            colour = 'cyan'
+        elif level == 'ok':
+            colour = 'green'
         else:
             colour = 'red'
 
@@ -88,7 +90,7 @@ class Bootstrap(object):
         self.args = args
         self.clog = Clog()
 
-        self.clog("Debug in on.", 'debug')
+        self.clog("Debug is on.", 'debug')
 
         # Instantiate a Docker client.
         try:
