@@ -206,8 +206,7 @@ class Compose(object):
         try:
             subprocess.check_output(
                 compose_command,
-                shell=True,
-                stderr=subprocess.STDOUT,
+                stderr=subprocess.STDOUT
             )
 
         except subprocess.CalledProcessError as e:
@@ -226,8 +225,8 @@ class Up(object):
     def __call__(self):
         self.clog("Provisioning GAZE services...", 'info')
         self.compose('up', '-d')
-        self.clog("\nThat's it! Go to \"http://localhost\" to view your media "
-                  "centre services.\n", 'info')
+        self.clog("That's it! Your GAZE services can be found here:\n\n    "
+                  "* GAZE Web: http://localhost\n", 'success')
 
 
 class Down(object):
