@@ -91,8 +91,7 @@ class Bootstrap(object):
 
         self.args = args
         self.clog = Clog()
-
-        self.clog("Debug is on.", 'debug')
+        self.up = Up(self.args)
 
         # Instantiate a Docker client.
         try:
@@ -170,6 +169,9 @@ class Bootstrap(object):
                 colored("    * {}: {}", 'green').format(i[0], docker_info[i[1]])
             )
 
+        if not self.args.noup:
+            self.up()
+
 
 class Compose(object):
     def __init__(self):
@@ -178,8 +180,8 @@ class Compose(object):
     def __call__(
             self,
             compose_cmd,
-            cmd_args='',
-            compose_file='docker-compose.yml',
+            cmd_args='-d',
+            compose_file='docker-compose.yaml',
             project_name='gaze',
             docker_host='unix://var/run/docker.sock',
             project_dir=os.path.dirname(os.path.realpath(__file__))
@@ -206,6 +208,7 @@ class Up(object):
         self.compose = Compose()
 
     def __call__(self):
+        self.clog("Provisioning media centre services...", 'info')
         self.compose('up')
 
 
