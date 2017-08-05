@@ -88,6 +88,8 @@ class Bootstrap(object):
         self.args = args
         self.clog = Clog()
 
+        self.clog("Debug in on.", 'debug')
+
         # Instantiate a Docker client.
         try:
             self.docker_client = docker.DockerClient(
