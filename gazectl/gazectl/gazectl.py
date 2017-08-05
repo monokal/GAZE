@@ -237,7 +237,7 @@ class Compose(object):
 
         self.clog("Rendered Docker Compose file:\n{}".format(rendered), 'debug')
 
-        with open("/opt/gazectl/gaze-compose.yaml", "wb") as fh:
+        with open("/opt/gazectl/gaze-compose.yaml", "w") as fh:
             fh.write(rendered)
 
 
