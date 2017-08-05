@@ -197,11 +197,11 @@ class Compose(object):
                  project_dir=os.path.dirname(os.path.realpath(__file__))):
 
         # Render the GAZE Docker Compose file.
-        compose_file = self.render_compose_file(template=template)
+        self.render_compose_file(template=template)
 
         compose_command = [
             'docker-compose',
-            '-f', compose_file,
+            '-f', '/opt/gazectl/gaze-compose-yaml',
             '-p', project_name,
             '-H', host,
             '--project-directory', project_dir,
@@ -224,22 +224,22 @@ class Compose(object):
             sys.exit(1)
 
     def render_compose_file(self, template):
-        cwd = os.path.dirname(os.path.abspath(__file__))
-
         j2_env = Environment(
-            loader=FileSystemLoader("{}/templates".format(cwd)),
+            loader=FileSystemLoader("templates"),
             trim_blocks=True
         )
 
         rendered = j2_env.get_template(template).render(
-            plex_claim="",
-            plex_ip="",
-            uid="",
-            gid=""
+            plex_claim="test",
+            plex_ip="test",
+            uid="test",
+            gid="test"
         )
 
         self.clog("Rendered Docker Compose file:\n{}".format(rendered), 'debug')
-        return rendered
+
+        with open("/opt/gazectl/gaze-compose.yaml", "wb") as fh:
+            fh.write(rendered)
 
 
 class Up(object):
