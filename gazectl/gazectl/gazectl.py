@@ -177,9 +177,12 @@ class Bootstrap(object):
         for i in info_items:
             self.clog("    * {}: {}".format(i[0], docker_info[i[1]]), 'success')
 
-        self.clog("Bootstrapping complete!", 'success')
+        self.clog("Bootstrapping complete!", 'info')
 
-        if not self.args.noup:
+        if self.args.noup:
+            self.clog("To deploy GAZE services, use the \"gaze up\" command.",
+                      'info')
+        else:
             self.up()
 
 
@@ -211,9 +214,10 @@ class Compose(object):
             )
 
         except subprocess.CalledProcessError as e:
-            self.clog("Failed to execute Docker Compose with exception: "
-                      "\n{}.".format(e.output), 'exception')
-
+            self.clog(
+                "Failed to execute Docker Compose with exception: \n"
+                "{}.".format(e.output), 'exception'
+            )
             sys.exit(1)
 
 
@@ -224,10 +228,13 @@ class Up(object):
         self.compose = Compose()
 
     def __call__(self):
-        self.clog("Provisioning GAZE services...", 'info')
+        """
+        Deploy GAZE containers via Docker Compose.
+        """
+        self.clog("Deploying GAZE services...", 'info')
         self.compose('up', '-d')
         self.clog("That's it! Your GAZE services can be found here:\n\n    "
-                  "* GAZE Web: http://localhost\n", 'success')
+                  "* http://localhost\n", 'success')
 
 
 class Down(object):
