@@ -151,6 +151,7 @@ class Bootstrap(object):
 
         self.clog("    * Success!", 'success')
 
+        self.clog("Checking Docker system configuration...")
         try:
             docker_info = self.docker_client.info()
 
@@ -174,7 +175,7 @@ class Bootstrap(object):
         ]
 
         for i in info_items:
-            self.clog("    * {}: {}", 'info').format(i[0], docker_info[i[1]])
+            self.clog("    * {}: {}".format(i[0], docker_info[i[1]]), 'success')
 
         self.clog("Bootstrapping complete!", 'success')
 
