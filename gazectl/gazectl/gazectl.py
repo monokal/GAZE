@@ -20,13 +20,12 @@ __email__ = "d@monokal.io"
 
 import argparse
 import logging
-import sys
-import subprocess
 import os
+import subprocess
+import sys
 
 import docker
 from termcolor import colored
-import compose.cli.command
 
 # Initialise a global logger.
 try:
@@ -208,7 +207,6 @@ class Up(object):
 
     def __call__(self):
         self.compose('up')
-
 
 
 def main():
