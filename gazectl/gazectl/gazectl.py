@@ -59,7 +59,7 @@ class Clog(object):
         elif level == 'warning':
             colour = 'yellow'
         elif level == 'debug':
-            colour = 'cyan'
+            colour = 'magenta'
         elif level == 'ok':
             colour = 'green'
         else:
