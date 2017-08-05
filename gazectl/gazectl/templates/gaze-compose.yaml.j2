@@ -80,7 +80,7 @@ services:
       - ./media/sonarr/config:/config
       - ./media/transmission/downloads/:/downloads
     environment:
-      - PUID={{uid}
+      - PUID={{uid}}
       - PGID={{gid}}
     depends_on:
       - transmission
