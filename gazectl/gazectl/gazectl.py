@@ -137,7 +137,6 @@ class Bootstrap(object):
     ''', 'blue'))
 
         self.clog("Welcome to GAZE! Let's prepare your system...", 'info')
-        self.clog("Checking Docker configuration...", 'info')
 
         # Ensure we can ping to host's Docker daemon.
         self.clog("Checking Docker daemon connectivity...", 'info')
@@ -264,7 +263,7 @@ class Up(object):
         self.clog("Deploying GAZE services...", 'info')
         self.compose('up', '-d')
         self.clog(
-            "That's it! You can access GAZE Web at: http://localhost", 'success'
+            "That's it! You can visit GAZE Web at: http://localhost", 'success'
         )
 
 
@@ -277,7 +276,8 @@ class Down(object):
     def __call__(self):
         self.clog("Removing GAZE services...", 'info')
         self.compose('down')
-        self.clog("GAZE services have been successfully removed.", 'success')
+        self.clog("GAZE services have been successfully removed. "
+                  "Use the \"gaze up\" command to redeploy.", 'success')
 
 
 def main():
