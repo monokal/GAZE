@@ -312,7 +312,7 @@ class Status(object):
             sys.exit(1)
 
         for i in containers:
-            print(i)
+            print(i.status)
 
 
 def main():
