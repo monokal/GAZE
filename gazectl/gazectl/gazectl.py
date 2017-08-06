@@ -36,7 +36,9 @@ try:
     # We're in Docker, so just log to stdout.
     out = logging.StreamHandler(sys.stdout)
     out.setLevel(logging.DEBUG)
-    formatter = logging.Formatter("[GAZE] %(message)s")
+    formatter = logging.Formatter("{} %(message)s".format(
+        colored('[GAZE]', 'magenta'))
+    )
     out.setFormatter(formatter)
     logger.addHandler(out)
 
