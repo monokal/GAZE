@@ -145,10 +145,10 @@ class Bootstrap(object):
             self.docker_client.ping()
 
         except docker.errors.APIError:
-            self.clog("Failed to ping the Docker daemon "
-                      "(unix://var/run/docker.sock). Are you using the "
-                      "\"gaze\" command?", 'exception')
-
+            self.clog(
+                "Failed to ping the Docker daemon (unix://var/run/docker.sock)."
+                " Are you using the \"gaze\" command?", 'exception'
+            )
             sys.exit(1)
 
         self.clog("    * Success!", 'success')
@@ -222,7 +222,7 @@ class Compose(object):
             compose_command.append(action_args)
 
         try:
-            self.clog(subprocess.check_output(compose_command), 'info')
+            subprocess.check_output(compose_command)
 
         except subprocess.CalledProcessError as e:
             self.clog(

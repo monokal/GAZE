@@ -12,12 +12,14 @@
 #   ==`==`   ==`   ==`
 #          monokal.io
 
+# Set environment variable defaults.
 NAMESPACE=${GAZECTL_NAMESPACE:='monokal'}
 IMAGE=${GAZECTL_IMAGE:='gazectl'}
 TAG=${GAZECTL_VERSION:='latest'}
 SOCKET=${GAZECTL_SOCKET:='/var/run/docker.sock'}
 
-if ! hash docker 2>/dev/null; then
+# Ensure we have Docker and the Docker daemon socket exists.
+if ! hash docker &>/dev/null; then
     echo 'Docker is required to run GAZE. Please install it then run "gaze bootstrap" again.'
     exit 1
 fi
@@ -27,7 +29,8 @@ if [ ! -S $SOCKET ]; then
     exit 1
 fi
 
-docker pull "${NAMESPACE}/${IMAGE}:${TAG}"
+# Always ensure we're running the latest push.
+docker pull "${NAMESPACE}/${IMAGE}:${TAG}" &>/dev/null
 
 # Mount the host Docker daemon's socket so we can manage host containers from
 # within the "gazectl" container.
