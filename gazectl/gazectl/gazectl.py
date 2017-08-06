@@ -264,7 +264,7 @@ class Up(object):
         self.clog("Deploying GAZE services...", 'info')
         self.compose('up', '-d')
         self.clog(
-            "That's it! You can visit GAZE Web at: http://localhost/", 'success'
+            "That's it! You can visit GAZE Web at http://localhost/", 'success'
         )
 
 
@@ -299,7 +299,8 @@ class Status(object):
             sys.exit(1)
 
     def __call__(self):
-        self.clog("Your GAZE services:\n", 'info')
+        self.clog("Your GAZE services are listed below. To access them, "
+                  "visit GAZE Web at http://localhost/\n", 'info')
 
         try:
             containers = self.docker_client.containers.list(
@@ -333,9 +334,6 @@ class Status(object):
                 tablefmt='simple'
             )
         )
-
-        self.clog("\nTo access your services, visit GAZE Web at: "
-                  "http://localhost/", 'info')
 
 
 def main():
