@@ -312,7 +312,7 @@ class Status(object):
             )
             sys.exit(1)
 
-        table_headers = ['NAME', 'STATUS', 'ID']
+        table_headers = ['Service', 'Status', 'ID']
         table_data = []
 
         # table_data = []
