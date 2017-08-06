@@ -299,7 +299,7 @@ class Status(object):
             sys.exit(1)
 
     def __call__(self):
-        self.clog("Your GAZE services:", 'info')
+        self.clog("Your GAZE services:\n", 'info')
 
         try:
             containers = self.docker_client.containers.list(
@@ -331,7 +331,7 @@ class Status(object):
                 tabular_data=table_data,
                 headers=table_headers,
                 tablefmt='simple'
-            )
+            ), "\n"
         )
 
 
