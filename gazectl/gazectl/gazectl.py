@@ -334,8 +334,8 @@ class Status(object):
             )
         )
 
-        self.clog("To access your services, visit GAZE Web at: "
-                  "http://localhost/\n", 'info')
+        self.clog("\nTo access your services, visit GAZE Web at: "
+                  "http://localhost/", 'info')
 
 
 def main():
