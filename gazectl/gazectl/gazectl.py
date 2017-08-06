@@ -309,16 +309,18 @@ class Status(object):
 
         except docker.errors.APIError:
             self.clog(
-                "Failed to retrieve Docker container info from host.", 'exception'
+                "Failed to retrieve Docker container info from host.",
+                'exception'
             )
             sys.exit(1)
 
-        table_headers = ['Service', 'Status']
+        table_headers = ['Service', 'Container', 'Status']
         table_data = []
 
         for i in containers:
             table_data.append(
                 [
+                    i.labels,
                     i.name,
                     str(i.status).upper()
                 ]
