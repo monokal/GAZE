@@ -222,7 +222,7 @@ class Compose(object):
             compose_command.append(action_args)
 
         try:
-            subprocess.check_output(compose_command)
+            self.clog(subprocess.check_output(compose_command), 'info')
 
         except subprocess.CalledProcessError as e:
             self.clog(
