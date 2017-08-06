@@ -36,7 +36,7 @@ try:
     # We're in Docker, so just log to stdout.
     out = logging.StreamHandler(sys.stdout)
     out.setLevel(logging.DEBUG)
-    formatter = logging.Formatter("%(message)s")
+    formatter = logging.Formatter("[GAZE] %(message)s")
     out.setFormatter(formatter)
     logger.addHandler(out)
 
@@ -197,7 +197,16 @@ class Compose(object):
                  project_dir=os.path.dirname(os.path.realpath(__file__))):
 
         # Render the GAZE Docker Compose file.
-        self.render_compose_file(template=template)
+        self.render_compose_file(
+            template=template,
+            items={
+                'plex_claim': 'test',
+                'plex_ip': 'test',
+                'uid': 'test',
+                'gid': 'test',
+
+            }
+        )
 
         compose_command = [
             'docker-compose',
@@ -212,9 +221,7 @@ class Compose(object):
             compose_command.append(action_args)
 
         try:
-            subprocess.check_output(
-                compose_command
-            )
+            subprocess.check_output(compose_command)
 
         except subprocess.CalledProcessError as e:
             self.clog(
@@ -223,22 +230,26 @@ class Compose(object):
             )
             sys.exit(1)
 
-    def render_compose_file(self, template):
-        j2_env = Environment(
-            loader=FileSystemLoader("templates")
-        )
+    def render_compose_file(self,
+                            template,
+                            items,
+                            destination='/opt/gazectl/gaze-compose.yaml'):
+        """
+        Render a Docker Compose Jinja2 template to file.
+        :param template:
+        :param items:
+        :param destination:
+        :return:
+        """
 
-        rendered = j2_env.get_template(template).render(
-            plex_claim="test",
-            plex_ip="test",
-            uid="test",
-            gid="test"
-        )
+        j2_env = Environment(loader=FileSystemLoader("templates"))
+        rendered = j2_env.get_template(template).render(items)
 
-        self.clog("Rendered Docker Compose file:\n{}".format(rendered), 'debug')
-
-        with open("/opt/gazectl/gaze-compose.yaml", "w") as fh:
+        with open(destination, "w") as fh:
             fh.write(rendered)
+
+        self.clog("Rendered Docker Compose file ({}):\n{}".format(
+            destination, rendered), 'debug')
 
 
 class Up(object):
