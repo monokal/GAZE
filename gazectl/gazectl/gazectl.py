@@ -311,8 +311,13 @@ class Status(object):
             )
             sys.exit(1)
 
+        # table_data = []
         for i in containers:
-            print(i.status)
+            # table_data.append([i.name, i.status, i.short_id])
+            self.clog(
+                "{}    {}    {}".format(i.name, i.status, i.short_id),
+                'info'
+            )
 
 
 def main():
