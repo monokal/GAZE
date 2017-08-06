@@ -263,8 +263,9 @@ class Up(object):
     def __call__(self):
         self.clog("Deploying GAZE services...", 'info')
         self.compose('up', '-d')
-        self.clog("    * That's it! You can access GAZE Web at: "
-                  "http://localhost", 'success')
+        self.clog(
+            "That's it! You can access GAZE Web at: http://localhost", 'success'
+        )
 
 
 class Down(object):
@@ -276,7 +277,7 @@ class Down(object):
     def __call__(self):
         self.clog("Removing GAZE services...", 'info')
         self.compose('down')
-        self.clog("    * Done!", 'success')
+        self.clog("GAZE services have been successfully removed.", 'success')
 
 
 def main():
