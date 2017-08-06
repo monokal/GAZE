@@ -302,7 +302,7 @@ class Status(object):
 
         try:
             containers = self.docker_client.containers.list(
-                filters='gaze.service'
+                filters={'label': 'gaze.service'}
             )
 
         except docker.errors.APIError:
