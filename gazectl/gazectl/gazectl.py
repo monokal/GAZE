@@ -303,6 +303,7 @@ class Status(object):
 
         try:
             containers = self.docker_client.containers.list(
+                all=True,
                 filters={'label': 'gaze.service'}
             )
 
@@ -312,18 +313,24 @@ class Status(object):
             )
             sys.exit(1)
 
-        table_headers = ['Service', 'Status', 'ID']
+        table_headers = ['Service', 'Status']
         table_data = []
 
-        # table_data = []
         for i in containers:
-            table_data.append([i.name, i.status, i.short_id])
+            table_data.append(
+                [
+                    i.name,
+                    str(i.status).upper()
+                ]
+            )
 
-        print(tabulate(
-            tabular_data=table_data,
-            headers=table_headers,
-            tablefmt='simple'
-        ))
+        print(
+            tabulate(
+                tabular_data=table_data,
+                headers=table_headers,
+                tablefmt='simple'
+            )
+        )
 
 
 def main():
