@@ -331,8 +331,11 @@ class Status(object):
                 tabular_data=table_data,
                 headers=table_headers,
                 tablefmt='simple'
-            ), "\n"
+            )
         )
+
+        self.clog("To access your services, visit GAZE Web at: "
+                  "http://localhost/\n", 'info')
 
 
 def main():
