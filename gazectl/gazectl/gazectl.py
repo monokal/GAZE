@@ -319,11 +319,11 @@ class Status(object):
         for i in containers:
             table_data.append([i.name, i.status, i.short_id])
 
-            print(colored(tabulate(
-                tabular_data=table_data,
-                headers=table_headers,
-                tablefmt='simple'
-            )), 'blue')
+        print(colored(tabulate(
+            tabular_data=table_data,
+            headers=table_headers,
+            tablefmt='simple'
+        )), 'blue')
 
 
 def main():
