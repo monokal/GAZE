@@ -263,7 +263,7 @@ class Up(object):
         self.clog("Deploying GAZE services...", 'info')
         self.compose('up', '-d')
         self.clog(
-            "That's it! You can visit GAZE Web at: http://localhost", 'success'
+            "That's it! You can visit GAZE Web at: http://localhost/", 'success'
         )
 
 
@@ -276,8 +276,43 @@ class Down(object):
     def __call__(self):
         self.clog("Removing GAZE services...", 'info')
         self.compose('down')
-        self.clog("GAZE services have been successfully removed. "
-                  "Use the \"gaze up\" command to redeploy.", 'success')
+        self.clog(
+            "GAZE services have been removed. Use the \"gaze up\" command to "
+            "redeploy.", 'success'
+        )
+
+
+class Status(object):
+    def __init__(self, args):
+        self.args = args
+        self.clog = Clog()
+
+        # Instantiate a Docker client.
+        try:
+            self.docker_client = docker.DockerClient(
+                base_url='unix://var/run/docker.sock'
+            )
+
+        except docker.errors.APIError:
+            self.clog("Failed to instantiate the Docker client.", 'exception')
+            sys.exit(1)
+
+    def __call__(self):
+        self.clog("Your GAZE services:", 'info')
+
+        try:
+            containers = self.docker_client.containers.list(
+                filters='gaze.service'
+            )
+
+        except docker.errors.APIError:
+            self.clog(
+                "Failed to retrieve Docker container info from host.", 'exception'
+            )
+            sys.exit(1)
+
+        for i in containers:
+            print(i)
 
 
 def main():
@@ -343,6 +378,19 @@ def main():
 
     parser_down.set_defaults(func=Down)
     # End "down" subparser.
+    #
+    
+    #
+    # Start "status" subparser.
+    parser_status = subparsers.add_parser(
+        'status',
+        help='list media centre services'
+    )
+
+    group_status = parser_status.add_argument_group('required arguments')
+
+    parser_status.set_defaults(func=Status)
+    # End "status" subparser.
     #
 
     try:
