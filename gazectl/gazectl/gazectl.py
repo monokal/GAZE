@@ -27,6 +27,7 @@ import sys
 import docker
 from jinja2 import Environment, FileSystemLoader
 from termcolor import colored
+from tabulate import tabulate
 
 # Initialise a global logger.
 try:
@@ -311,13 +312,18 @@ class Status(object):
             )
             sys.exit(1)
 
+        table_headers = ['NAME', 'STATUS', 'ID']
+        table_data = []
+
         # table_data = []
         for i in containers:
-            # table_data.append([i.name, i.status, i.short_id])
-            self.clog(
-                "{}    {}    {}".format(i.name, i.status, i.short_id),
-                'info'
-            )
+            table_data.append([i.name, i.status, i.short_id])
+
+            print(colored(tabulate(
+                tabular_data=table_data,
+                headers=table_headers,
+                tablefmt='simple'
+            )), 'blue')
 
 
 def main():

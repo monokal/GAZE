@@ -24,7 +24,8 @@ ENV PIP_PACKAGES \
     docker \
     docker-compose \
     termcolor \
-    jinja2
+    jinja2 \
+    tabulate
 
 # Install the Alpine packages.
 RUN apk --no-cache add $APK_PACKAGES
