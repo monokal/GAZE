@@ -115,7 +115,7 @@ class Bootstrap(object):
         :return:
         """
 
-        colored(r'''
+        print(colored(r'''
                                 __        .-.
                             .-"` .`'.    /\\|
                     _(\-/)_" ,  .   ,\  /\\\/
@@ -123,16 +123,16 @@ class Bootstrap(object):
                    `-.(Y).-`  ,  |  , |\.-`
                         /~/,_/~~~\,__.-`
                        ////~     //~\\
-                     ==`==`    ==`  ==`''', 'magenta')
+                     ==`==`    ==`  ==`''', 'magenta'))
 
-        colored(r''' ██████╗    █████╗   ███████╗  ███████╗
+        print(colored(r''' ██████╗    █████╗   ███████╗  ███████╗
 ██╔════╝   ██╔══██╗  ╚══███╔╝  ██╔════╝
 ██║  ███╗  ███████║    ███╔╝   █████╗  
 ██║   ██║  ██╔══██║   ███╔╝    ██╔══╝  
 ╚██████╔╝  ██║  ██║  ███████╗  ███████╗
  ╚═════╝   ╚═╝  ╚═╝  ╚══════╝  ╚══════╝
   Turnkey Open Media Centre
-    ''', 'blue')
+    ''', 'blue'))
 
         self.clog("Welcome to GAZE! Let's prepare your system...", 'info')
         self.clog("Checking Docker configuration...", 'info')
