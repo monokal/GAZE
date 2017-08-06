@@ -320,7 +320,7 @@ class Status(object):
         for i in containers:
             table_data.append(
                 [
-                    i.labels,
+                    str(i.labels['gaze.service']).upper(),
                     i.name,
                     str(i.status).upper()
                 ]
