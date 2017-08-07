@@ -10,3 +10,4 @@
 #   ==`==`   ==`   ==`
 #          monokal.io
 
+FROM nginx:latest
