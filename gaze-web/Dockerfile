@@ -11,3 +11,5 @@
 #          monokal.io
 
 FROM nginx:latest
+
+COPY gazeweb /usr/share/nginx/html
