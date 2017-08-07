@@ -13,7 +13,10 @@
 version: '3'
 
 networks:
-  gaze:
+  internalnet:
+
+volumes:
+  servicevol:
 
 services:
   plex:
@@ -28,7 +31,7 @@ services:
       - ./media/plex/config/:/config
       - /tmp/transcode/:/transcode
     networks:
-      - gaze
+      - internal
     ports:
       - "32400:32400"
     restart: always
@@ -43,7 +46,7 @@ services:
     depends_on:
       - plex
     networks:
-      - gaze
+      - internal
     ports:
       - "8181:8181"
     restart: always
@@ -53,7 +56,7 @@ services:
   transmission:
     image: linuxserver/transmission:latest
     networks:
-      - gaze
+      - internal
     environment:
       - PUID={{uid}}
       - PGID={{gid}}
@@ -70,7 +73,7 @@ services:
   sonarr:
     image: linuxserver/sonarr:latest
     networks:
-      - gaze
+      - internal
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /dev/rtc:/dev/rtc:ro
@@ -91,7 +94,7 @@ services:
   radarr:
     image: linuxserver/radarr:latest
     networks:
-      - gaze
+      - internal
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /dev/rtc:/dev/rtc:ro
@@ -112,7 +115,7 @@ services:
   jackett:
     image: linuxserver/jackett:latest
     networks:
-      - gaze
+      - internal
     volumes:
       - ./media/jackett/config/:/config
       - ./media/transmission/downloads/:/downloads
@@ -128,7 +131,7 @@ services:
   ombi:
     image: linuxserver/ombi
     networks:
-      - gaze
+      - internal
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./media/ombi/config:/config

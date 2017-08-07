@@ -26,8 +26,8 @@ import sys
 
 import docker
 from jinja2 import Environment, FileSystemLoader
-from termcolor import colored
 from tabulate import tabulate
+from termcolor import colored
 
 # Initialise a global logger.
 try:
@@ -193,7 +193,7 @@ class Compose(object):
     def __init__(self):
         self.clog = Clog()
 
-    def __call__(self, action, action_args=None,
+    def __call__(self, action, items, action_args=None,
                  template='gaze-compose.yaml.j2', project_name='gaze',
                  host='unix://var/run/docker.sock',
                  project_dir=os.path.dirname(os.path.realpath(__file__))):
@@ -201,13 +201,7 @@ class Compose(object):
         # Render the GAZE Docker Compose file.
         self.render_compose_file(
             template=template,
-            items={
-                'plex_claim': 'test',
-                'plex_ip': 'test',
-                'uid': 'test',
-                'gid': 'test',
-
-            }
+            items=items
         )
 
         compose_command = [
@@ -262,8 +256,16 @@ class Up(object):
         self.compose = Compose()
 
     def __call__(self):
+        items = {
+            'plex_claim': 'test',
+            'plex_ip': 'test',
+            'uid': 'test',
+            'gid': 'test',
+
+        }
+
         self.clog("Deploying GAZE services...", 'info')
-        self.compose('up', '-d')
+        self.compose('up', items, '-d')
         self.clog("That's it!", 'success')
         self.status()
 
@@ -400,7 +402,7 @@ def main():
     parser_down.set_defaults(func=Down)
     # End "down" subparser.
     #
-    
+
     #
     # Start "status" subparser.
     parser_status = subparsers.add_parser(
