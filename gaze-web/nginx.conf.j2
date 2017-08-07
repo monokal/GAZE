@@ -10,57 +10,28 @@
 #   ==`==`   ==`   ==`
 #          monokal.io
 
-error_log ./logs/error.log;
-pid ./logs/nginx.pid;
-
-events {
-  worker_connections 1024;
-}
-
 http {
-  # google's DNS server
+  server_tokens off;
+
+  # Use the Docker Network nameserver.
   resolver 127.0.0.11;
   resolver_timeout 5s;
 
-  access_log ./logs/access.log;
-  proxy_temp_path ./temp;
-
+  # GAZE Web service.
   server {
-    # proxy server port
-    listen 3128;
-
+    listen 80;
     location / {
-      # local http server host and port
-      set $devel_host "127.0.0.1";
-      set $devel_port "80";
-
-      # proxy (default)
-      set $proxy_host "$http_host";
-      set $url "$scheme://$http_host$request_uri";
-
-      # http://any.with.suffix.devel/path
-      if ($host ~* "^(.+)\.devel$") {
-        set $proxy_host "$1";
-        set $url "http://$devel_host:$devel_port$request_uri";
-      }
-
-      # http://any.with.suffix.devel:8000/path
-      if ($http_host ~* "^(.+)\.devel:(\d+)$") {
-        set $proxy_host "$1:$2";
-        set $url "http://$devel_host:$2$request_uri";
-      }
-
-      proxy_redirect off;
-      proxy_set_header Host $proxy_host;
-      proxy_set_header X-Forwarded-Host $http_host;
-      proxy_pass "$url";
+    proxy_pass http://{{ service.name }}:{{ service.port }}
     }
-
-    # access policy denies global ip addresses
-    allow 127.0.0.1/32;
-    allow 192.168.0.0/16;
-    allow 172.16.0.0/12;
-    allow 10.0.0.0/8;
-    deny all;
   }
+
+  {% for service in services %}
+  # {{ service.name }} service.
+  server {
+    listen 80;
+    location /{{ service.name }} {
+    proxy_pass http://{{ service.name }}:{{ service.port }}
+    }
+  }
+  {% endfor %}
 }
