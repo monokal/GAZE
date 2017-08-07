@@ -259,13 +259,13 @@ class Up(object):
         self.args = args
         self.clog = Clog()
         self.compose = Compose()
+        self.status = Status()
 
     def __call__(self):
         self.clog("Deploying GAZE services...", 'info')
         self.compose('up', '-d')
-        self.clog(
-            "That's it! You can visit GAZE Web at http://localhost/", 'success'
-        )
+        self.clog("That's it!", 'success')
+        self.status()
 
 
 class Down(object):
