@@ -257,9 +257,9 @@ class Compose(object):
 class Up(object):
     def __init__(self, args):
         self.args = args
+        self.status = Status(self.args)
         self.clog = Clog()
         self.compose = Compose()
-        self.status = Status()
 
     def __call__(self):
         self.clog("Deploying GAZE services...", 'info')
