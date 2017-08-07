@@ -332,7 +332,7 @@ class Status(object):
                 tabular_data=table_data,
                 headers=table_headers,
                 tablefmt='simple'
-            )
+            ), "\n"
         )
 
 
