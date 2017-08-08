@@ -22,6 +22,7 @@ services:
   gazeweb:
     image: monokal/gazeweb:latest
     networks:
+      - default
       - internal
     ports:
       - "8080:80"
