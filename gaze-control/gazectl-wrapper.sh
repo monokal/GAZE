@@ -20,12 +20,12 @@ SOCKET=${GAZECTL_SOCKET:='/var/run/docker.sock'}
 
 # Ensure we have Docker and the Docker daemon socket exists.
 if ! hash docker &>/dev/null; then
-    echo 'Docker is required to run GAZE. Please install it then run "gaze bootstrap" again.'
+    echo '[GAZE] Docker is required to run GAZE. Please install it then run "gaze bootstrap" again.'
     exit 1
 fi
 
 if [ ! -S $SOCKET ]; then
-    echo "The Docker daemon socket (${SOCKET}) could not be found. Please ensure it's running then run \"gaze bootstrap\" again."
+    echo "[GAZE] The Docker daemon socket (${SOCKET}) could not be found. Please ensure it's running then run \"gaze bootstrap\" again."
     exit 1
 fi
 
