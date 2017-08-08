@@ -19,6 +19,16 @@ volumes:
   servicevol:
 
 services:
+  gazeweb:
+    image: monokal/gazeweb:latest
+    networks:
+      - internal
+    ports:
+      - "8080:80"
+    restart: always
+    labels:
+      - "gaze.service=gazeweb"
+      
   plex:
     image: plexinc/pms-docker:latest
     environment:
