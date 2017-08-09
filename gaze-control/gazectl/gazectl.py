@@ -121,7 +121,7 @@ class Bootstrap(object):
         print(colored(r'''
                                        __        .-.
                                    .-"` .`'.    /\\|
-                           _(\-/)_" ,  .   ,\  /\\\/
+                           _(\-/){{ gazeweb_port }}_" ,  .   ,\  /\\\/
                           {(=o^O=)} .   ./,  |/\\\/
                           `-.(Y).-`  ,  |  , |\.-`
                                /~/,_/~~~\,__.-`
@@ -199,9 +199,10 @@ class Compose(object):
                  project_dir=os.path.dirname(os.path.realpath(__file__))):
 
         # Render the GAZE Docker Compose file.
-        self.render_compose_file(
+        self.render_template(
             template=template,
-            items=items
+            items=items,
+            destination='/opt/gazectl/gaze-compose.yaml'
         )
 
         compose_command = [
@@ -226,12 +227,9 @@ class Compose(object):
             )
             sys.exit(1)
 
-    def render_compose_file(self,
-                            template,
-                            items,
-                            destination='/opt/gazectl/gaze-compose.yaml'):
+    def render_template(self, template, items, destination):
         """
-        Render a Docker Compose Jinja2 template to file.
+        Render a Jinja2 template to file.
         :param template:
         :param items:
         :param destination:
@@ -244,8 +242,8 @@ class Compose(object):
         with open(destination, "w") as fh:
             fh.write(rendered)
 
-        self.clog("Rendered Docker Compose file ({}):\n{}".format(
-            destination, rendered), 'debug')
+        self.clog("Rendered template ({}):\n{}".format(destination, rendered),
+                  'debug')
 
 
 class Up(object):

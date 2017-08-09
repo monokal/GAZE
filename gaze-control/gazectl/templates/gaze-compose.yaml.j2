@@ -25,7 +25,7 @@ services:
       - default
       - internal
     ports:
-      - "8080:80"
+      - "{{gazeweb_port}}:{{gazeweb_port}}"
     restart: always
     labels:
       - "gaze.service=gazeweb"

@@ -12,5 +12,4 @@
 
 FROM nginx:latest
 
-COPY gaze.conf /etc/nginx/conf.d
 COPY gazeweb /usr/share/nginx/html

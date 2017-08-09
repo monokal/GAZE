@@ -10,22 +10,12 @@
 #   ==`==`   ==`   ==`
 #          monokal.io
 
-
-# Use the Docker Network nameserver.
-resolver 127.0.0.11;
-resolver_timeout 5s;
-
-# GAZE Web service.
 server {
-    listen 80;
-    location / {
-        proxy_pass http://{{ service.name }}:{{ service.port }}
-    }
-}
+    listen {{gazeweb_port}};
 
-server {
-    listen 80;
-    location /ombi {
-        proxy_pass http://ombi:3579
+    {% for service in services %}
+    location /{{service.name}} {
+        proxy_pass {{service.protocol}}://{{service.name}}:{{service.port}};
     }
+    {% endfor %}
 }
