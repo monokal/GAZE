@@ -48,7 +48,10 @@ except:
     sys.exit(1)
 
 
-class Clog(object):
+#
+# Internal classes.
+#
+class _Clog(object):
     def __init__(self):
         pass
 
@@ -80,10 +83,10 @@ class Clog(object):
         target_method(colored(message, colour))
 
 
-class Gaze(object):
+class _Gaze(object):
     def __init__(self, args):
         self.args = args
-        self.clog = Clog()
+        self.clog = _Clog()
 
     def __call__(self):
         # Instantiate and call the given class.
@@ -91,6 +94,100 @@ class Gaze(object):
         return target_class()
 
 
+class _Compose(object):
+    def __init__(self):
+        self.clog = _Clog()
+        self.template = _Template()
+
+    def __call__(self, action, items, action_args=None,
+                 template='gaze-compose.yaml.j2', project_name='gaze',
+                 host='unix://var/run/docker.sock',
+                 project_dir=os.path.dirname(os.path.realpath(__file__))):
+
+        # Render the GAZE Docker Compose file.
+        self.template.render(
+            template=template,
+            items=items,
+            destination='/opt/gazectl/gaze-compose.yaml'
+        )
+
+        compose_command = [
+            'docker-compose',
+            '-f', '/opt/gazectl/gaze-compose.yaml',
+            '-p', project_name,
+            '-H', host,
+            '--project-directory', project_dir,
+            action
+        ]
+
+        if action_args is not None:
+            compose_command.append(action_args)
+
+        try:
+            subprocess.check_output(compose_command)
+
+        except subprocess.CalledProcessError as e:
+            self.clog(
+                "Failed to execute Docker Compose with exception: \n"
+                "{}.".format(e.output), 'exception'
+            )
+            sys.exit(1)
+
+
+class _GazeWeb(object):
+    def __init__(self):
+        self.clog = _Clog()
+        self.template = _Template()
+
+    def render_config(self, template='gazeweb-nginx.conf.j2'):
+        items = {
+            'gazeweb_port': '8080',
+            'services': {
+                'plex': '32400',
+                'plexpy': '8181',
+                'transmission': '9091',
+                'sonarr': '8989',
+                'radarr': '7878',
+                'jackett': '9117',
+                'ombi': '3579'
+            }
+        }
+
+        # Render the GAZE Web Nginx config file.
+        self.template.render(
+            template=template,
+            items=items,
+            destination='/etc/nginx/conf.d/gazeweb.conf'
+        )
+
+
+class _Template(object):
+    def __init__(self):
+        self.clog = _Clog()
+
+    def render(self, template, items, destination):
+        """
+        Render a Jinja2 template to file.
+        :param template:
+        :param items:
+        :param destination:
+        :return:
+        """
+        self.clog("Rendering template ({})...".format(destination), 'info')
+
+        j2_env = Environment(loader=FileSystemLoader("templates"))
+        rendered = j2_env.get_template(template).render(items)
+
+        with open(destination, "w") as file:
+            file.write(rendered)
+
+        self.clog("Rendered template ({}):\n{}".format(destination, rendered),
+                  'debug')
+
+
+#
+# User-called classes.
+#
 class Bootstrap(object):
     def __init__(self, args):
         """
@@ -99,7 +196,8 @@ class Bootstrap(object):
         """
 
         self.args = args
-        self.clog = Clog()
+        self.clog = _Clog()
+        self.gazeweb = _GazeWeb()
         self.up = Up(self.args)
 
         # Instantiate a Docker client.
@@ -121,7 +219,7 @@ class Bootstrap(object):
         print(colored(r'''
                                        __        .-.
                                    .-"` .`'.    /\\|
-                           _(\-/){{ gazeweb_port }}_" ,  .   ,\  /\\\/
+                           _(\-/)_" ,  .   ,\  /\\\/
                           {(=o^O=)} .   ./,  |/\\\/
                           `-.(Y).-`  ,  |  , |\.-`
                                /~/,_/~~~\,__.-`
@@ -180,6 +278,10 @@ class Bootstrap(object):
         for i in info_items:
             self.clog("    * {}: {}".format(i[0], docker_info[i[1]]), 'success')
 
+        self.clog("Rendering GAZE Web configuration...", 'info')
+        self.gazeweb.render_config()
+        self.clog("    * Success!", 'success')
+
         self.clog("Bootstrapping complete.", 'info')
 
         if self.args.noup:
@@ -189,77 +291,20 @@ class Bootstrap(object):
             self.up()
 
 
-class Compose(object):
-    def __init__(self):
-        self.clog = Clog()
-
-    def __call__(self, action, items, action_args=None,
-                 template='gaze-compose.yaml.j2', project_name='gaze',
-                 host='unix://var/run/docker.sock',
-                 project_dir=os.path.dirname(os.path.realpath(__file__))):
-
-        # Render the GAZE Docker Compose file.
-        self.render_template(
-            template=template,
-            items=items,
-            destination='/opt/gazectl/gaze-compose.yaml'
-        )
-
-        compose_command = [
-            'docker-compose',
-            '-f', '/opt/gazectl/gaze-compose.yaml',
-            '-p', project_name,
-            '-H', host,
-            '--project-directory', project_dir,
-            action
-        ]
-
-        if action_args is not None:
-            compose_command.append(action_args)
-
-        try:
-            subprocess.check_output(compose_command)
-
-        except subprocess.CalledProcessError as e:
-            self.clog(
-                "Failed to execute Docker Compose with exception: \n"
-                "{}.".format(e.output), 'exception'
-            )
-            sys.exit(1)
-
-    def render_template(self, template, items, destination):
-        """
-        Render a Jinja2 template to file.
-        :param template:
-        :param items:
-        :param destination:
-        :return:
-        """
-
-        j2_env = Environment(loader=FileSystemLoader("templates"))
-        rendered = j2_env.get_template(template).render(items)
-
-        with open(destination, "w") as fh:
-            fh.write(rendered)
-
-        self.clog("Rendered template ({}):\n{}".format(destination, rendered),
-                  'debug')
-
-
 class Up(object):
     def __init__(self, args):
         self.args = args
         self.status = Status(self.args)
-        self.clog = Clog()
-        self.compose = Compose()
+        self.clog = _Clog()
+        self.compose = _Compose()
 
     def __call__(self):
         items = {
+            'gazeweb_port': '8080',
             'plex_claim': 'test',
-            'plex_ip': 'test',
-            'uid': 'test',
-            'gid': 'test',
-
+            'plex_ip': '0.0.0.0',
+            'uid': '1000',
+            'gid': '1000'
         }
 
         self.clog("Deploying GAZE services...", 'info')
@@ -271,8 +316,8 @@ class Up(object):
 class Down(object):
     def __init__(self, args):
         self.args = args
-        self.clog = Clog()
-        self.compose = Compose()
+        self.clog = _Clog()
+        self.compose = _Compose()
 
     def __call__(self):
         self.clog("Removing GAZE services...", 'info')
@@ -286,7 +331,7 @@ class Down(object):
 class Status(object):
     def __init__(self, args):
         self.args = args
-        self.clog = Clog()
+        self.clog = _Clog()
 
         # Instantiate a Docker client.
         try:
@@ -425,7 +470,7 @@ def main():
     if args.debug:
         logger.setLevel(logging.DEBUG)
 
-    client = Gaze(args)
+    client = _Gaze(args)
     return client()
 
 
