@@ -309,6 +309,47 @@ class Bootstrap(object):
             self.up()
 
 
+class _Volume(object):
+    def __init__(self):
+        self.clog = _Clog()
+
+        # Instantiate a Docker client.
+        try:
+            self.docker_client = docker.DockerClient(
+                base_url='unix://var/run/docker.sock'
+            )
+
+        except docker.errors.APIError:
+            self.clog("Failed to instantiate the Docker client.", 'exception')
+            sys.exit(1)
+
+    def get(self, volume_id):
+        try:
+            volume = self.docker_client.volumes.get(
+                volume_id=volume_id
+            )
+        except docker.errors.APIError:
+            self.clog(
+                "Failed to get Docker Volume ({}).".format(volume_id),
+                'exception'
+            )
+            sys.exit(1)
+
+    def create(self, name, driver, driver_opts, labels):
+        try:
+            volume = self.docker_client.volumes.create(
+                name=name,
+                driver=driver,
+                driver_opts=driver_opts,
+                labels=labels
+            )
+        except docker.errors.APIError:
+            self.clog(
+                "Failed to create Docker Volume ({}).".format(name), 'exception'
+            )
+            sys.exit(1)
+
+
 class Up(object):
     def __init__(self, args):
         self.args = args
