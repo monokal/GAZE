@@ -153,11 +153,29 @@ class _GazeWeb(object):
             }
         }
 
-        # Render the GAZE Web Nginx config file.
         self.template.render(
             template=template,
             items=items,
             destination='/etc/nginx/conf.d/gazeweb.conf'
+        )
+
+    def render_index_html(self, template='index.html.j2'):
+        items = {
+            'services': {
+                'plex': '32400',
+                'plexpy': '8181',
+                'transmission': '9091',
+                'sonarr': '8989',
+                'radarr': '7878',
+                'jackett': '9117',
+                'ombi': '3579'
+            }
+        }
+
+        self.template.render(
+            template=template,
+            items=items,
+            destination='/some/path/index.html'
         )
 
 
