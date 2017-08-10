@@ -15,9 +15,6 @@
              monokal.io
 """
 
-__author__ = "Daniel Middleton"
-__email__ = "d@monokal.io"
-
 import argparse
 import logging
 import os
@@ -28,6 +25,11 @@ import docker
 from jinja2 import Environment, FileSystemLoader
 from tabulate import tabulate
 from termcolor import colored
+
+# GAZE modules.
+from .gazelib.compose import Compose
+from .gazelib.template import Template
+from .gazelib.volume import Volume
 
 # Initialise a global logger.
 try:
