@@ -1,5 +1,5 @@
-GAZE documentation
-==================
+GAZE Control documentation
+==========================
 
 .. toctree::
    :maxdepth: 2
