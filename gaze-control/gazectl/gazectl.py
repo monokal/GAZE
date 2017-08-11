@@ -88,15 +88,16 @@ class _Web(object):
 
 
 class Bootstrap(object):
+    """ Prepare a host for GAZE services deployment. """
+
     def __init__(self, args):
         """
-
-        :param args:
+        :param args: List: Arguments from the command-line.
         """
 
         self.args = args
         self.log = Log(args.debug)
-        self.gazeweb = _Web(self.args)
+        self.web = _Web(self.args)
         self.up = Up(self.args)
 
         # Instantiate a Docker client.
@@ -111,8 +112,6 @@ class Bootstrap(object):
 
     def __call__(self):
         """
-
-        :return:
         """
 
         print(colored(r'''
@@ -178,7 +177,7 @@ class Bootstrap(object):
             self.log("    * {}: {}".format(i[0], docker_info[i[1]]), 'success')
 
         self.log("Rendering GAZE Web configuration...", 'info')
-        self.gazeweb.render_config()
+        self.web.render_config()
         self.log("    * Success!", 'success')
 
         self.log("Bootstrapping complete.", 'info')
