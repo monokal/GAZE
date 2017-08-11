@@ -1,4 +1,5 @@
 ![GAZE project logo](static/images/raccoon.png "GAZE project")
+[![Documentation Status](https://readthedocs.org/projects/gaze/badge/?version=latest)](http://gaze.readthedocs.io/en/latest/?badge=latest)
 ## What's GAZE?
 It's a true turnkey open-source media centre solution. It will deploy, configure and network the following services, making use of Docker's ecosystem:
 - `Sonarr`, to manage TV series downloads.
