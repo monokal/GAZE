@@ -41,7 +41,7 @@ class Template(object):
 
         self.log("Rendering template ({})...".format(destination), 'info')
 
-        j2_env = Environment(loader=FileSystemLoader("../templates"))
+        j2_env = Environment(loader=FileSystemLoader("templates"))
         rendered = j2_env.get_template(template).render(items)
 
         with open(destination, "w") as file:

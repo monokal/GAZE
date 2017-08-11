@@ -23,11 +23,12 @@ from termcolor import colored
 class Log(object):
     """ Provides a custom GAZE formatted logger. """
 
-    def __init__(self):
+    def __init__(self, logger_name='gaze'):
         """
+        :param logger_name: String: Name of the logger object to use.
         """
 
-        self.logger = logging.getLogger('gaze')
+        self.logger = logging.getLogger(logger_name)
 
     def __call__(self, message, level):
         """
