@@ -22,124 +22,31 @@ import subprocess
 import sys
 
 import docker
-from jinja2 import Environment, FileSystemLoader
 from tabulate import tabulate
 from termcolor import colored
 
-# GAZE modules.
+# Import GAZE modules.
+from .gazelib.log import Log
 from .gazelib.compose import Compose
 from .gazelib.template import Template
 from .gazelib.volume import Volume
-
-# Initialise a global logger.
-try:
-    logger = logging.getLogger('gaze')
-    logger.setLevel(logging.INFO)
-
-    # We're in Docker, so just log to stdout.
-    out = logging.StreamHandler(sys.stdout)
-    out.setLevel(logging.DEBUG)
-    formatter = logging.Formatter("{} %(message)s".format(
-        colored('[GAZE]', 'magenta'))
-    )
-    out.setFormatter(formatter)
-    logger.addHandler(out)
-
-except:
-    print("Failed to initialise logging.")
-    sys.exit(1)
-
-
-#
-# Internal classes.
-#
-class _Clog(object):
-    def __init__(self):
-        pass
-
-    def __call__(self, message, level):
-        """
-
-        :param message:
-        :param level:
-        :return: None
-        """
-
-        if level == 'info':
-            colour = 'blue'
-
-        elif level == 'warning':
-            colour = 'yellow'
-
-        elif level == 'debug':
-            colour = 'magenta'
-
-        elif level == 'success':
-            level = 'info'
-            colour = 'green'
-
-        else:
-            colour = 'red'
-
-        target_method = getattr(logger, level)
-        target_method(colored(message, colour))
 
 
 class _Gaze(object):
     def __init__(self, args):
         self.args = args
-        self.clog = _Clog()
-
+        self.log = Log(args.debug)
+        
     def __call__(self):
         # Instantiate and call the given class.
         target_class = self.args.func(self.args)
         return target_class()
 
 
-class _Compose(object):
-    def __init__(self):
-        self.clog = _Clog()
-        self.template = _Template()
-
-    def __call__(self, action, items, action_args=None,
-                 template='gaze-compose.yaml.j2', project_name='gaze',
-                 host='unix://var/run/docker.sock',
-                 project_dir=os.path.dirname(os.path.realpath(__file__))):
-
-        # Render the GAZE Docker Compose file.
-        self.template.render(
-            template=template,
-            items=items,
-            destination='/opt/gazectl/gaze-compose.yaml'
-        )
-
-        compose_command = [
-            'docker-compose',
-            '-f', '/opt/gazectl/gaze-compose.yaml',
-            '-p', project_name,
-            '-H', host,
-            '--project-directory', project_dir,
-            action
-        ]
-
-        if action_args is not None:
-            compose_command.append(action_args)
-
-        try:
-            subprocess.check_output(compose_command)
-
-        except subprocess.CalledProcessError as e:
-            self.clog(
-                "Failed to execute Docker Compose with exception: \n"
-                "{}.".format(e.output), 'exception'
-            )
-            sys.exit(1)
-
-
-class _GazeWeb(object):
-    def __init__(self):
-        self.clog = _Clog()
-        self.template = _Template()
+class _Web(object):
+    def __init__(self, args):
+        self.log = Log(args.debug)
+        self.template = Template()
 
     def render_config(self, template='gazeweb-nginx.conf.j2'):
         items = {
@@ -181,33 +88,6 @@ class _GazeWeb(object):
         )
 
 
-class _Template(object):
-    def __init__(self):
-        self.clog = _Clog()
-
-    def render(self, template, items, destination):
-        """
-        Render a Jinja2 template to file.
-        :param template:
-        :param items:
-        :param destination:
-        :return:
-        """
-        self.clog("Rendering template ({})...".format(destination), 'info')
-
-        j2_env = Environment(loader=FileSystemLoader("templates"))
-        rendered = j2_env.get_template(template).render(items)
-
-        with open(destination, "w") as file:
-            file.write(rendered)
-
-        self.clog("Rendered template ({}):\n{}".format(destination, rendered),
-                  'debug')
-
-
-#
-# User-called classes.
-#
 class Bootstrap(object):
     def __init__(self, args):
         """
@@ -216,8 +96,8 @@ class Bootstrap(object):
         """
 
         self.args = args
-        self.clog = _Clog()
-        self.gazeweb = _GazeWeb()
+        self.log = Log(args.debug)
+        self.gazeweb = _Web(self.args)
         self.up = Up(self.args)
 
         # Instantiate a Docker client.
@@ -227,7 +107,7 @@ class Bootstrap(object):
             )
 
         except docker.errors.APIError:
-            self.clog("Failed to instantiate the Docker client.", 'exception')
+            self.log("Failed to instantiate the Docker client.", 'exception')
             sys.exit(1)
 
     def __call__(self):
@@ -255,29 +135,29 @@ class Bootstrap(object):
          Turnkey Open Media Centre
          ''', 'blue'))
 
-        self.clog("Welcome to GAZE! Let's prepare your system...", 'info')
+        self.log("Welcome to GAZE! Let's prepare your system...", 'info')
 
         # Ensure we can ping to host's Docker daemon.
-        self.clog("Checking Docker daemon connectivity...", 'info')
+        self.log("Checking Docker daemon connectivity...", 'info')
 
         try:
             self.docker_client.ping()
 
         except docker.errors.APIError:
-            self.clog(
+            self.log(
                 "Failed to ping the Docker daemon (unix://var/run/docker.sock)."
                 " Are you using the \"gaze\" command?", 'exception'
             )
             sys.exit(1)
 
-        self.clog("    * Success!", 'success')
+        self.log("    * Success!", 'success')
 
-        self.clog("Checking Docker system configuration...", 'info')
+        self.log("Checking Docker system configuration...", 'info')
         try:
             docker_info = self.docker_client.info()
 
         except:
-            self.clog(
+            self.log(
                 "Failed to retrieve Docker system info from host.", 'exception'
             )
             sys.exit(1)
@@ -296,68 +176,27 @@ class Bootstrap(object):
         ]
 
         for i in info_items:
-            self.clog("    * {}: {}".format(i[0], docker_info[i[1]]), 'success')
+            self.log("    * {}: {}".format(i[0], docker_info[i[1]]), 'success')
 
-        self.clog("Rendering GAZE Web configuration...", 'info')
+        self.log("Rendering GAZE Web configuration...", 'info')
         self.gazeweb.render_config()
-        self.clog("    * Success!", 'success')
+        self.log("    * Success!", 'success')
 
-        self.clog("Bootstrapping complete.", 'info')
+        self.log("Bootstrapping complete.", 'info')
 
         if self.args.noup:
-            self.clog("To deploy GAZE services, use the \"gaze up\" command.",
+            self.log("To deploy GAZE services, use the \"gaze up\" command.",
                       'info')
         else:
             self.up()
-
-
-class _Volume(object):
-    def __init__(self):
-        self.clog = _Clog()
-
-        # Instantiate a Docker client.
-        try:
-            self.docker_client = docker.DockerClient(
-                base_url='unix://var/run/docker.sock'
-            )
-
-        except docker.errors.APIError:
-            self.clog("Failed to instantiate the Docker client.", 'exception')
-            sys.exit(1)
-
-    def get(self, volume_id):
-        try:
-            volume = self.docker_client.volumes.get(
-                volume_id=volume_id
-            )
-        except docker.errors.APIError:
-            self.clog(
-                "Failed to get Docker Volume ({}).".format(volume_id),
-                'exception'
-            )
-            sys.exit(1)
-
-    def create(self, name, driver, driver_opts, labels):
-        try:
-            volume = self.docker_client.volumes.create(
-                name=name,
-                driver=driver,
-                driver_opts=driver_opts,
-                labels=labels
-            )
-        except docker.errors.APIError:
-            self.clog(
-                "Failed to create Docker Volume ({}).".format(name), 'exception'
-            )
-            sys.exit(1)
 
 
 class Up(object):
     def __init__(self, args):
         self.args = args
         self.status = Status(self.args)
-        self.clog = _Clog()
-        self.compose = _Compose()
+        self.log = Log(args.debug)
+        self.compose = Compose()
 
     def __call__(self):
         items = {
@@ -368,22 +207,22 @@ class Up(object):
             'gid': '1000'
         }
 
-        self.clog("Deploying GAZE services...", 'info')
+        self.log("Deploying GAZE services...", 'info')
         self.compose('up', items, '-d')
-        self.clog("That's it!", 'success')
+        self.log("That's it!", 'success')
         self.status()
 
 
 class Down(object):
     def __init__(self, args):
         self.args = args
-        self.clog = _Clog()
-        self.compose = _Compose()
+        self.log = Log(args.debug)
+        self.compose = Compose()
 
     def __call__(self):
-        self.clog("Removing GAZE services...", 'info')
+        self.log("Removing GAZE services...", 'info')
         self.compose('down')
-        self.clog(
+        self.log(
             "GAZE services have been removed. Use the \"gaze up\" command to "
             "redeploy.", 'success'
         )
@@ -392,7 +231,7 @@ class Down(object):
 class Status(object):
     def __init__(self, args):
         self.args = args
-        self.clog = _Clog()
+        self.log = Log(args.debug)
 
         # Instantiate a Docker client.
         try:
@@ -401,11 +240,11 @@ class Status(object):
             )
 
         except docker.errors.APIError:
-            self.clog("Failed to instantiate the Docker client.", 'exception')
+            self.log("Failed to instantiate the Docker client.", 'exception')
             sys.exit(1)
 
     def __call__(self):
-        self.clog("Your GAZE services are listed below. To access them, "
+        self.log("Your GAZE services are listed below. To access them, "
                   "visit GAZE Web at http://localhost/\n", 'info')
 
         try:
@@ -415,7 +254,7 @@ class Status(object):
             )
 
         except docker.errors.APIError:
-            self.clog(
+            self.log(
                 "Failed to retrieve Docker container info from host.",
                 'exception'
             )
@@ -524,12 +363,8 @@ def main():
         args = parser.parse_args()
 
     except Exception:
-        logger.exception(colored("Failed to parse arguments.", 'red'))
+        print("Failed to parse arguments.")
         sys.exit(1)
-
-    # Turn on debug output if -d/--debug was passed.
-    if args.debug:
-        logger.setLevel(logging.DEBUG)
 
     client = _Gaze(args)
     return client()
