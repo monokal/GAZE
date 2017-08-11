@@ -1,4 +1,4 @@
-![GAZE project logo](docs/images/raccoon.png "GAZE project")
+![GAZE project logo](static/images/raccoon.png "GAZE project")
 
 [![Documentation Status](https://readthedocs.org/projects/gaze/badge/?version=latest)](http://gaze.readthedocs.io/en/latest/?badge=latest)
 
