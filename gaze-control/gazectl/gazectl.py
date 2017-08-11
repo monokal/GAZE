@@ -16,6 +16,7 @@
 """
 
 import argparse
+import logging
 import sys
 
 import docker
@@ -30,11 +31,29 @@ from gazelib.template import Template
 
 # from gazelib.volume import Volume
 
+# Initialise a global logger.
+try:
+    logger = logging.getLogger('gaze')
+    logger.setLevel(logging.INFO)
+
+    # We're in Docker, so just log to stdout.
+    out = logging.StreamHandler(sys.stdout)
+    out.setLevel(logging.DEBUG)
+    formatter = logging.Formatter("{} %(message)s".format(
+        colored('[GAZE]', 'magenta'))
+    )
+    out.setFormatter(formatter)
+    logger.addHandler(out)
+
+except Exception as e:
+    print("Failed to initialise logging with exception:\n{}".format(e))
+    sys.exit(1)
+
 
 class _Gaze(object):
     def __init__(self, args):
         self.args = args
-        self.log = Log(args.debug)
+        self.log = Log()
 
     def __call__(self):
         # Instantiate and call the given class.
@@ -44,7 +63,7 @@ class _Gaze(object):
 
 class _Web(object):
     def __init__(self, args):
-        self.log = Log(args.debug)
+        self.log = Log()
         self.template = Template()
 
     def render_config(self, template='gazeweb-nginx.conf.j2'):
@@ -96,7 +115,7 @@ class Bootstrap(object):
         """
 
         self.args = args
-        self.log = Log(args.debug)
+        self.log = Log()
         self.web = _Web(self.args)
         self.up = Up(self.args)
 
@@ -193,7 +212,7 @@ class Up(object):
     def __init__(self, args):
         self.args = args
         self.status = Status(self.args)
-        self.log = Log(args.debug)
+        self.log = Log()
         self.compose = Compose()
 
     def __call__(self):
@@ -214,7 +233,7 @@ class Up(object):
 class Down(object):
     def __init__(self, args):
         self.args = args
-        self.log = Log(args.debug)
+        self.log = Log()
         self.compose = Compose()
 
     def __call__(self):
@@ -229,7 +248,7 @@ class Down(object):
 class Status(object):
     def __init__(self, args):
         self.args = args
-        self.log = Log(args.debug)
+        self.log = Log()
 
         # Instantiate a Docker client.
         try:
@@ -363,6 +382,9 @@ def main():
     except Exception:
         print("Failed to parse arguments.")
         sys.exit(1)
+
+    if args.debug:
+        logger.setLevel(logging.DEBUG)
 
     client = _Gaze(args)
     return client()

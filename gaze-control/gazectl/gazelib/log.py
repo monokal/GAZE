@@ -16,7 +16,6 @@
 """
 
 import logging
-import sys
 
 from termcolor import colored
 
@@ -24,31 +23,11 @@ from termcolor import colored
 class Log(object):
     """ Provides a custom GAZE formatted logger. """
 
-    def __init__(self, debug=False):
+    def __init__(self):
         """
-        :param debug: Boolean: Set the logger to debug verbosity.
         """
 
-        # Initialise a global logger.
-        try:
-            self.logger = logging.getLogger(__name__)
-            self.logger.setLevel(logging.INFO)
-
-            # We're in Docker, so just log to stdout.
-            out = logging.StreamHandler(sys.stdout)
-            out.setLevel(logging.DEBUG)
-            formatter = logging.Formatter("{} %(message)s".format(
-                colored('[GAZE]', 'magenta'))
-            )
-            out.setFormatter(formatter)
-            self.logger.addHandler(out)
-
-            if debug:
-                self.logger.setLevel(logging.DEBUG)
-
-        except Exception as e:
-            print("Failed to initialise logging with exception:\n{}".format(e))
-            sys.exit(1)
+        self.logger = logging.getLogger('gaze')
 
     def __call__(self, message, level):
         """
@@ -67,7 +46,6 @@ class Log(object):
             level = 'info'
             colour = 'green'
         elif level == 'exception':
-            level = 'exception'
             colour = 'red'
         else:
             colour = 'red'

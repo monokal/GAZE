@@ -31,7 +31,7 @@ class Compose(object):
         :param debug: Boolean: Set the logger to debug verbosity.
         """
 
-        self.log = Log(debug)
+        self.log = Log()
         self.template = Template(debug)
 
     def __call__(self,

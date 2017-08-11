@@ -28,7 +28,7 @@ class Template(object):
         :param debug: Boolean: Set the logger to debug verbosity.
         """
 
-        self.log = Log(debug)
+        self.log = Log()
 
     def render(self, template, items, destination):
         """

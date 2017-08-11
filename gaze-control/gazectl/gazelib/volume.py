@@ -30,7 +30,7 @@ class Volume(object):
         :param debug: Boolean: Set the logger to debug verbosity.
         """
 
-        self.log = Log(debug)
+        self.log = Log()
 
         # Instantiate a Docker client.
         try:
