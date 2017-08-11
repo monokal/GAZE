@@ -16,27 +16,26 @@
 """
 
 import argparse
-import logging
-import os
-import subprocess
 import sys
 
 import docker
 from tabulate import tabulate
 from termcolor import colored
 
+from .gazelib.compose import Compose
 # Import GAZE modules.
 from .gazelib.log import Log
-from .gazelib.compose import Compose
 from .gazelib.template import Template
-from .gazelib.volume import Volume
+
+
+# from .gazelib.volume import Volume
 
 
 class _Gaze(object):
     def __init__(self, args):
         self.args = args
         self.log = Log(args.debug)
-        
+
     def __call__(self):
         # Instantiate and call the given class.
         target_class = self.args.func(self.args)
@@ -186,7 +185,7 @@ class Bootstrap(object):
 
         if self.args.noup:
             self.log("To deploy GAZE services, use the \"gaze up\" command.",
-                      'info')
+                     'info')
         else:
             self.up()
 
@@ -245,7 +244,7 @@ class Status(object):
 
     def __call__(self):
         self.log("Your GAZE services are listed below. To access them, "
-                  "visit GAZE Web at http://localhost/\n", 'info')
+                 "visit GAZE Web at http://localhost/\n", 'info')
 
         try:
             containers = self.docker_client.containers.list(
