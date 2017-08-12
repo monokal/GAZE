@@ -19,6 +19,7 @@ import sys
 
 import docker
 
+from .error import *
 from .log import Log
 
 
@@ -45,8 +46,8 @@ class Volume(object):
         """
         Get information about a Docker Volume.
 
-        :param volume_id:
-        :return:
+        :param volume_id: String: ID of the Docker Volume.
+        :return volume: Docker Volume object.
         """
 
         try:
@@ -66,6 +67,9 @@ class Volume(object):
                 "The Docker Volume ({}) does not exist.".format(volume_id),
                 'info'
             )
+            raise GazeVolumeNotFound
+
+        return volume
 
     def create(self, name, driver, driver_opts, labels):
         """

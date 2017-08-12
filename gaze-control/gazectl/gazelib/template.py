@@ -18,6 +18,7 @@ import sys
 
 from jinja2 import Environment, FileSystemLoader
 
+from .error import *
 from .log import Log
 
 

@@ -18,6 +18,7 @@
 import subprocess
 import sys
 
+from .error import *
 from .log import Log
 from .template import Template
 

@@ -19,6 +19,7 @@ import logging
 
 from termcolor import colored
 
+from .error import *
 
 class Log(object):
     """ Provides a custom GAZE formatted logger. """

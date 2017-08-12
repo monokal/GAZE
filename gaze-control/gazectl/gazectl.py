@@ -22,6 +22,7 @@ import sys
 import docker
 from gazelib.compose import Compose
 # Import GAZE modules.
+from gazelib.error import *
 from gazelib.log import Log
 from gazelib.template import Template
 from tabulate import tabulate
