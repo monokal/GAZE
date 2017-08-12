@@ -15,7 +15,6 @@
              monokal.io
 """
 
-import os
 import subprocess
 import sys
 
