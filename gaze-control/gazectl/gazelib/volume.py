@@ -53,12 +53,19 @@ class Volume(object):
             volume = self.docker_client.volumes.get(
                 volume_id=volume_id
             )
+
         except docker.errors.APIError:
             self.log(
                 "Failed to get Docker Volume ({}).".format(volume_id),
                 'exception'
             )
             sys.exit(1)
+
+        except docker.errors.NotFound:
+            self.log(
+                "The Docker Volume ({}) does not exist.".format(volume_id),
+                'info'
+            )
 
     def create(self, name, driver, driver_opts, labels):
         """

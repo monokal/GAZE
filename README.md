@@ -41,3 +41,6 @@ If you experience any problems, bugs or would like to request a new feature, ple
 
 ## Contributions
 If you'd like to contribute to the GAZE project, simply fork the `master` branch, make and test your changes then open a Pull Request here: https://github.com/monokal/GAZE/pulls
+
+## Disclaimer
+The maintainer(s) of the GAZE project do not advocate the illegal sharing of media in any way. The GAZE project is intended to be an educational programming exercise, and therefore the maintainer(s) assumes no responsibility of improper use.
