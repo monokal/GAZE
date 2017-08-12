@@ -79,7 +79,7 @@ class _Web(object):
         self.template.render(
             template=template,
             items=items,
-            destination='/etc/nginx/conf.d/gazeweb.conf'
+            destination='/opt/gazectl/gazeweb-nginx.conf'
         )
 
     def render_index_html(self, template='index.html.j2'):
@@ -191,9 +191,8 @@ class Bootstrap(object):
         for i in info_items:
             self.log("    * {}: {}".format(i[0], docker_info[i[1]]), 'success')
 
-        self.log("Rendering GAZE Web configuration...", 'info')
+        # Render GAZE Web Nginx configuration.
         self.web.render_config()
-        self.log("    * Success!", 'success')
 
         self.log("Bootstrapping complete.", 'info')
 

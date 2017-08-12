@@ -32,16 +32,15 @@ class Compose(object):
         """
 
         self.log = Log()
-        self.template = Template(debug)
+        self.template = Template()
 
     def __call__(self,
                  action,
-                 items,
+                 items=(),
                  action_args=None,
                  template='gaze-compose.yaml.j2',
                  project_name='gaze',
-                 host='unix://var/run/docker.sock',
-                 project_dir=os.path.dirname(os.path.realpath(__file__))):
+                 host='unix://var/run/docker.sock'):
         """
         :param action: String: The top-level Docker Compose command to execute.
         :param items: Dict: Values required to render the Compose template.
@@ -49,7 +48,6 @@ class Compose(object):
         :param template: String: Path of the Jinja2 Compose template file.
         :param project_name: String: The Docker project name.
         :param host: String: Path to the Docker socket.
-        :param project_dir: String: Path to the Docker project.
         :return return_code: Int: Return code of the Docker Compose command.
         """
 
@@ -65,7 +63,6 @@ class Compose(object):
             '-f', '/opt/gazectl/gaze-compose.yaml',
             '-p', project_name,
             '-H', host,
-            '--project-directory', project_dir,
             action
         ]
 

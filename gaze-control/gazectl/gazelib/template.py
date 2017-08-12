@@ -14,7 +14,7 @@
       ==`==`   ==`   ==`
              monokal.io
 """
-
+import sys
 from jinja2 import Environment, FileSystemLoader
 
 from .log import Log
@@ -23,9 +23,8 @@ from .log import Log
 class Template(object):
     """ Provides methods to manage Jinja2 templates. """
 
-    def __init__(self, debug=False):
+    def __init__(self):
         """
-        :param debug: Boolean: Set the logger to debug verbosity.
         """
 
         self.log = Log()
@@ -39,13 +38,33 @@ class Template(object):
         :param destination: String: Path of the rendered file.
         """
 
-        self.log("Rendering template ({})...".format(destination), 'info')
+        self.log("Rendering template ({})...".format(template), 'info')
+        try:
+            j2_env = Environment(
+                loader=FileSystemLoader("/opt/gazectl/templates"),
+                trim_blocks=True
+            )
+            rendered = j2_env.get_template(template).render(items)
 
-        j2_env = Environment(loader=FileSystemLoader("templates"))
-        rendered = j2_env.get_template(template).render(items)
+        except Exception as e:
+            self.log(
+                "Failed to render template ({}) with exception:"
+                "\n{}".format(template, e), 'exception'
+            )
+            sys.exit(1)
 
-        with open(destination, "w") as file:
-            file.write(rendered)
+        self.log("    * Success!", 'success')
 
-        self.log("Rendered template ({}):\n{}".format(destination, rendered),
-                 'debug')
+        self.log("Writing template to file ({})...".format(destination), 'info')
+        try:
+            with open(destination, "w") as file:
+                file.write(rendered)
+
+        except Exception as e:
+            self.log(
+                "Failed to write template to file ({}) with exception:"
+                "\n{}".format(destination, e), 'exception'
+            )
+            sys.exit(1)
+
+        self.log("    * Success!", 'success')
