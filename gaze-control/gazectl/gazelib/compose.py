@@ -27,21 +27,14 @@ class Compose(object):
 
     def __init__(self):
         """
-        :param debug: Boolean: Set the logger to debug verbosity.
         """
 
         self.log = Log()
         self.template = Template()
 
-    def __call__(self,
-                 action,
-                 items=(),
-                 action_args=None,
-                 template='gaze-compose.yaml.j2',
-                 project_name='gaze',
-                 host='unix://var/run/docker.sock'):
+    def up(self, items, action_args=None, template='gaze-compose.yaml.j2',
+           project_name='gaze', host='unix://var/run/docker.sock'):
         """
-        :param action: String: The top-level Docker Compose command to execute.
         :param items: Dict: Values required to render the Compose template.
         :param action_args: String: Arguments to the given action.
         :param template: String: Path of the Jinja2 Compose template file.
@@ -62,11 +55,32 @@ class Compose(object):
             '-f', '/opt/gazectl/gaze-compose.yaml',
             '-p', project_name,
             '-H', host,
-            action
+            'up', action_args
         ]
 
-        if action_args is not None:
-            compose_command.append(action_args)
+        return self._execute(compose_command)
+
+    def down(self, compose_file='gaze-compose.yaml',
+             host='unix://var/run/docker.sock'):
+        """
+        :param compose_file: String: Path of the Docker Compose file.
+        :param host: String: Path to the Docker socket.
+        :return return_code: Int: Return code of the Docker Compose command.
+        """
+
+        compose_command = [
+            'docker-compose',
+            '-f', '/opt/gazectl/gaze-compose.yaml',
+            '-H', host,
+            'down'
+        ]
+
+        return self._execute(compose_command)
+
+    def _execute(self, compose_command):
+        """
+        :return return_code: Int: Return code of the Docker Compose command.
+        """
 
         try:
             return_code = subprocess.check_output(compose_command)

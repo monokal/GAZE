@@ -192,7 +192,7 @@ class Bootstrap(object):
             self.log("    * {}: {}".format(i[0], docker_info[i[1]]), 'success')
 
         # Render GAZE Web Nginx configuration.
-        self.web.render_config()
+        # self.web.render_config()
 
         self.log("Bootstrapping complete.", 'info')
 
@@ -220,7 +220,7 @@ class Up(object):
         }
 
         self.log("Deploying GAZE services...", 'info')
-        self.compose('up', items, '-d')
+        self.compose.up(items, '-d')
         self.log("That's it!", 'success')
         self.status()
 
@@ -233,7 +233,7 @@ class Down(object):
 
     def __call__(self):
         self.log("Removing GAZE services...", 'info')
-        self.compose('down')
+        self.compose.down('/opt/gazectl/gaze-compose.yaml')
         self.log(
             "GAZE services have been removed. Use the \"gaze up\" command to "
             "redeploy.", 'success'

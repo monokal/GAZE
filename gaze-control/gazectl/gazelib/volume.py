@@ -25,9 +25,8 @@ from .log import Log
 class Volume(object):
     """ Provides methods to manage Docker Volumes. """
 
-    def __init__(self, debug=False):
+    def __init__(self):
         """
-        :param debug: Boolean: Set the logger to debug verbosity.
         """
 
         self.log = Log()
