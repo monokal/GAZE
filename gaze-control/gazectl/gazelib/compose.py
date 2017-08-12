@@ -25,7 +25,7 @@ from .template import Template
 class Compose(object):
     """ Provides methods to interact with Docker Compose. """
 
-    def __init__(self, debug=False):
+    def __init__(self):
         """
         :param debug: Boolean: Set the logger to debug verbosity.
         """

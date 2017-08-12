@@ -46,6 +46,7 @@ class Template(object):
                 trim_blocks=True
             )
             rendered = j2_env.get_template(template).render(items)
+            self.log("Rendered template:\n{}".format(rendered), 'debug')
 
         except Exception as e:
             self.log(
