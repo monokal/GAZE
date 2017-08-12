@@ -20,17 +20,17 @@ import sys
 import docker
 
 from .error import *
-from .log import Log
+from .log import GazeLog
 
 
-class Volume(object):
+class GazeVolume(object):
     """ Provides methods to manage Docker Volumes. """
 
     def __init__(self):
         """
         """
 
-        self.log = Log()
+        self.log = GazeLog()
 
         # Instantiate a Docker client.
         try:

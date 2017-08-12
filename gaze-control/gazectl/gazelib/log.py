@@ -19,9 +19,8 @@ import logging
 
 from termcolor import colored
 
-from .error import *
 
-class Log(object):
+class GazeLog(object):
     """ Provides a custom GAZE formatted logger. """
 
     def __init__(self, logger_name='gaze'):

@@ -20,13 +20,14 @@ import logging
 import sys
 
 import docker
-from gazelib.compose import Compose
-# Import GAZE modules.
-from gazelib.error import *
-from gazelib.log import Log
-from gazelib.template import Template
 from tabulate import tabulate
 from termcolor import colored
+
+from .gazelib.compose import GazeCompose
+# Import GAZE modules.
+from .gazelib.log import GazeLog
+from .gazelib.template import GazeTemplate
+from .gazelib.volume import GazeVolume
 
 # Initialise a global logger.
 try:
@@ -50,7 +51,7 @@ except Exception as e:
 class _Gaze(object):
     def __init__(self, args):
         self.args = args
-        self.log = Log()
+        self.log = GazeLog()
 
     def __call__(self):
         # Instantiate and call the given class.
@@ -60,8 +61,8 @@ class _Gaze(object):
 
 class _Web(object):
     def __init__(self, args):
-        self.log = Log()
-        self.template = Template()
+        self.log = GazeLog()
+        self.template = GazeTemplate()
 
     def render_config(self, template='gazeweb-nginx.conf.j2'):
         items = {
@@ -112,7 +113,7 @@ class Bootstrap(object):
         """
 
         self.args = args
-        self.log = Log()
+        self.log = GazeLog()
         self.web = _Web(self.args)
         self.up = Up(self.args)
 
@@ -208,8 +209,8 @@ class Up(object):
     def __init__(self, args):
         self.args = args
         self.status = Status(self.args)
-        self.log = Log()
-        self.compose = Compose()
+        self.log = GazeLog()
+        self.compose = GazeCompose()
 
     def __call__(self):
         items = {
@@ -229,8 +230,23 @@ class Up(object):
 class Down(object):
     def __init__(self, args):
         self.args = args
-        self.log = Log()
-        self.compose = Compose()
+        self.log = GazeLog()
+        self.compose = GazeCompose()
+
+    def __call__(self):
+        self.log("Removing GAZE services...", 'info')
+        self.compose.down('/opt/gazectl/gaze-compose.yaml')
+        self.log(
+            "GAZE services have been removed. Use the \"gaze up\" command to "
+            "redeploy.", 'success'
+        )
+
+
+class Volume(object):
+    def __init__(self, args):
+        self.args = args
+        self.log = GazeLog()
+        self.volume = GazeVolume()
 
     def __call__(self):
         self.log("Removing GAZE services...", 'info')
@@ -244,7 +260,7 @@ class Down(object):
 class Status(object):
     def __init__(self, args):
         self.args = args
-        self.log = Log()
+        self.log = GazeLog()
 
         # Instantiate a Docker client.
         try:

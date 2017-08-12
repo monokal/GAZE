@@ -18,20 +18,19 @@
 import subprocess
 import sys
 
-from .error import *
-from .log import Log
-from .template import Template
+from .log import GazeLog
+from .template import GazeTemplate
 
 
-class Compose(object):
+class GazeCompose(object):
     """ Provides methods to interact with Docker Compose. """
 
     def __init__(self):
         """
         """
 
-        self.log = Log()
-        self.template = Template()
+        self.log = GazeLog()
+        self.template = GazeTemplate()
 
     def up(self, items, action_args=None, template='gaze-compose.yaml.j2',
            project_name='gaze', host='unix://var/run/docker.sock'):

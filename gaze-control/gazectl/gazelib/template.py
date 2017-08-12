@@ -18,18 +18,17 @@ import sys
 
 from jinja2 import Environment, FileSystemLoader
 
-from .error import *
-from .log import Log
+from .log import GazeLog
 
 
-class Template(object):
+class GazeTemplate(object):
     """ Provides methods to manage Jinja2 templates. """
 
     def __init__(self):
         """
         """
 
-        self.log = Log()
+        self.log = GazeLog()
 
     def render(self, template, items, destination):
         """
