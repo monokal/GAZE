@@ -64,7 +64,7 @@ class _Web(object):
         self.log = GazeLog()
         self.template = GazeTemplate()
 
-    def render_config(self, template='gazeweb-nginx.conf.j2'):
+    def render_config(self, destination, template='gazeweb-nginx.conf.j2'):
         items = {
             'gazeweb_port': '8080',
             'services': {
@@ -81,7 +81,7 @@ class _Web(object):
         self.template.render(
             template=template,
             items=items,
-            destination='/opt/gazectl/gazeweb-nginx.conf'
+            destination=destination
         )
 
     def render_index(self, template='index.html.j2'):
@@ -194,15 +194,11 @@ class Bootstrap(object):
         for i in info_items:
             self.log("    * {}: {}".format(i[0], docker_info[i[1]]), 'success')
 
-        # Render GAZE Web Nginx configuration.
-        # self.web.render_config()
+        # Bootstrap the "gaze-share" Docker Volume.
+        volume = self.volume.create(name='gaze-share')
 
-        # Create a Docker Volume.
-        self.volume.create(
-            name='gazevol',
-            driver='local',
-            labels={"gaze.volume": "gazevol"}
-        )
+        # Render GAZE Web Nginx configuration.
+        self.web.render_config("{}/gazeweb-nginx.conf".format(volume.attrs['Mountpoint']))
 
         self.log("Bootstrapping complete.", 'info')
 

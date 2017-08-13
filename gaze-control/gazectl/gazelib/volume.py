@@ -87,7 +87,7 @@ class GazeVolume(object):
 
         return volume
 
-    def create(self, name, driver, labels, driver_opts=None):
+    def create(self, name, driver='local', driver_opts=None):
         """
         Create a Docker Volume.
 
@@ -112,7 +112,7 @@ class GazeVolume(object):
                     name=name,
                     driver=driver,
                     driver_opts=driver_opts,
-                    labels=labels
+                    labels={"gaze.volume": name}
                 )
 
             except docker.errors.APIError:
@@ -123,4 +123,7 @@ class GazeVolume(object):
                 sys.exit(1)
 
         self.log("    * Success!", 'success')
+
+        # self.log("Got Docker Volume:\n{}".format(volume.attrs['Mountpoint']), 'debug')
+        self.log("Got Docker Volume:\n{}".format(volume.attrs), 'debug')
         return volume
