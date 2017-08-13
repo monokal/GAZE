@@ -34,7 +34,8 @@ fi
 docker pull "${NAMESPACE}/${IMAGE}:${TAG}" &>/dev/null
 
 # Mount the host Docker daemon's socket so we can manage host containers from
-# within the "gazectl" container.
+# within the "gazectl" container, and mount the host's Docker Volumes directory
+# as we need to bootstrap the "gaze-share" volume.
 docker run \
     --name gazectl \
     --privileged \
