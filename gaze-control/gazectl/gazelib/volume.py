@@ -82,7 +82,7 @@ class GazeVolume(object):
         :return:
         """
 
-        self.log("Creating Docker Volume ({}).".format(name), 'info')
+        self.log("Creating Docker Volume ({})...".format(name), 'info')
 
         try:
             volume = self.get(name)
@@ -106,6 +106,5 @@ class GazeVolume(object):
                 )
                 sys.exit(1)
 
-            self.log("    * Success!", 'success')
-
+        self.log("    * Success!", 'success')
         return volume
