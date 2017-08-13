@@ -40,6 +40,6 @@ docker run \
     -ti \
     --rm \
     -v "${SOCKET}:/var/run/docker.sock" \
-    -v "${VOLUMES}:/var/lib/docker/volumes"
+    -v "${VOLUMES}:/var/lib/docker/volumes" \
     "${NAMESPACE}/${IMAGE}:${TAG}" \
     "${@}"
