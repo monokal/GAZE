@@ -42,7 +42,7 @@ class GazeContainer(object):
             sys.exit(1)
 
     def run(self, name, image, environment, volumes, networks, ports,
-            restart_policy, labels, detach):
+            restart_policy, labels):
         """
         Run a Docker Container.
 
@@ -54,7 +54,6 @@ class GazeContainer(object):
         :param ports: (dict) Ports to bind inside the container.
         :param restart_policy: (dict) Restart policy of the container.
         :param labels: (dict or list) Labels to set on the container.
-        :param detach: (bool) Run the container in the background.
         :return logs: A Container object.
         """
 
@@ -64,11 +63,11 @@ class GazeContainer(object):
                 image=image,
                 environment=environment,
                 volumes=volumes,
-                network=networks[0],
+                network=networks[0],  # Additional networks are handled below.
                 ports=ports,
                 restart_policy=restart_policy,
                 labels=labels,
-                detach=True
+                detach=True  # Forced or we wont return a Container object.
             )
 
         except docker.errors.ContainerError:
@@ -94,17 +93,17 @@ class GazeContainer(object):
         # networks using "Network.connect()" once it's running. Skip the first
         # element/network as we've already added it during run.
         if len(networks) > 1:
-            for network_id in networks[1:]:
+            for i in networks[1:]:
                 self.log(
                     "Connecting \"{}\" to additional network \"{}\"...".format(
-                        name, network_id), 'info')
+                        name, i), 'info')
 
                 try:
-                    network = self.docker_client.networks.get(network_id)
+                    network = self.docker_client.networks.get(i)
 
                 except docker.errors.NotFound:
                     self.log("The Docker Network ({}) was not found.".format(
-                        network_id), 'exception'
+                        i), 'exception'
                     )
                     sys.exit(1)
 

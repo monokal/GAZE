@@ -28,6 +28,7 @@ from gazelib.compose import GazeCompose
 from gazelib.log import GazeLog
 from gazelib.template import GazeTemplate
 from gazelib.volume import GazeVolume
+from gazelib.container import GazeContainer
 
 # Initialise a global logger.
 try:
@@ -196,6 +197,8 @@ class Bootstrap(object):
 
         # Bootstrap the "gaze-share" Docker Volume.
         volume = self.volume.create(name='gaze-share')
+
+        # Bootstrap the "gaze-internal" Docker Network.
 
         # Render GAZE Web Nginx configuration.
         self.web.render_config("{}/gazeweb-nginx.conf".format(
