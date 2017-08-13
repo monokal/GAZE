@@ -114,6 +114,7 @@ class Bootstrap(object):
 
         self.args = args
         self.log = GazeLog()
+        self.volume = GazeVolume()
         self.web = _Web(self.args)
         self.up = Up(self.args)
 
@@ -196,6 +197,13 @@ class Bootstrap(object):
         # Render GAZE Web Nginx configuration.
         # self.web.render_config()
 
+        # Create a Docker Volume.
+        self.volume.create(
+            name='gazevol',
+            driver='local',
+            labels='{"gaze.volume": "gazevol"}'
+        )
+
         self.log("Bootstrapping complete.", 'info')
 
         if self.args.noup:
@@ -242,19 +250,14 @@ class Down(object):
         )
 
 
-class Volume(object):
-    def __init__(self, args):
-        self.args = args
-        self.log = GazeLog()
-        self.volume = GazeVolume()
-
-    def __call__(self):
-        self.log("Removing GAZE services...", 'info')
-        self.compose.down('/opt/gazectl/gaze-compose.yaml')
-        self.log(
-            "GAZE services have been removed. Use the \"gaze up\" command to "
-            "redeploy.", 'success'
-        )
+# class Volume(object):
+#     def __init__(self, args):
+#         self.args = args
+#         self.log = GazeLog()
+#         self.volume = GazeVolume()
+#
+#     def __call__(self):
+#         pass
 
 
 class Status(object):
@@ -356,8 +359,6 @@ def main():
         help='deploy media centre services'
     )
 
-    group_up = parser_up.add_argument_group('required arguments')
-
     parser_up.set_defaults(func=Up)
     # End "up" subparser.
     #
@@ -382,11 +383,27 @@ def main():
         help='list media centre services'
     )
 
-    group_status = parser_status.add_argument_group('required arguments')
-
     parser_status.set_defaults(func=Status)
     # End "status" subparser.
     #
+
+    # #
+    # # Start "volume" subparser.
+    # parser_volume = subparsers.add_parser(
+    #     'volume',
+    #     help='manage GAZE volumes'
+    # )
+    #
+    # group_volume = parser_volume.add_argument_group('required arguments')
+    #
+    # group_volume.add_argument('--create',
+    #                            nargs=1,
+    #                            metavar='NAME',
+    #                            help="create a GAZE volume")
+    #
+    # parser_volume.set_defaults(func=Volume)
+    # # End "volume" subparser.
+    # #
 
     try:
         args = parser.parse_args()

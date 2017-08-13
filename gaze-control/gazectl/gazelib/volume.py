@@ -71,7 +71,7 @@ class GazeVolume(object):
 
         return volume
 
-    def create(self, name, driver, driver_opts, labels):
+    def create(self, name, driver, labels, driver_opts=None):
         """
         Create a Docker Volume.
 
