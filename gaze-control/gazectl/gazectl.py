@@ -198,7 +198,8 @@ class Bootstrap(object):
         volume = self.volume.create(name='gaze-share')
 
         # Render GAZE Web Nginx configuration.
-        self.web.render_config("{}/gazeweb-nginx.conf".format(volume.attrs['Mountpoint']))
+        self.web.render_config("{}/gazeweb-nginx.conf".format(
+            volume.attrs['Mountpoint']))
 
         self.log("Bootstrapping complete.", 'info')
 

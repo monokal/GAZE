@@ -17,6 +17,7 @@ NAMESPACE=${GAZECTL_NAMESPACE:='monokal'}
 IMAGE=${GAZECTL_IMAGE:='gazectl'}
 TAG=${GAZECTL_VERSION:='latest'}
 SOCKET=${GAZECTL_SOCKET:='/var/run/docker.sock'}
+VOLUMES=${GAZECTL_VOLUMES:='/var/lib/docker/volumes'}
 
 # Ensure we have Docker and the Docker daemon socket exists.
 if ! hash docker &>/dev/null; then
@@ -39,5 +40,6 @@ docker run \
     -ti \
     --rm \
     -v "${SOCKET}:/var/run/docker.sock" \
+    -v "${VOLUMES}:/var/lib/docker/volumes"
     "${NAMESPACE}/${IMAGE}:${TAG}" \
     "${@}"

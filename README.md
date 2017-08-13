@@ -35,6 +35,7 @@ The `gaze` command-line tool also supports overriding various default runtime ar
 - `GAZECTL_IMAGE` - The Docker Image of the `gazectl` container (default: `gazectl`).
 - `GAZECTL_VERSION` - The Docker Image Tag of the `gazectl` container (default: `latest`).
 - `GAZECTL_SOCKET` - The Docker socket of the host (default: `/var/run/docker.sock`).
+- `GAZECTL_VOLUMES` - Path to the Docker Volumes mountpoint on the host (default: `/var/lib/docker/volumes`).
 
 ## Issues / Feature Requests
 If you experience any problems, bugs or would like to request a new feature, please first search for duplicates then raise a ticket here: https://github.com/monokal/GAZE/issues
