@@ -83,16 +83,23 @@ class GazeVolume(object):
         """
 
         try:
-            volume = self.docker_client.volumes.create(
-                name=name,
-                driver=driver,
-                driver_opts=driver_opts,
-                labels=labels
-            )
-        except docker.errors.APIError:
+            volume = self.get(name)
             self.log(
-                "Failed to create Docker Volume ({}).".format(name), 'exception'
+                "The Docker Volume ({}) already exists.".format(name), 'info'
             )
-            sys.exit(1)
+
+        except GazeVolumeNotFound:
+            try:
+                volume = self.docker_client.volumes.create(
+                    name=name,
+                    driver=driver,
+                    driver_opts=driver_opts,
+                    labels=labels
+                )
+            except docker.errors.APIError:
+                self.log(
+                    "Failed to create Docker Volume ({}).".format(name), 'exception'
+                )
+                sys.exit(1)
 
         return volume
