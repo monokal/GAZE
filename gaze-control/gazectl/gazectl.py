@@ -84,7 +84,7 @@ class _Web(object):
             destination='/opt/gazectl/gazeweb-nginx.conf'
         )
 
-    def render_index_html(self, template='index.html.j2'):
+    def render_index(self, template='index.html.j2'):
         items = {
             'services': {
                 'plex': '32400',

@@ -42,6 +42,22 @@ class GazeVolume(object):
             self.log("Failed to instantiate the Docker client.", 'exception')
             sys.exit(1)
 
+    def list(self):
+        """
+        Return all Docker Volumes.
+
+        :return volumes: List: Docker Volume objects.
+        """
+
+        try:
+            volumes = self.docker_client.volumes.list()
+
+        except docker.errors.APIError:
+            self.log("Failed to get Docker Volumes.", 'exception')
+            sys.exit(1)
+
+        return volumes
+
     def get(self, volume_id):
         """
         Get information about a Docker Volume.
@@ -57,8 +73,8 @@ class GazeVolume(object):
 
         except docker.errors.NotFound:
             self.log(
-                "The Docker Volume ({}) does not exist.".format(volume_id),
-                'info'
+                "The Docker Volume ({}) does not already exist.".format(
+                    volume_id), 'info'
             )
             raise GazeVolumeNotFound
 
