@@ -37,6 +37,7 @@ docker pull "${NAMESPACE}/${IMAGE}:${TAG}" &>/dev/null
 # within the "gazectl" container.
 docker run \
     --name gazectl \
+    --privileged \
     -ti \
     --rm \
     -v "${SOCKET}:/var/run/docker.sock" \
