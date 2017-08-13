@@ -23,11 +23,11 @@ import docker
 from tabulate import tabulate
 from termcolor import colored
 
-from .gazelib.compose import GazeCompose
 # Import GAZE modules.
-from .gazelib.log import GazeLog
-from .gazelib.template import GazeTemplate
-from .gazelib.volume import GazeVolume
+from gazelib.compose import GazeCompose
+from gazelib.log import GazeLog
+from gazelib.template import GazeTemplate
+from gazelib.volume import GazeVolume
 
 # Initialise a global logger.
 try:
@@ -201,7 +201,7 @@ class Bootstrap(object):
         self.volume.create(
             name='gazevol',
             driver='local',
-            labels='{"gaze.volume": "gazevol"}'
+            labels={"gaze.volume": "gazevol"}
         )
 
         self.log("Bootstrapping complete.", 'info')

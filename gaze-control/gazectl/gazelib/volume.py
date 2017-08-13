@@ -55,19 +55,19 @@ class GazeVolume(object):
                 volume_id=volume_id
             )
 
-        except docker.errors.APIError:
-            self.log(
-                "Failed to get Docker Volume ({}).".format(volume_id),
-                'exception'
-            )
-            sys.exit(1)
-
         except docker.errors.NotFound:
             self.log(
                 "The Docker Volume ({}) does not exist.".format(volume_id),
                 'info'
             )
             raise GazeVolumeNotFound
+
+        except docker.errors.APIError:
+            self.log(
+                "Failed to get Docker Volume ({}).".format(volume_id),
+                'info'
+            )
+            sys.exit(1)
 
         return volume
 
@@ -81,6 +81,8 @@ class GazeVolume(object):
         :param labels:
         :return:
         """
+
+        self.log("Creating Docker Volume ({}).".format(name), 'info')
 
         try:
             volume = self.get(name)
@@ -96,10 +98,14 @@ class GazeVolume(object):
                     driver_opts=driver_opts,
                     labels=labels
                 )
+
             except docker.errors.APIError:
                 self.log(
-                    "Failed to create Docker Volume ({}).".format(name), 'exception'
+                    "Failed to create Docker Volume ({}).".format(name),
+                    'exception'
                 )
                 sys.exit(1)
+
+            self.log("    * Success!", 'success')
 
         return volume
