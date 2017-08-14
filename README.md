@@ -19,7 +19,7 @@ Additionally, to aggregate all of the above in to a single user-friendly service
 - `GAZE Monitor`, a Grafana dashboard to display service metrics and alerts.
 - `GAZE Control`, a command-line tool to manage the full stack.
 
-## Installation (Linux)
+## Installation
 Although GAZE should run on any system with Docker, we test builds on **Ubuntu 16.04 LTS and later** so suggest it as a known good configuration.
 
 To install the `gaze` command-line tool and deploy the full media centre stack simply paste the following command into a shell. On completion, you will be presented with all the details you need to access your services:
