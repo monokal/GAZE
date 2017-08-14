@@ -19,17 +19,6 @@ volumes:
   servicevol:
 
 services:
-  gazeweb:
-    image: monokal/gazeweb:latest
-    networks:
-      - default
-      - internal
-    ports:
-      - "{{gazeweb_port}}:{{gazeweb_port}}"
-    restart: always
-    labels:
-      - "gaze.service=gazeweb"
-
   plex:
     image: plexinc/pms-docker:latest
     environment:
