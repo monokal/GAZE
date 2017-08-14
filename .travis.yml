@@ -13,4 +13,4 @@ install:
   - chmod +x /tmp/gaze
 
 script:
-  - /tmp/gaze bootstrap
+  - /tmp/gaze -d bootstrap
