@@ -1,4 +1,6 @@
-*Please note that GAZE is currently under active alpha development and as such is likely to be in a broken state.*
+*Please note that GAZE is currently under active alpha development and as such is **likely to be in a broken state**.*
+
+---
 
 # GAZE - Turnkey Open Media Centre [![Documentation Status](https://readthedocs.org/projects/gaze/badge/?version=latest)](http://gaze.readthedocs.io/en/latest/?badge=latest) [![Docker Build Status](https://img.shields.io/badge/docker%20build-automated-brightgreen.svg)](https://hub.docker.com/r/monokal/gazectl/)
 
