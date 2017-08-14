@@ -1,9 +1,16 @@
 sudo: required
 
+language: python
+
+python:
+  - "3.6"
+
 services:
   - docker
 
-before_install:
-- curl -L https://raw.githubusercontent.com/monokal/GAZE/master/gaze-control/gazectl-wrapper.sh > /tmp/gaze
-- chmod +x /tmp/gaze
-- /tmp/gaze bootstrap
+install:
+  - curl -L https://raw.githubusercontent.com/monokal/GAZE/master/gaze-control/gazectl-wrapper.sh > /tmp/gaze
+  - chmod +x /tmp/gaze
+
+script:
+  - /tmp/gaze bootstrap
