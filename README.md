@@ -1,4 +1,6 @@
-<div style="text-align:center"><img src="static/images/gaze.png" /></div>
+<p align="center">
+  <img src="static/images/gaze.png" alt="GAZE"/>
+</p>
 
 [![Documentation Status](https://readthedocs.org/projects/gaze/badge/?version=latest)](http://gaze.readthedocs.io/en/latest/?badge=latest)
 ## What's GAZE?
