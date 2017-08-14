@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 #
 # GAZE documentation build configuration file, created by
-# sphinx-quickstart on Fri Aug 11 18:14:05 2017.
+# sphinx-quickstart on Mon Aug 14 02:22:31 2017.
 #
 # This file is execfile()d with the current directory set to its
 # containing dir.
@@ -31,7 +31,11 @@
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.autodoc']
+extensions = ['sphinx.ext.autodoc',
+    'sphinx.ext.intersphinx',
+    'sphinx.ext.todo',
+    'sphinx.ext.viewcode',
+    'sphinx.ext.githubpages']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -75,7 +79,8 @@ exclude_patterns = []
 pygments_style = 'sphinx'
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
-todo_include_todos = False
+todo_include_todos = True
+
 
 # -- Options for HTML output ----------------------------------------------
 
@@ -110,10 +115,12 @@ html_sidebars = {
     ]
 }
 
+
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'GAZEdoc'
+
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -143,6 +150,7 @@ latex_documents = [
      'Daniel Middleton', 'manual'),
 ]
 
+
 # -- Options for manual page output ---------------------------------------
 
 # One entry per manual page. List of tuples
@@ -151,6 +159,7 @@ man_pages = [
     (master_doc, 'gaze', 'GAZE Documentation',
      [author], 1)
 ]
+
 
 # -- Options for Texinfo output -------------------------------------------
 
@@ -162,3 +171,9 @@ texinfo_documents = [
      author, 'GAZE', 'One line description of project.',
      'Miscellaneous'),
 ]
+
+
+
+
+# Example configuration for intersphinx: refer to the Python standard library.
+intersphinx_mapping = {'https://docs.python.org/': None}
