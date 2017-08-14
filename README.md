@@ -1,4 +1,3 @@
-tl;dr:
 ```sh
 curl -L https://raw.githubusercontent.com/monokal/GAZE/master/gaze-control/gazectl-wrapper.sh > /usr/local/bin/gaze && chmod +x /usr/local/bin/gaze && gaze bootstrap
 ```
