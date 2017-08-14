@@ -23,7 +23,7 @@ from .log import GazeLog
 
 
 class GazeNetwork(object):
-    """ Provides methods to interact with Docker Networks. """
+    """ Provides methods to interact with Docker Network. """
 
     def __init__(self):
         """
