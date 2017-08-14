@@ -22,7 +22,7 @@ Additionally, to aggregate all of the above in to a single user-friendly service
 ## Installation
 Although GAZE should run on any system with Docker, we test builds on **Ubuntu 16.04 LTS and later** so suggest it as a known good configuration.
 
-To install the `gaze` command-line tool and deploy the full media centre stack simply paste the following command into a shell. On completion, you will be presented with all the details you need to access your services:
+To install the `gaze` command-line tool and deploy the full media centre stack, simply paste the following command into a shell. On completion, you will be presented with all the details you need to access your services:
 ```sh
 curl -L https://raw.githubusercontent.com/monokal/GAZE/master/gaze-control/gazectl-wrapper.sh > /usr/local/bin/gaze && chmod +x /usr/local/bin/gaze && gaze bootstrap
 ```
