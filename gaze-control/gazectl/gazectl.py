@@ -29,6 +29,7 @@ from gazelib.log import GazeLog
 from gazelib.template import GazeTemplate
 from gazelib.volume import GazeVolume
 from gazelib.container import GazeContainer
+from gazelib.network import GazeNetwork
 
 # Initialise a global logger.
 try:
@@ -116,6 +117,8 @@ class Bootstrap(object):
         self.args = args
         self.log = GazeLog()
         self.volume = GazeVolume()
+        self.network = GazeNetwork()
+        self.container = GazeContainer()
         self.web = _Web(self.args)
         self.up = Up(self.args)
 
@@ -156,7 +159,6 @@ class Bootstrap(object):
 
         # Ensure we can ping to host's Docker daemon.
         self.log("Checking Docker daemon connectivity...", 'info')
-
         try:
             self.docker_client.ping()
 
@@ -199,6 +201,7 @@ class Bootstrap(object):
         volume = self.volume.create(name='gaze-share')
 
         # Bootstrap the "gaze-internal" Docker Network.
+        self.network.create(name='gaze-internal')
 
         # Render GAZE Web Nginx configuration.
         self.web.render_config("{}/gazeweb-nginx.conf".format(

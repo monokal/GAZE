@@ -20,6 +20,7 @@ import sys
 import docker
 
 from .log import GazeLog
+from .error import *
 
 
 class GazeNetwork(object):
@@ -48,3 +49,45 @@ class GazeNetwork(object):
         :param network_id: String: ID of the Docker Network.
         :return volume: Docker Network object.
         """
+
+        pass
+
+    def create(self, name, driver='local', driver_opts=None):
+        """
+        Create a Docker Network.
+
+        :param name: (str) Name of the Docker Network.
+        :param driver: (str) Name of the Network driver.
+        :param driver_opts: (dict) Key-value driver options.
+        :param labels: (dict) Map of labels to set on the network.
+        :return: A Network object.
+        """
+
+        self.log("Creating Docker Network ({})...".format(name), 'info')
+
+        try:
+            network = self.get(name)
+            self.log(
+                "The Docker Network ({}) already exists.".format(name), 'info'
+            )
+
+        except GazeNetworkNotFound:
+            try:
+                network = self.docker_client.networks.create(
+                    name=name,
+                    driver=driver,
+                    driver_opts=driver_opts,
+                    labels={"gaze.network": name}
+                )
+
+            except docker.errors.APIError:
+                self.log(
+                    "Failed to create Docker Network ({}).".format(name),
+                    'exception'
+                )
+                sys.exit(1)
+
+        self.log("    * Success!", 'success')
+
+        self.log("Got Docker Network:\n{}".format(network.attrs), 'debug')
+        return network

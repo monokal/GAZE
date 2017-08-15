@@ -91,8 +91,8 @@ class GazeVolume(object):
         """
         Create a Docker Volume.
 
-        :param name:
-        :param driver:
+        :param name: (str) Name of the Docker Volume.
+        :param driver: (str) Name of the Volume driver.
         :param driver_opts:
         :param labels:
         :return:

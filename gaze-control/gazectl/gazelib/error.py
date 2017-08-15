@@ -18,3 +18,7 @@
 
 class GazeVolumeNotFound(Exception):
     pass
+
+
+class GazeNetworkNotFound(Exception):
+    pass
