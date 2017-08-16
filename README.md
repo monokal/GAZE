@@ -1,8 +1,10 @@
 > *Please note that GAZE is currently under active alpha development and as such is **likely to be in a broken state**.*
 
-# GAZE - Turnkey Open Media Centre [![Documentation Status](http://readthedocs.org/projects/gaze/badge/?version=latest)](http://gaze.readthedocs.io/en/latest/?badge=latest) [![Build Status](https://travis-ci.org/monokal/GAZE.svg?branch=master)](https://travis-ci.org/monokal/GAZE) [![Docker Build Status](https://img.shields.io/badge/docker%20build-automated-brightgreen.svg)](https://hub.docker.com/r/monokal/gazectl/)
+# GAZE - Turnkey Open Media Centre
+[![Documentation Status](http://readthedocs.org/projects/gaze/badge/?version=latest)](http://gaze.readthedocs.io/en/latest/?badge=latest) [![Build Status](https://travis-ci.org/monokal/GAZE.svg?branch=master)](https://travis-ci.org/monokal/GAZE) [![Docker Build Status](https://img.shields.io/badge/docker%20build-automated-brightgreen.svg)](https://hub.docker.com/r/monokal/gazectl/) [![Chat on Gitter](https://img.shields.io/badge/chat-gitter-brightgreen.svg)](https://gitter.im/gaze-tomc/Lobby/) [![Donate via PayPal](https://img.shields.io/badge/donate-paypal-blue.svg)](https://www.paypal.me/monokal/)
 
 <p align="center">
+  <br />
   <img src="static/images/gaze.png" alt="GAZE"/>
 </p>
 
