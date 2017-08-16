@@ -24,6 +24,9 @@ from .log import GazeLog
 class GazeConfig(object):
 
     def __init__(self):
+        """
+
+        """
 
         self.log = GazeLog()
 

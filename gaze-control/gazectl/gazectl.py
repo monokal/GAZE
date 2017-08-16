@@ -24,6 +24,7 @@ from tabulate import tabulate
 from termcolor import colored
 
 # Import GAZE modules.
+from gazelib.config import GazeConfig
 from gazelib.compose import GazeCompose
 from gazelib.log import GazeLog
 from gazelib.template import GazeTemplate
@@ -54,10 +55,11 @@ class _Gaze(object):
     def __init__(self, args):
         self.args = args
         self.log = GazeLog()
+        self.config = GazeConfig()
 
     def __call__(self):
         # Instantiate and call the given class.
-        target_class = self.args.func(self.args)
+        target_class = self.args.func(self.args, self.config)
         return target_class()
 
 
@@ -109,12 +111,13 @@ class _Web(object):
 class Bootstrap(object):
     """ Prepare a host for GAZE services deployment. """
 
-    def __init__(self, args):
+    def __init__(self, args, config):
         """
         :param args: List: Arguments from the command-line.
         """
 
         self.args = args
+        self.config = config
         self.log = GazeLog()
         self.volume = GazeVolume()
         self.network = GazeNetwork()
@@ -217,8 +220,9 @@ class Bootstrap(object):
 
 
 class Up(object):
-    def __init__(self, args):
+    def __init__(self, args, config):
         self.args = args
+        self.config = config
         self.status = Status(self.args)
         self.log = GazeLog()
         self.compose = GazeCompose()
@@ -239,8 +243,9 @@ class Up(object):
 
 
 class Down(object):
-    def __init__(self, args):
+    def __init__(self, args, config):
         self.args = args
+        self.config = config
         self.log = GazeLog()
         self.compose = GazeCompose()
 
@@ -264,8 +269,9 @@ class Down(object):
 
 
 class Status(object):
-    def __init__(self, args):
+    def __init__(self, args, config):
         self.args = args
+        self.config = config
         self.log = GazeLog()
 
         # Instantiate a Docker client.
