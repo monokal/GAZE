@@ -42,10 +42,8 @@ class GazeConfig(object):
 
         except Exception as e:
             self.log(
-                "Failed to load config ({}) with exception:\n{}.".format(
-                    path, e
-                ),
-                'exception'
+                "Failed to load config ({}) with exception:\n"
+                "{}.".format(path, e), 'exception'
             )
             sys.exit(1)
 
