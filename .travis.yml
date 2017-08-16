@@ -14,3 +14,11 @@ install:
 
 script:
   - /tmp/gaze -d bootstrap
+
+notifications:
+  webhooks:
+    urls:
+      - https://webhooks.gitter.im/e/96c2bf7be3231aee724b
+    on_success: always
+    on_failure: always
+    on_start: always
