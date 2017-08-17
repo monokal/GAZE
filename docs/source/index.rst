@@ -1,19 +1,14 @@
-.. GAZE documentation master file, created by
-   sphinx-quickstart on Mon Aug 14 02:22:31 2017.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+.. GAZE documentation master file.
 
-Welcome to GAZE's documentation!
-================================
+GAZE's documentation
+====================
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-
-
-Indices and tables
-==================
+Contents
+========
 
 * :ref:`genindex`
 * :ref:`modindex`
