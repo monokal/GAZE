@@ -123,7 +123,7 @@ class Bootstrap(object):
         self.network = GazeNetwork()
         self.container = GazeContainer()
         self.proxy = _Proxy(self.args)
-        self.up = Up(self.args)
+        self.up = Up(self.args, self.config)
 
         # Instantiate a Docker client.
         try:
