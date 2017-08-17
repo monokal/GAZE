@@ -5,7 +5,7 @@
 
 <p align="center">
   <br />
-  <img src="docs/static/images/gaze.png" alt="GAZE"/>
+  <img src="docs/img/gaze.png" alt="GAZE"/>
 </p>
 
 ## What's GAZE?
