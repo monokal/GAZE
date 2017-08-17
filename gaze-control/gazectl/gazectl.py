@@ -63,14 +63,14 @@ class _Gaze(object):
         return target_class()
 
 
-class _Web(object):
+class _Proxy(object):
     def __init__(self, args):
         self.log = GazeLog()
         self.template = GazeTemplate()
 
-    def render_config(self, destination, template='gazeweb-nginx.conf.j2'):
+    def render_config(self, destination, template='gazeproxy-nginx.conf.j2'):
         items = {
-            'gazeweb_port': '8080',
+            'gazeproxy_port': '8080',
             'services': {
                 'plex': '32400',
                 'plexpy': '8181',
@@ -122,7 +122,7 @@ class Bootstrap(object):
         self.volume = GazeVolume()
         self.network = GazeNetwork()
         self.container = GazeContainer()
-        self.web = _Web(self.args)
+        self.proxy = _Proxy(self.args)
         self.up = Up(self.args)
 
         # Instantiate a Docker client.
@@ -206,8 +206,8 @@ class Bootstrap(object):
         # Bootstrap the "gaze-internal" Docker Network.
         self.network.create(name='gaze-internal')
 
-        # Render GAZE Web Nginx configuration.
-        self.web.render_config("{}/gazeweb-nginx.conf".format(
+        # Render GAZE Proxy Nginx configuration.
+        self.proxy.render_config("{}/gazeproxy-nginx.conf".format(
             volume.attrs['Mountpoint']))
 
         self.log("Bootstrapping complete.", 'info')
@@ -229,7 +229,7 @@ class Up(object):
 
     def __call__(self):
         items = {
-            'gazeweb_port': '8080',
+            'gazeproxy_port': '8080',
             'plex_claim': 'test',
             'plex_ip': '0.0.0.0',
             'uid': '1000',
@@ -286,7 +286,7 @@ class Status(object):
 
     def __call__(self):
         self.log("Your GAZE services are listed below. To access them, "
-                 "visit GAZE Web at http://localhost/\n", 'info')
+                 "visit GAZE Proxy at http://localhost/\n", 'info')
 
         try:
             containers = self.docker_client.containers.list(

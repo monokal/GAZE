@@ -11,11 +11,14 @@
 #          monokal.io
 
 server {
-    listen {{gazeweb_port}};
+    listen {{ gazeproxy_port }};
 
     {% for service in services %}
-    location /{{service.name}} {
-        proxy_pass {{service.protocol}}://{{service.name}}:{{service.port}};
+    location /{{ service.name }} {
+        proxy_pass {{ service.protocol }}://{{ service.name }}:{{ service.port }};
+
+        sub_filter '<head>' '<head><my_stuff>';
+        sub_filter_once on;
     }
     {% endfor %}
 }

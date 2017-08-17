@@ -20,7 +20,7 @@ It's a true turnkey open-source media centre solution. It will deploy, configure
 - `Prometheus`, to provide resource usage, performance metrics and alerts for services.
 
 Additionally, to aggregate all of the above in to a single user-friendly service, we also provide:
-- `GAZE Web`, a proxy service and web-UI to provide easy access to all of the above.
+- `GAZE Proxy`, a proxy service and web-UI to provide easy access to all of the above.
 - `GAZE Monitor`, a Grafana dashboard to display service metrics and alerts.
 - `GAZE Control`, a command-line tool to manage the full stack.
 
