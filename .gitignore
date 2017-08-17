@@ -132,3 +132,4 @@ fabric.properties
 gaze-control/docs/source/_static/
 gaze-control/docs/source/_templates/
 gaze-web/gazeweb/
+!/docs/build/
