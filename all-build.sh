@@ -17,5 +17,6 @@ if ! hash docker 2>/dev/null; then
     exit 1
 fi
 
+mkdocs build --clean
 cd gaze-control && ./gazectl-build.sh; cd -
 cd gaze-web && ./gazeweb-build.sh; cd -
