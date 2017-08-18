@@ -48,8 +48,8 @@ The `gaze` command-line tool also supports overriding various default runtime ar
 
 ## Documentation
 Full documentation on the GAZE project is available from a couple of places:
-- http://gaze.monokal.io (hosted by GitHub)
-- http://gaze.readthedocs.io (hosted by ReadTheDocs)
+* http://gaze.monokal.io (hosted by GitHub)
+* http://gaze.readthedocs.io (hosted by ReadTheDocs)
 
 ## Issues / Feature Requests
 If you experience any problems, bugs or would like to request a new feature, please first search for duplicates then raise a ticket here: https://github.com/monokal/GAZE/issues
