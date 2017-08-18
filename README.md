@@ -46,6 +46,9 @@ The `gaze` command-line tool also supports overriding various default runtime ar
 - `GAZECTL_SOCKET` - The Docker socket of the host (default: `/var/run/docker.sock`).
 - `GAZECTL_VOLUMES` - Path to the Docker Volumes mountpoint on the host (default: `/var/lib/docker/volumes`).
 
+## Documentation
+Full documentation on the GAZE project can be found here: http://gaze.monokal.io
+
 ## Issues / Feature Requests
 If you experience any problems, bugs or would like to request a new feature, please first search for duplicates then raise a ticket here: https://github.com/monokal/GAZE/issues
 
