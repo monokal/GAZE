@@ -161,15 +161,50 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#commands" title="Commands" class="md-nav__link">
-    Commands
+  <a href="#whats-gaze" title="What's GAZE?" class="md-nav__link">
+    What's GAZE?
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#project-layout" title="Project layout" class="md-nav__link">
-    Project layout
+  <a href="#installation" title="Installation" class="md-nav__link">
+    Installation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentation" title="Documentation" class="md-nav__link">
+    Documentation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#issues-feature-requests" title="Issues / Feature Requests" class="md-nav__link">
+    Issues / Feature Requests
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contributions" title="Contributions" class="md-nav__link">
+    Contributions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#disclaimer" title="Disclaimer" class="md-nav__link">
+    Disclaimer
   </a>
   
 </li>
@@ -204,15 +239,50 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#commands" title="Commands" class="md-nav__link">
-    Commands
+  <a href="#whats-gaze" title="What's GAZE?" class="md-nav__link">
+    What's GAZE?
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#project-layout" title="Project layout" class="md-nav__link">
-    Project layout
+  <a href="#installation" title="Installation" class="md-nav__link">
+    Installation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentation" title="Documentation" class="md-nav__link">
+    Documentation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#issues-feature-requests" title="Issues / Feature Requests" class="md-nav__link">
+    Issues / Feature Requests
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contributions" title="Contributions" class="md-nav__link">
+    Contributions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#disclaimer" title="Disclaimer" class="md-nav__link">
+    Disclaimer
   </a>
   
 </li>
@@ -232,20 +302,59 @@
               
                 
                 
-                <h1 id="gaze-documentation">GAZE Documentation</h1>
-<h2 id="commands">Commands</h2>
-<ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs help</code> - Print this help message.</li>
-</ul>
-<h2 id="project-layout">Project layout</h2>
-<pre><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
+                <blockquote>
+<p><em>Please note that GAZE is currently under active alpha development and as such is <strong>likely to be in a broken state</strong>.</em></p>
+</blockquote>
+<h1 id="gaze-turnkey-open-media-centre">GAZE - Turnkey Open Media Centre</h1>
+<p><a href="http://gaze.readthedocs.io/en/latest/?badge=latest"><img alt="Documentation Status" src="http://readthedocs.org/projects/gaze/badge/?version=latest" /></a> <a href="https://travis-ci.org/monokal/GAZE"><img alt="Build Status" src="https://travis-ci.org/monokal/GAZE.svg?branch=master" /></a> <a href="https://hub.docker.com/r/monokal/gazectl/"><img alt="Docker Build Status" src="https://img.shields.io/badge/docker%20build-automated-brightgreen.svg" /></a> <a href="https://gitter.im/gaze-tomc/"><img alt="Chat on Gitter" src="https://img.shields.io/badge/chat-gitter-brightgreen.svg" /></a> <a href="https://www.paypal.me/monokal/"><img alt="Donate via PayPal" src="https://img.shields.io/badge/donate-paypal-blue.svg" /></a></p>
+<p align="center">
+  <br />
+  <img src="docs/img/gaze.png" alt="GAZE"/>
+</p>
+
+<h2 id="whats-gaze">What's GAZE?</h2>
+<p>It's a true turnkey open-source media centre solution. It will deploy, configure and network the following services, making use of Docker's ecosystem:
+- <code>Sonarr</code>, to manage TV series downloads.
+- <code>Radarr</code>, to manage movie downloads.
+- <code>Jackett</code>, to manage torrent trackers.
+- <code>Transmission</code>, a torrent client.
+- <code>Plex Media Server</code>, to encode and stream media to devices.
+- <code>PlexPy</code>, a Plex monitoring dashboard.
+- <code>Ombi</code>, a unified web-UI for managing Sonarr/Radarr/Plex/etc.
+- <code>Prometheus</code>, to provide resource usage, performance metrics and alerts for services.</p>
+<p>Additionally, to aggregate all of the above in to a single user-friendly service, we also provide:
+- <code>GAZE Proxy</code>, a proxy service and web-UI to provide easy access to all of the above.
+- <code>GAZE Monitor</code>, a Grafana dashboard to display service metrics and alerts.
+- <code>GAZE Control</code>, a command-line tool to manage the full stack.</p>
+<h2 id="installation">Installation</h2>
+<p>Although GAZE should run on any system with Docker, we test builds on <strong>Ubuntu 16.04 LTS and later</strong> so suggest it as a known good configuration.</p>
+<p>To install the <code>gaze</code> command-line tool and deploy the full media centre stack, simply paste the following command into a shell. On completion, you will be presented with all the details you need to access your services:</p>
+<pre><code class="sh">curl -L https://raw.githubusercontent.com/monokal/GAZE/master/gaze-control/gazectl-wrapper.sh &gt; /usr/local/bin/gaze &amp;&amp; chmod +x /usr/local/bin/gaze &amp;&amp; gaze bootstrap
 </code></pre>
+
+<p>If you hit a <code>Permission denied</code> error, use <code>sudo -i</code> then retry the above command.</p>
+<p><strong>That's it!</strong></p>
+<h2 id="usage">Usage</h2>
+<p>To make life easy, the <code>gaze</code> command-line tool can be used to manage the full stack of media centre services. Usage can be seen using the following command:</p>
+<pre><code class="sh">gaze --help
+</code></pre>
+
+<p>The <code>gaze</code> command-line tool also supports overriding various default runtime arguments using environment variables. Sane defaults have been chosen so you shouldn't need to, but if you do:
+- <code>GAZECTL_NAMESPACE</code> - The Docker Namespace of the <code>gazectl</code> container (default: <code>monokal</code>).
+- <code>GAZECTL_IMAGE</code> - The Docker Image of the <code>gazectl</code> container (default: <code>gazectl</code>).
+- <code>GAZECTL_VERSION</code> - The Docker Image Tag of the <code>gazectl</code> container (default: <code>latest</code>).
+- <code>GAZECTL_SOCKET</code> - The Docker socket of the host (default: <code>/var/run/docker.sock</code>).
+- <code>GAZECTL_VOLUMES</code> - Path to the Docker Volumes mountpoint on the host (default: <code>/var/lib/docker/volumes</code>).</p>
+<h2 id="documentation">Documentation</h2>
+<p>Full documentation on the GAZE project is available from a couple of places:
+- http://gaze.monokal.io (hosted by GitHub)
+- http://gaze.readthedocs.io (hosted by ReadTheDocs)</p>
+<h2 id="issues-feature-requests">Issues / Feature Requests</h2>
+<p>If you experience any problems, bugs or would like to request a new feature, please first search for duplicates then raise a ticket here: https://github.com/monokal/GAZE/issues</p>
+<h2 id="contributions">Contributions</h2>
+<p>If you'd like to contribute to the GAZE project, simply fork the <code>master</code> branch, make and test your changes then open a Pull Request here: https://github.com/monokal/GAZE/pulls</p>
+<h2 id="disclaimer">Disclaimer</h2>
+<p>The maintainer(s) of the GAZE project do not advocate the illegal sharing of media in any way. The GAZE project is intended to be an educational programming exercise, and therefore the maintainer(s) assumes no responsibility of improper use.</p>
                 
                   
                 

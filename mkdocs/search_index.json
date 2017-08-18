@@ -2,23 +2,48 @@
     "docs": [
         {
             "location": "/",
-            "text": "GAZE Documentation\n\n\nCommands\n\n\n\n\nmkdocs new [dir-name]\n - Create a new project.\n\n\nmkdocs serve\n - Start the live-reloading docs server.\n\n\nmkdocs build\n - Build the documentation site.\n\n\nmkdocs help\n - Print this help message.\n\n\n\n\nProject layout\n\n\nmkdocs.yml    # The configuration file.\ndocs/\n    index.md  # The documentation homepage.\n    ...       # Other markdown pages, images and other files.",
+            "text": "Please note that GAZE is currently under active alpha development and as such is \nlikely to be in a broken state\n.\n\n\n\n\nGAZE - Turnkey Open Media Centre\n\n\n \n \n \n \n\n\n\n  \n\n  \n\n\n\n\n\nWhat's GAZE?\n\n\nIt's a true turnkey open-source media centre solution. It will deploy, configure and network the following services, making use of Docker's ecosystem:\n- \nSonarr\n, to manage TV series downloads.\n- \nRadarr\n, to manage movie downloads.\n- \nJackett\n, to manage torrent trackers.\n- \nTransmission\n, a torrent client.\n- \nPlex Media Server\n, to encode and stream media to devices.\n- \nPlexPy\n, a Plex monitoring dashboard.\n- \nOmbi\n, a unified web-UI for managing Sonarr/Radarr/Plex/etc.\n- \nPrometheus\n, to provide resource usage, performance metrics and alerts for services.\n\n\nAdditionally, to aggregate all of the above in to a single user-friendly service, we also provide:\n- \nGAZE Proxy\n, a proxy service and web-UI to provide easy access to all of the above.\n- \nGAZE Monitor\n, a Grafana dashboard to display service metrics and alerts.\n- \nGAZE Control\n, a command-line tool to manage the full stack.\n\n\nInstallation\n\n\nAlthough GAZE should run on any system with Docker, we test builds on \nUbuntu 16.04 LTS and later\n so suggest it as a known good configuration.\n\n\nTo install the \ngaze\n command-line tool and deploy the full media centre stack, simply paste the following command into a shell. On completion, you will be presented with all the details you need to access your services:\n\n\ncurl -L https://raw.githubusercontent.com/monokal/GAZE/master/gaze-control/gazectl-wrapper.sh > /usr/local/bin/gaze && chmod +x /usr/local/bin/gaze && gaze bootstrap\n\n\n\n\nIf you hit a \nPermission denied\n error, use \nsudo -i\n then retry the above command.\n\n\nThat's it!\n\n\nUsage\n\n\nTo make life easy, the \ngaze\n command-line tool can be used to manage the full stack of media centre services. Usage can be seen using the following command:\n\n\ngaze --help\n\n\n\n\nThe \ngaze\n command-line tool also supports overriding various default runtime arguments using environment variables. Sane defaults have been chosen so you shouldn't need to, but if you do:\n- \nGAZECTL_NAMESPACE\n - The Docker Namespace of the \ngazectl\n container (default: \nmonokal\n).\n- \nGAZECTL_IMAGE\n - The Docker Image of the \ngazectl\n container (default: \ngazectl\n).\n- \nGAZECTL_VERSION\n - The Docker Image Tag of the \ngazectl\n container (default: \nlatest\n).\n- \nGAZECTL_SOCKET\n - The Docker socket of the host (default: \n/var/run/docker.sock\n).\n- \nGAZECTL_VOLUMES\n - Path to the Docker Volumes mountpoint on the host (default: \n/var/lib/docker/volumes\n).\n\n\nDocumentation\n\n\nFull documentation on the GAZE project is available from a couple of places:\n- http://gaze.monokal.io (hosted by GitHub)\n- http://gaze.readthedocs.io (hosted by ReadTheDocs)\n\n\nIssues / Feature Requests\n\n\nIf you experience any problems, bugs or would like to request a new feature, please first search for duplicates then raise a ticket here: https://github.com/monokal/GAZE/issues\n\n\nContributions\n\n\nIf you'd like to contribute to the GAZE project, simply fork the \nmaster\n branch, make and test your changes then open a Pull Request here: https://github.com/monokal/GAZE/pulls\n\n\nDisclaimer\n\n\nThe maintainer(s) of the GAZE project do not advocate the illegal sharing of media in any way. The GAZE project is intended to be an educational programming exercise, and therefore the maintainer(s) assumes no responsibility of improper use.",
             "title": "Home"
         },
         {
-            "location": "/#gaze-documentation",
+            "location": "/#gaze-turnkey-open-media-centre",
             "text": "",
-            "title": "GAZE Documentation"
+            "title": "GAZE - Turnkey Open Media Centre"
         },
         {
-            "location": "/#commands",
-            "text": "mkdocs new [dir-name]  - Create a new project.  mkdocs serve  - Start the live-reloading docs server.  mkdocs build  - Build the documentation site.  mkdocs help  - Print this help message.",
-            "title": "Commands"
+            "location": "/#whats-gaze",
+            "text": "It's a true turnkey open-source media centre solution. It will deploy, configure and network the following services, making use of Docker's ecosystem:\n-  Sonarr , to manage TV series downloads.\n-  Radarr , to manage movie downloads.\n-  Jackett , to manage torrent trackers.\n-  Transmission , a torrent client.\n-  Plex Media Server , to encode and stream media to devices.\n-  PlexPy , a Plex monitoring dashboard.\n-  Ombi , a unified web-UI for managing Sonarr/Radarr/Plex/etc.\n-  Prometheus , to provide resource usage, performance metrics and alerts for services.  Additionally, to aggregate all of the above in to a single user-friendly service, we also provide:\n-  GAZE Proxy , a proxy service and web-UI to provide easy access to all of the above.\n-  GAZE Monitor , a Grafana dashboard to display service metrics and alerts.\n-  GAZE Control , a command-line tool to manage the full stack.",
+            "title": "What's GAZE?"
         },
         {
-            "location": "/#project-layout",
-            "text": "mkdocs.yml    # The configuration file.\ndocs/\n    index.md  # The documentation homepage.\n    ...       # Other markdown pages, images and other files.",
-            "title": "Project layout"
+            "location": "/#installation",
+            "text": "Although GAZE should run on any system with Docker, we test builds on  Ubuntu 16.04 LTS and later  so suggest it as a known good configuration.  To install the  gaze  command-line tool and deploy the full media centre stack, simply paste the following command into a shell. On completion, you will be presented with all the details you need to access your services:  curl -L https://raw.githubusercontent.com/monokal/GAZE/master/gaze-control/gazectl-wrapper.sh > /usr/local/bin/gaze && chmod +x /usr/local/bin/gaze && gaze bootstrap  If you hit a  Permission denied  error, use  sudo -i  then retry the above command.  That's it!",
+            "title": "Installation"
+        },
+        {
+            "location": "/#usage",
+            "text": "To make life easy, the  gaze  command-line tool can be used to manage the full stack of media centre services. Usage can be seen using the following command:  gaze --help  The  gaze  command-line tool also supports overriding various default runtime arguments using environment variables. Sane defaults have been chosen so you shouldn't need to, but if you do:\n-  GAZECTL_NAMESPACE  - The Docker Namespace of the  gazectl  container (default:  monokal ).\n-  GAZECTL_IMAGE  - The Docker Image of the  gazectl  container (default:  gazectl ).\n-  GAZECTL_VERSION  - The Docker Image Tag of the  gazectl  container (default:  latest ).\n-  GAZECTL_SOCKET  - The Docker socket of the host (default:  /var/run/docker.sock ).\n-  GAZECTL_VOLUMES  - Path to the Docker Volumes mountpoint on the host (default:  /var/lib/docker/volumes ).",
+            "title": "Usage"
+        },
+        {
+            "location": "/#documentation",
+            "text": "Full documentation on the GAZE project is available from a couple of places:\n- http://gaze.monokal.io (hosted by GitHub)\n- http://gaze.readthedocs.io (hosted by ReadTheDocs)",
+            "title": "Documentation"
+        },
+        {
+            "location": "/#issues-feature-requests",
+            "text": "If you experience any problems, bugs or would like to request a new feature, please first search for duplicates then raise a ticket here: https://github.com/monokal/GAZE/issues",
+            "title": "Issues / Feature Requests"
+        },
+        {
+            "location": "/#contributions",
+            "text": "If you'd like to contribute to the GAZE project, simply fork the  master  branch, make and test your changes then open a Pull Request here: https://github.com/monokal/GAZE/pulls",
+            "title": "Contributions"
+        },
+        {
+            "location": "/#disclaimer",
+            "text": "The maintainer(s) of the GAZE project do not advocate the illegal sharing of media in any way. The GAZE project is intended to be an educational programming exercise, and therefore the maintainer(s) assumes no responsibility of improper use.",
+            "title": "Disclaimer"
         }
     ]
 }
