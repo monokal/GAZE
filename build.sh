@@ -19,13 +19,13 @@ if ! hash docker 2>/dev/null; then
     exit 1
 fi
 
-echo "Building & pushing the gazectl Docker Image..."
+echo "\nBuilding & pushing the gazectl Docker Image...\n"
 cd gaze-control && ./gazectl-build.sh; cd -
 
 echo "Building & pushing documentation..."
 mkdocs build --clean && mkdocs gh-deploy
 
-echo "Pushing all changes to Git..."
+echo "\nPushing all changes to Git...\n"
 git add -A && git commit -m "Pushed by ${0}" && git push
 
-echo "Done!"
+echo "\nDone!\n"
