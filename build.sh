@@ -22,7 +22,7 @@ if ! hash docker 2>/dev/null; then
     exit 1
 fi
 
-echo -e "\n${SC}$[GAZE] Building & pushing the gazectl Docker Image...${EC}\n"
+echo -e "\n${SC}[GAZE] Building & pushing the gazectl Docker Image...${EC}\n"
 cd gaze-control && ./gazectl-build.sh; cd -
 
 echo -e "\n${SC}[GAZE] Building & pushing documentation...${EC}\n"
