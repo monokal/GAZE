@@ -10,19 +10,19 @@
 
 ## What's GAZE?
 It's a true turnkey open-source media centre solution. It will deploy, configure and network the following services, making use of Docker's ecosystem:
-* Sonarr, to manage TV series downloads.
-* Radarr, to manage movie downloads.
-* Jackett, to manage torrent trackers.
-* Transmission, a torrent client.
-* Plex Media Server, to encode and stream media to devices.
-* PlexPy, a Plex monitoring dashboard.
-* Ombi, a unified web-UI for managing Sonarr/Radarr/Plex/etc.
-* Prometheus, to provide resource usage, performance metrics and alerts for services.
+*  `Sonarr`, to manage TV series downloads.
+*  `Radarr`, to manage movie downloads.
+*  `Jackett`, to manage torrent trackers.
+*  `Transmission`, a torrent client.
+*  `Plex Media Server`, to encode and stream media to devices.
+*  `PlexPy`, a Plex monitoring dashboard.
+*  `Ombi`, a unified web-UI for managing Sonarr/Radarr/Plex/etc.
+*  `Prometheus`, to provide resource usage, performance metrics and alerts for services.
 
 Additionally, to aggregate all of the above in to a single user-friendly service, we also provide:
-* GAZE Proxy, a proxy service and web-UI to provide easy access to all of the above.
-* GAZE Monitor, a Grafana dashboard to display service metrics and alerts.
-* GAZE Control, a command-line tool to manage the full stack.
+*  `GAZE Proxy`, a proxy service and web-UI to provide easy access to all of the above.
+*  `GAZE Monitor`, a Grafana dashboard to display service metrics and alerts.
+*  `GAZE Control`, a command-line tool to manage the full stack.
 
 ## Installation
 Although GAZE should run on any system with Docker, we test builds on **Ubuntu 16.04 LTS and later** so suggest it as a known good configuration.
@@ -40,11 +40,11 @@ To make life easy, the `gaze` command-line tool can be used to manage the full s
 gaze --help
 ```
 The `gaze` command-line tool also supports overriding various default runtime arguments using environment variables. Sane defaults have been chosen so you shouldn't need to, but if you do:
-* GAZECTL_NAMESPACE - The Docker Namespace of the gazectl container (default: monokal).
-* GAZECTL_IMAGE - The Docker Image of the gazectl container (default: gazectl).
-* GAZECTL_VERSION - The Docker Image Tag of the gazectl container (default: latest).
-* GAZECTL_SOCKET - The Docker socket of the host (default: /var/run/docker.sock).
-* GAZECTL_VOLUMES - Path to the Docker Volumes mountpoint on the host (default: /var/lib/docker/volumes).
+*  `GAZECTL_NAMESPACE` - The Docker Namespace of the `gazectl` container (default: `monokal`).
+*  `GAZECTL_IMAGE` - The Docker Image of the `gazectl` container (default: `gazectl`).
+*  `GAZECTL_VERSION` - The Docker Image Tag of the `gazectl` container (default: `latest`).
+*  `GAZECTL_SOCKET` - The Docker socket of the host (default: `/var/run/docker.sock`).
+*  `GAZECTL_VOLUMES` - Path to the Docker Volumes mountpoint on the host (default: `/var/lib/docker/volumes`).
 
 ## Documentation
 Full documentation on the GAZE project is available from a couple of places:
