@@ -16,13 +16,13 @@
 """
 
 import sys
+
 import yaml
 
 from .log import GazeLog
 
 
 class GazeConfig(object):
-
     def __init__(self):
         """
 

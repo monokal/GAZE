@@ -19,8 +19,8 @@ import sys
 
 import docker
 
-from .log import GazeLog
 from .error import *
+from .log import GazeLog
 
 
 class GazeNetwork(object):

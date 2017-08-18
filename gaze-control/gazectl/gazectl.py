@@ -20,17 +20,15 @@ import logging
 import sys
 
 import docker
-from tabulate import tabulate
-from termcolor import colored
-
-# Import GAZE modules.
 from gazelib.config import GazeConfig
 from gazelib.compose import GazeCompose
+from gazelib.container import GazeContainer
 from gazelib.log import GazeLog
+from gazelib.network import GazeNetwork
 from gazelib.template import GazeTemplate
 from gazelib.volume import GazeVolume
-from gazelib.container import GazeContainer
-from gazelib.network import GazeNetwork
+from tabulate import tabulate
+from termcolor import colored
 
 # Initialise a global logger.
 try:
