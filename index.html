@@ -120,18 +120,18 @@
 
 <h2 id="whats-gaze">What's GAZE?</h2>
 <p>It's a true turnkey open-source media centre solution. It will deploy, configure and network the following services, making use of Docker's ecosystem:
-<em> <code>Sonarr</code>, to manage TV series downloads.
-</em> <code>Radarr</code>, to manage movie downloads.
-<em> <code>Jackett</code>, to manage torrent trackers.
-</em> <code>Transmission</code>, a torrent client.
-<em> <code>Plex Media Server</code>, to encode and stream media to devices.
-</em> <code>PlexPy</code>, a Plex monitoring dashboard.
-<em> <code>Ombi</code>, a unified web-UI for managing Sonarr/Radarr/Plex/etc.
-</em> <code>Prometheus</code>, to provide resource usage, performance metrics and alerts for services.</p>
+<em> Sonarr, to manage TV series downloads.
+</em> Radarr, to manage movie downloads.
+<em> Jackett, to manage torrent trackers.
+</em> Transmission, a torrent client.
+<em> Plex Media Server, to encode and stream media to devices.
+</em> PlexPy, a Plex monitoring dashboard.
+<em> Ombi, a unified web-UI for managing Sonarr/Radarr/Plex/etc.
+</em> Prometheus, to provide resource usage, performance metrics and alerts for services.</p>
 <p>Additionally, to aggregate all of the above in to a single user-friendly service, we also provide:
-<em> <code>GAZE Proxy</code>, a proxy service and web-UI to provide easy access to all of the above.
-</em> <code>GAZE Monitor</code>, a Grafana dashboard to display service metrics and alerts.
-* <code>GAZE Control</code>, a command-line tool to manage the full stack.</p>
+<em> GAZE Proxy<code>, a proxy service and web-UI to provide easy access to all of the above.
+* GAZE Monitor</code>, a Grafana dashboard to display service metrics and alerts.
+</em> GAZE Control`, a command-line tool to manage the full stack.</p>
 <h2 id="installation">Installation</h2>
 <p>Although GAZE should run on any system with Docker, we test builds on <strong>Ubuntu 16.04 LTS and later</strong> so suggest it as a known good configuration.</p>
 <p>To install the <code>gaze</code> command-line tool and deploy the full media centre stack, simply paste the following command into a shell. On completion, you will be presented with all the details you need to access your services:</p>
@@ -146,11 +146,11 @@
 </code></pre>
 
 <p>The <code>gaze</code> command-line tool also supports overriding various default runtime arguments using environment variables. Sane defaults have been chosen so you shouldn't need to, but if you do:
-<em> <code>GAZECTL_NAMESPACE</code> - The Docker Namespace of the <code>gazectl</code> container (default: <code>monokal</code>).
-</em> <code>GAZECTL_IMAGE</code> - The Docker Image of the <code>gazectl</code> container (default: <code>gazectl</code>).
-<em> <code>GAZECTL_VERSION</code> - The Docker Image Tag of the <code>gazectl</code> container (default: <code>latest</code>).
-</em> <code>GAZECTL_SOCKET</code> - The Docker socket of the host (default: <code>/var/run/docker.sock</code>).
-* <code>GAZECTL_VOLUMES</code> - Path to the Docker Volumes mountpoint on the host (default: <code>/var/lib/docker/volumes</code>).</p>
+<em> GAZECTL_NAMESPACE - The Docker Namespace of the gazectl container (default: monokal).
+</em> GAZECTL_IMAGE - The Docker Image of the gazectl container (default: gazectl).
+<em> GAZECTL_VERSION - The Docker Image Tag of the gazectl container (default: latest).
+</em> GAZECTL_SOCKET - The Docker socket of the host (default: /var/run/docker.sock).
+* GAZECTL_VOLUMES - Path to the Docker Volumes mountpoint on the host (default: /var/lib/docker/volumes).</p>
 <h2 id="documentation">Documentation</h2>
 <p>Full documentation on the GAZE project is available from a couple of places:
 <em> http://gaze.monokal.io (hosted by GitHub)
@@ -198,5 +198,5 @@
 
 <!--
 MkDocs version : 0.16.3
-Build Date UTC : 2017-08-18 10:17:46
+Build Date UTC : 2017-08-18 11:01:23
 -->
