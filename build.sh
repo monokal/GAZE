@@ -12,10 +12,20 @@
 #   ==`==`   ==`   ==`
 #          monokal.io
 
+set -e
+
 if ! hash docker 2>/dev/null; then
     echo 'Docker is required to build GAZE. Please install it then try again.'
     exit 1
 fi
 
-mkdocs build --clean && mkdocs gh-deploy
+echo "Building & pushing the gazectl Docker Image..."
 cd gaze-control && ./gazectl-build.sh; cd -
+
+echo "Building & pushing documentation..."
+mkdocs build --clean && mkdocs gh-deploy
+
+echo "Pushing all changes to Git..."
+git add -A && git commit -m "Pushed by ${0}" && git push
+
+echo "Done!"
