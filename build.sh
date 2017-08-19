@@ -18,13 +18,19 @@ NAMESPACE=${GAZECTL_NAMESPACE:='monokal'}
 IMAGE=${GAZECTL_IMAGE:='gazectl'}
 TAG=${GAZECTL_VERSION:='latest'}
 
+REQUIREMENTS=( 'docker' 'mkdocs' )
+
 PURPLE='\033[0;35m'
+GREEN='\032[0;35m'
+RED='\031[0;35m'
 NONE='\033[0m'
 
-if ! hash docker 2>/dev/null; then
-    echo -e "${PURPLE}[GAZE] Docker is required to build GAZE. Please install it then try again.${NONE}"
-    exit 1
-fi
+for i in "${REQUIREMENTS[@]}"; do
+    if ! hash "${i}" 2>/dev/null; then
+        echo -e "${RED}[GAZE] "${i}" is required to build GAZE. Please install it then try again.${NONE}"
+        exit 1
+    fi
+done
 
 # Build & push the gazectl Docker Image.
 echo -e "\n${PURPLE}[GAZE] Building & pushing the ${NAMESPACE}/${IMAGE}:${TAG} Docker Image...${NONE}\n"
@@ -39,4 +45,4 @@ mkdocs build --clean && mkdocs gh-deploy
 echo -e "\n${PURPLE}[GAZE] Pushing all changes to Git...${NONE}\n"
 git add -A && git commit -m "Pushed by ${0}" && git push
 
-echo -e "\n${PURPLE}[GAZE] Success!${NONE}\n"
+echo -e "\n${GREEN}[GAZE] Success!${NONE}\n"
