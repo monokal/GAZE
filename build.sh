@@ -27,7 +27,7 @@ if ! hash docker 2>/dev/null; then
 fi
 
 # Build & push the gazectl Docker Image.
-echo -e "\n${PURPLE}[GAZE] Building & pushing the gazectl Docker Image...${NONE}\n"
+echo -e "\n${PURPLE}[GAZE] Building & pushing the ${NAMESPACE}/${IMAGE}:${TAG} Docker Image...${NONE}\n"
 docker build -t "${NAMESPACE}/${IMAGE}:${TAG}" gaze-control/ && \
 docker push "${NAMESPACE}/${IMAGE}:${TAG}"
 
