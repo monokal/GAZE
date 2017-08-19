@@ -20,10 +20,10 @@ TAG=${GAZECTL_VERSION:='latest'}
 
 REQUIREMENTS=( 'docker' 'mkdocs' )
 
-PURPLE='\033[0;35m'
-GREEN='\032[0;35m'
-RED='\033[0;31m'
-NONE='\033[0m'
+MAGENTA=$(tput setaf 5)
+GREEN=$(tput setaf 2)
+RED=$(tput setaf 1)
+NONE=$(tput sgr 0)
 
 for i in "${REQUIREMENTS[@]}"; do
     if ! hash "${i}" 2>/dev/null; then
@@ -33,16 +33,16 @@ for i in "${REQUIREMENTS[@]}"; do
 done
 
 # Build & push the gazectl Docker Image.
-echo -e "\n${PURPLE}[GAZE] Building & pushing the ${NAMESPACE}/${IMAGE}:${TAG} Docker Image...${NONE}\n"
+echo -e "\n${MAGENTA}[GAZE] Building & pushing the ${NAMESPACE}/${IMAGE}:${TAG} Docker Image...${NONE}\n"
 docker build -t "${NAMESPACE}/${IMAGE}:${TAG}" gaze-control/ && \
 docker push "${NAMESPACE}/${IMAGE}:${TAG}"
 
 # Build & deploy documentation.
-echo -e "\n${PURPLE}[GAZE] Building & pushing documentation...${NONE}\n"
+echo -e "\n${MAGENTA}[GAZE] Building & pushing documentation...${NONE}\n"
 mkdocs build --clean && mkdocs gh-deploy
 
 # Push all changes to Git.
-echo -e "\n${PURPLE}[GAZE] Pushing all changes to Git...${NONE}\n"
+echo -e "\n${MAGENTA}[GAZE] Pushing all changes to Git...${NONE}\n"
 git add -A && git commit -m "Pushed by ${0}" && git push
 
 echo -e "\n${GREEN}[GAZE] Finished.${NONE}\n"
