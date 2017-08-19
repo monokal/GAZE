@@ -5,7 +5,7 @@
 
 <p align="center">
   <br />
-  <img src="img/gaze.png" alt="GAZE"/>
+  <img src="https://raw.githubusercontent.com/monokal/GAZE/master/docs/img/gaze.png" alt="GAZE"/>
 </p>
 
 ## What's GAZE?
