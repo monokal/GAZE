@@ -14,7 +14,7 @@
 
 set -e
 
-# Values which can be overridden using environment variables.
+# Environment variable overrides.
 NAMESPACE=${GAZECTL_NAMESPACE:='monokal'}
 IMAGE=${GAZECTL_IMAGE:='gazectl'}
 TAG=${GAZECTL_VERSION:='latest'}
