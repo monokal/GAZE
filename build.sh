@@ -14,18 +14,20 @@
 
 set -e
 
+# Values which can be overridden using environment variables.
 NAMESPACE=${GAZECTL_NAMESPACE:='monokal'}
 IMAGE=${GAZECTL_IMAGE:='gazectl'}
 TAG=${GAZECTL_VERSION:='latest'}
 
-REQUIREMENTS=( 'docker' 'mkdocs' )
+DEPS=( 'docker' 'mkdocs' )
 
 MAGENTA=$(tput setaf 5)
 GREEN=$(tput setaf 2)
 RED=$(tput setaf 1)
 NONE=$(tput sgr 0)
 
-for i in "${REQUIREMENTS[@]}"; do
+# Check for dependencies.
+for i in "${DEPS[@]}"; do
     if ! hash "${i}" 2>/dev/null; then
         echo -e "${RED}[GAZE] "${i}" is required to build GAZE. Please install it then try again.${NONE}"
         exit 1

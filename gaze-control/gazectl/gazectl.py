@@ -20,8 +20,8 @@ import logging
 import sys
 
 import docker
-from gazelib.config import GazeConfig
 from gazelib.compose import GazeCompose
+from gazelib.config import GazeConfig
 from gazelib.container import GazeContainer
 from gazelib.log import GazeLog
 from gazelib.network import GazeNetwork
