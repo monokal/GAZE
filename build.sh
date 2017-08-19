@@ -22,7 +22,7 @@ REQUIREMENTS=( 'docker' 'mkdocs' )
 
 PURPLE='\033[0;35m'
 GREEN='\032[0;35m'
-RED='\031[0;35m'
+RED='\033[0;31m'
 NONE='\033[0m'
 
 for i in "${REQUIREMENTS[@]}"; do
