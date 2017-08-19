@@ -45,4 +45,4 @@ mkdocs build --clean && mkdocs gh-deploy
 echo -e "\n${PURPLE}[GAZE] Pushing all changes to Git...${NONE}\n"
 git add -A && git commit -m "Pushed by ${0}" && git push
 
-echo -e "\n${GREEN}[GAZE] Success!${NONE}\n"
+echo -e "\n${GREEN}[GAZE] Finished.${NONE}\n"
