@@ -14,6 +14,10 @@
 
 set -e
 
+NAMESPACE=${GAZECTL_NAMESPACE:='monokal'}
+IMAGE=${GAZECTL_IMAGE:='gazectl'}
+TAG=${GAZECTL_VERSION:='latest'}
+
 SC='\033[0;35m'
 EC='\033[0m'
 
@@ -23,7 +27,10 @@ if ! hash docker 2>/dev/null; then
 fi
 
 echo -e "\n${SC}[GAZE] Building & pushing the gazectl Docker Image...${EC}\n"
-cd gaze-control && ./gazectl-build.sh; cd -
+#cd gaze-control && ./gazectl-build.sh; cd -
+
+docker build -t "${NAMESPACE}/${IMAGE}:${TAG}" gaze-control/ && \
+docker push "${NAMESPACE}/${IMAGE}:${TAG}"
 
 echo -e "\n${SC}[GAZE] Building & pushing documentation...${EC}\n"
 mkdocs build --clean && mkdocs gh-deploy
