@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #            GAZE
-#  Turnkey Open Media Centre
+#  Turnkey Open Media Center
 #              __        .-.
 #          .-"` .`'.    /\\|
 #  _(\-/)_" ,  .   ,\  /\\\/     =o O=

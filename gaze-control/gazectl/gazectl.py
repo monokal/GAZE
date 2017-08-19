@@ -3,7 +3,7 @@
 
 """
                GAZE
-     Turnkey Open Media Centre
+     Turnkey Open Media Center
                  __        .-.
              .-"` .`'.    /\\|
      _(\-/)_" ,  .   ,\  /\\\/     =o O=
@@ -153,7 +153,7 @@ class Bootstrap(object):
        ██║   ██║  ██╔══██║   ███╔╝    ██╔══╝  
        ╚██████╔╝  ██║  ██║  ███████╗  ███████╗
         ╚═════╝   ╚═╝  ╚═╝  ╚══════╝  ╚══════╝
-         Turnkey Open Media Centre
+         Turnkey Open Media Center
          ''', 'blue'))
 
         self.log("Welcome to GAZE! Let's prepare your system...", 'info')
@@ -324,7 +324,7 @@ def main():
     # Configure argument parsing.
     parser = argparse.ArgumentParser(
         prog="gaze",
-        description="Turnkey Open Media Centre."
+        description="Turnkey Open Media Center."
     )
 
     # Top-level arguments.
@@ -363,7 +363,7 @@ def main():
     # Start "up" subparser.
     parser_up = subparsers.add_parser(
         'up',
-        help='deploy media centre services'
+        help='deploy media center services'
     )
 
     parser_up.set_defaults(func=Up)
@@ -374,7 +374,7 @@ def main():
     # Start "down" subparser.
     parser_down = subparsers.add_parser(
         'down',
-        help='remove media centre services'
+        help='remove media center services'
     )
 
     group_down = parser_down.add_argument_group('required arguments')
@@ -387,7 +387,7 @@ def main():
     # Start "status" subparser.
     parser_status = subparsers.add_parser(
         'status',
-        help='list media centre services'
+        help='list media center services'
     )
 
     parser_status.set_defaults(func=Status)
