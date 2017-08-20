@@ -17,7 +17,7 @@ set -e
 # Environment variable overrides.
 NAMESPACE=${GAZECTL_NAMESPACE:='monokal'}
 IMAGE=${GAZECTL_IMAGE:='gazectl'}
-TAG=${GAZECTL_VERSION:='latest'}
+TAG=${GAZECTL_VERSION:='test'}
 SOCKET=${GAZECTL_SOCKET:='/var/run/docker.sock'}
 VOLUMES=${GAZECTL_VOLUMES:='/var/lib/docker/volumes'}
 
@@ -37,13 +37,4 @@ done
 
 docker build -t "${NAMESPACE}/${IMAGE}:${TAG}" gaze-control/
 
-docker run \
-    --name gazectl \
-    --privileged \
-    -ti \
-    --rm \
-    -v "${SOCKET}:/var/run/docker.sock" \
-    -v "${VOLUMES}:/var/lib/docker/volumes" \
-    "${NAMESPACE}/${IMAGE}:${TAG}" \
-    -d bootstrap --noup
-
+GAZECTL_VERSION="${TAG}" gaze bootstrap --noup
