@@ -176,9 +176,10 @@ class Bootstrap(object):
         try:
             docker_info = self.docker_client.info()
 
-        except:
+        except Exception as e:
             self.log(
-                "Failed to retrieve Docker system info from host.", 'exception'
+                "Failed to retrieve Docker system info from host with "
+                "exception:\n{}".format(e), 'exception'
             )
             sys.exit(1)
 
@@ -202,11 +203,14 @@ class Bootstrap(object):
         volume = self.volume.create(name='gaze-share')
 
         # Bootstrap the "gaze-internal" Docker Network.
-        network = self.network.create(name='gaze-internal')
+        #network = self.network.create(name='gaze-internal')
 
         # Render GAZE Proxy Nginx configuration.
-        self.proxy.render_config("{}/gazeproxy-nginx.conf".format(
-            volume.attrs['Mountpoint']))
+        self.proxy.render_config(
+            destination="{}/gazeproxy-nginx.conf".format(
+                volume.attrs['Mountpoint']
+            )
+        )
 
         self.log("Bootstrapping complete.", 'info')
 
@@ -221,7 +225,7 @@ class Up(object):
     def __init__(self, args, config):
         self.args = args
         self.config = config
-        self.status = Status(self.args)
+        self.status = Status(self.args, self.config)
         self.log = GazeLog()
         self.compose = GazeCompose()
 

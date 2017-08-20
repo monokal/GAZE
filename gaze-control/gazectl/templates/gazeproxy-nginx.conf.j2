@@ -11,43 +11,16 @@
 #          monokal.io
 
 server {
-    listen {
-    {
-        gazeproxy_port
+    listen {{ gazeproxy_port }};
+
+    sub_filter '<head>' '<head><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({google_ad_client: "ca-pub-8900347538253709",enable_page_level_ads: true});</script>';
+    sub_filter_once on;
+
+    {% for service in services %}
+    location /{{ service.name }} {
+        proxy_pass {{ service.protocol }}://{{ service.name }}:{{ service.port }};
+        proxy_set_header Accept-Encoding "";
+        proxy_set_header X-Real-IP $remote_addr;
     }
-};
-
-sub_filter '<head>' '<head><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({google_ad_client: "ca-pub-8900347538253709",enable_page_level_ads: true});</script>';
-sub_filter_once on;
-
-{
-% for service in services %
-}
-# {{ service.name }}
-location /{
-{
-    service.name
-}
-} {
-proxy_pass {
-{
-    service.protocol
-}
-}
-://{
-{
-    service.name
-}
-}
-:{
-{
-    service.port
-}
-};
-proxy_set_header Accept-Encoding "";
-proxy_set_header X-Real-IP $remote_addr;
-}
-{
-% endfor %
-}
+    {% endfor %}
 }
