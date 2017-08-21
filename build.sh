@@ -14,12 +14,13 @@
 
 set -e
 
+# Dependencies which should be in PATH.
+DEPS=( 'docker' 'mkdocs' )
+
 # Environment variable overrides.
 NAMESPACE=${GAZECTL_NAMESPACE:='monokal'}
 IMAGE=${GAZECTL_IMAGE:='gazectl'}
 TAG=${GAZECTL_VERSION:='latest'}
-
-DEPS=( 'docker' 'mkdocs' )
 
 MAGENTA=$(tput setaf 5)
 GREEN=$(tput setaf 2)
