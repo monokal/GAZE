@@ -44,6 +44,7 @@ done
 echo -e "\n${MAGENTA}[GAZE] Building & pushing the ${NAMESPACE}/${IMAGE}:${TAG} Docker Image...${NONE}\n"
 docker build -t "${NAMESPACE}/${IMAGE}:${TAG}" gaze-control/ && \
 docker push "${NAMESPACE}/${IMAGE}:${TAG}"
+echo -e "\n${GREEN}[GAZE] OK.${NONE}"
 
 #
 # Build & deploy documentation.
@@ -51,9 +52,11 @@ docker push "${NAMESPACE}/${IMAGE}:${TAG}"
 
 echo -e "\n${MAGENTA}[GAZE] Copying docs/index.md to README.md...${NONE}\n"
 cp docs/index.md README.md
+echo -e "\n${GREEN}[GAZE] OK.${NONE}"
 
 echo -e "\n${MAGENTA}[GAZE] Building & pushing documentation...${NONE}\n"
 mkdocs build --clean && mkdocs gh-deploy
+echo -e "\n${GREEN}[GAZE] OK.${NONE}"
 
 #
 # Push all changes to Git.
@@ -61,6 +64,7 @@ mkdocs build --clean && mkdocs gh-deploy
 
 echo -e "\n${MAGENTA}[GAZE] Pushing all changes to Git...${NONE}\n"
 git add -A && git commit -m "Pushed by ${0}" && git push
+echo -e "\n${GREEN}[GAZE] OK.${NONE}"
 
 echo -e "\n${GREEN}[GAZE] Finished.${NONE}\n"
 
