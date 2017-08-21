@@ -51,7 +51,7 @@ echo -e "\n${GREEN}[GAZE] OK.${NONE}"
 #
 
 echo -e "\n${MAGENTA}[GAZE] Copying docs/index.md to README.md...${NONE}\n"
-cp docs/index.md README.md
+cp -v docs/index.md README.md
 echo -e "\n${GREEN}[GAZE] OK.${NONE}"
 
 echo -e "\n${MAGENTA}[GAZE] Building & pushing documentation...${NONE}\n"
