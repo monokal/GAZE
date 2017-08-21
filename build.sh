@@ -41,6 +41,7 @@ docker push "${NAMESPACE}/${IMAGE}:${TAG}"
 
 # Build & deploy documentation.
 echo -e "\n${MAGENTA}[GAZE] Building & pushing documentation...${NONE}\n"
+cp README.md docs/index.md
 mkdocs build --clean && mkdocs gh-deploy
 
 # Push all changes to Git.
