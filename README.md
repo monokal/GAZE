@@ -60,3 +60,5 @@ If you'd like to contribute to the GAZE project, simply fork the `master` branch
 
 ## Disclaimer
 The maintainer(s) of the GAZE project do not advocate the illegal sharing of media in any way. The GAZE project is intended to be an educational programming exercise, and therefore the maintainer(s) assumes no responsibility of improper use.
+
+> _README.md is copied from docs/index.md during the build process, so edit that instead._
