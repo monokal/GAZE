@@ -25,9 +25,6 @@ class GazeTemplate(object):
     """ Provides methods to manage Jinja2 templates. """
 
     def __init__(self):
-        """
-        """
-
         self.log = GazeLog()
 
     def render(self, template, items, destination):

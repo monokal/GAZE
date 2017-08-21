@@ -23,11 +23,9 @@ from .log import GazeLog
 
 
 class GazeConfig(object):
+    """ Provides methods to interact with GAZE configuration. """
+
     def __init__(self):
-        """
-
-        """
-
         self.log = GazeLog()
 
     def load(self, path):
@@ -50,4 +48,5 @@ class GazeConfig(object):
             )
             sys.exit(1)
 
+        self.log("Loaded GAZE config:\n{}".format(config_dict), 'debug')
         return config_dict

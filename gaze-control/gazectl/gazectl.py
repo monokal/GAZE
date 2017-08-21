@@ -49,77 +49,26 @@ except Exception as e:
     sys.exit(1)
 
 
-class _Gaze(object):
-    def __init__(self, args):
-        self.args = args
-        self.log = GazeLog()
-        self.config = GazeConfig()
-
-    def __call__(self):
-        # Instantiate and call the given class.
-        target_class = self.args.func(self.args, self.config)
-        return target_class()
-
-
-class _Proxy(object):
-    def __init__(self, args):
-        self.log = GazeLog()
-        self.template = GazeTemplate()
-
-    def render_config(self, destination, template='gazeproxy-nginx.conf.j2'):
-        items = {
-            'gazeproxy_port': '8080',
-            'services': {
-                'plex': '32400',
-                'plexpy': '8181',
-                'transmission': '9091',
-                'sonarr': '8989',
-                'radarr': '7878',
-                'jackett': '9117',
-                'ombi': '3579'
-            }
-        }
-
-        self.template.render(
-            template=template,
-            items=items,
-            destination=destination
-        )
-
-    def render_index(self, template='index.html.j2'):
-        items = {
-            'services': {
-                'plex': '32400',
-                'plexpy': '8181',
-                'transmission': '9091',
-                'sonarr': '8989',
-                'radarr': '7878',
-                'jackett': '9117',
-                'ombi': '3579'
-            }
-        }
-
-        self.template.render(
-            template=template,
-            items=items,
-            destination='/some/path/index.html'
-        )
-
+#
+# User called Classes.
+#
 
 class Bootstrap(object):
     """ Prepare a host for GAZE services deployment. """
 
     def __init__(self, args, config):
         """
-        :param args: List: Arguments from the command-line.
+        :param args: (list) Arguments from the command-line.
         """
 
         self.args = args
         self.config = config
+
         self.log = GazeLog()
         self.volume = GazeVolume()
         self.network = GazeNetwork()
         self.container = GazeContainer()
+
         self.proxy = _Proxy(self.args)
         self.up = Up(self.args, self.config)
 
@@ -134,9 +83,6 @@ class Bootstrap(object):
             sys.exit(1)
 
     def __call__(self):
-        """
-        """
-
         print(colored(r'''
                                        __        .-.
                                    .-"` .`'.    /\\|
@@ -146,7 +92,6 @@ class Bootstrap(object):
                                /~/,_/~~~\,__.-`
                               ////~     //~\\
                             ==`==`    ==`  ==`''', 'magenta'))
-
         print(colored(r'''        ██████╗    █████╗   ███████╗  ███████╗
        ██╔════╝   ██╔══██╗  ╚══███╔╝  ██╔════╝
        ██║  ███╗  ███████║    ███╔╝   █████╗  
@@ -158,7 +103,7 @@ class Bootstrap(object):
 
         self.log("Welcome to GAZE! Let's prepare your system...", 'info')
 
-        # Ensure we can ping to host's Docker daemon.
+        # Ensure we can ping the host's Docker daemon.
         self.log("Checking Docker daemon connectivity...", 'info')
         try:
             self.docker_client.ping()
@@ -203,7 +148,7 @@ class Bootstrap(object):
         volume = self.volume.create(name='gaze-share')
 
         # Bootstrap the "gaze-internal" Docker Network.
-        #network = self.network.create(name='gaze-internal')
+        # network = self.network.create(name='gaze-internal')
 
         # Render GAZE Proxy Nginx configuration.
         self.proxy.render_config(
@@ -321,6 +266,67 @@ class Status(object):
                 headers=table_headers,
                 tablefmt='simple'
             ), "\n"
+        )
+
+
+#
+# Internally called Classes.
+#
+
+class _Gaze(object):
+    def __init__(self, args):
+        self.args = args
+        self.log = GazeLog()
+        self.config = GazeConfig()
+
+    def __call__(self):
+        # Instantiate and call the given class.
+        target_class = self.args.func(self.args, self.config)
+        return target_class()
+
+
+class _Proxy(object):
+    def __init__(self, args):
+        self.log = GazeLog()
+        self.template = GazeTemplate()
+
+    def render_config(self, destination, template='gazeproxy-nginx.conf.j2'):
+        items = {
+            'gazeproxy_port': '8080',
+            'services': {
+                'plex': '32400',
+                'plexpy': '8181',
+                'transmission': '9091',
+                'sonarr': '8989',
+                'radarr': '7878',
+                'jackett': '9117',
+                'ombi': '3579'
+            }
+        }
+
+        self.template.render(
+            template=template,
+            items=items,
+            destination=destination
+        )
+
+    def render_index(self, template='index.html.j2'):
+        items = {
+            'services': {
+                'plex': '32400',
+                'plexpy': '8181',
+                'transmission': '9091',
+                'sonarr': '8989',
+                'radarr': '7878',
+                'jackett': '9117',
+                'ombi': '3579'
+            }
+        }
+
+        self.template.render(
+            template=template,
+            items=items,
+            destination='/some/path/index.html'
         )
 
 
