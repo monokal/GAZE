@@ -29,7 +29,7 @@ To install the `gaze` command-line tool and deploy the full media center stack, 
 ```sh
 curl -L https://raw.githubusercontent.com/monokal/GAZE/master/gaze-control/gazectl-wrapper.sh > /usr/local/bin/gaze && chmod +x /usr/local/bin/gaze && gaze bootstrap
 ```
-If you get a `Permission denied` error, use `sudo -i` then retry the above command.
+If you get a `Permission denied` error, try `sudo -i` then the above command again.
 
 **That's it!**
 
