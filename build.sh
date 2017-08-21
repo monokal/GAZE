@@ -26,7 +26,10 @@ GREEN=$(tput setaf 2)
 RED=$(tput setaf 1)
 NONE=$(tput sgr 0)
 
+#
 # Check for dependencies.
+#
+
 for i in "${DEPS[@]}"; do
     if ! hash "${i}" 2>/dev/null; then
         echo -e "${RED}[GAZE] "${i}" is required to build GAZE. Please install it then try again.${NONE}"
@@ -34,18 +37,30 @@ for i in "${DEPS[@]}"; do
     fi
 done
 
+#
 # Build & push the gazectl Docker Image.
+#
+
 echo -e "\n${MAGENTA}[GAZE] Building & pushing the ${NAMESPACE}/${IMAGE}:${TAG} Docker Image...${NONE}\n"
 docker build -t "${NAMESPACE}/${IMAGE}:${TAG}" gaze-control/ && \
 docker push "${NAMESPACE}/${IMAGE}:${TAG}"
 
+#
 # Build & deploy documentation.
+#
+
+echo -e "\n${MAGENTA}[GAZE] Copying docs/index.md to README.md...${NONE}\n"
+cp docs/index.md README.md
+
 echo -e "\n${MAGENTA}[GAZE] Building & pushing documentation...${NONE}\n"
-cp README.md docs/index.md
 mkdocs build --clean && mkdocs gh-deploy
 
+#
 # Push all changes to Git.
+#
+
 echo -e "\n${MAGENTA}[GAZE] Pushing all changes to Git...${NONE}\n"
 git add -A && git commit -m "Pushed by ${0}" && git push
 
 echo -e "\n${GREEN}[GAZE] Finished.${NONE}\n"
+
