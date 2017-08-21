@@ -42,30 +42,30 @@ done
 # Build & push the gazectl Docker Image.
 #
 
-echo -e "\n${MAGENTA}[GAZE] Building & pushing the ${NAMESPACE}/${IMAGE}:${TAG} Docker Image...${NONE}\n"
+echo -e "${MAGENTA}[GAZE] Building & pushing the ${NAMESPACE}/${IMAGE}:${TAG} Docker Image...${NONE}"
 docker build -t "${NAMESPACE}/${IMAGE}:${TAG}" gaze-control/ && \
 docker push "${NAMESPACE}/${IMAGE}:${TAG}"
-echo -e "\n${GREEN}[GAZE] OK.${NONE}"
+echo -e "${GREEN}[GAZE] OK.${NONE}"
 
 #
 # Build & deploy documentation.
 #
 
-echo -e "\n${MAGENTA}[GAZE] Copying docs/index.md to README.md...${NONE}\n"
+echo -e "${MAGENTA}[GAZE] Copying docs/index.md to README.md...${NONE}"
 cp -v docs/index.md README.md
-echo -e "\n${GREEN}[GAZE] OK.${NONE}"
+echo -e "${GREEN}[GAZE] OK.${NONE}"
 
-echo -e "\n${MAGENTA}[GAZE] Building & pushing documentation...${NONE}\n"
+echo -e "${MAGENTA}[GAZE] Building & pushing documentation...${NONE}"
 mkdocs build --clean && mkdocs gh-deploy
-echo -e "\n${GREEN}[GAZE] OK.${NONE}"
+echo -e "${GREEN}[GAZE] OK.${NONE}"
 
 #
 # Push all changes to Git.
 #
 
-echo -e "\n${MAGENTA}[GAZE] Pushing all changes to Git...${NONE}\n"
+echo -e "${MAGENTA}[GAZE] Pushing all changes to Git...${NONE}"
 git add -A && git commit -m "Pushed by ${0}" && git push
-echo -e "\n${GREEN}[GAZE] OK.${NONE}"
+echo -e "${GREEN}[GAZE] OK.${NONE}"
 
-echo -e "\n${GREEN}[GAZE] Finished.${NONE}\n"
+echo -e "${GREEN}[GAZE] Finished.${NONE}"
 
