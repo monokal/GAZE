@@ -77,6 +77,11 @@ class GazeCompose(object):
 
         return self._execute(compose_command)
 
+    def restart(self, compose_file='gaze-compose.yaml', services=None,
+                host='unix://var/run/docker.sock'):
+
+        pass
+
     def _execute(self, compose_command):
         """
         :return return_code: Int: Return code of the Docker Compose command.
