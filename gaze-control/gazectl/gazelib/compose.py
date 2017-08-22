@@ -26,9 +26,6 @@ class GazeCompose(object):
     """ Provides methods to interact with Docker Compose. """
 
     def __init__(self):
-        """
-        """
-
         self.log = GazeLog()
         self.template = GazeTemplate()
 
