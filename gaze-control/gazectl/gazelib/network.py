@@ -59,7 +59,6 @@ class GazeNetwork(object):
         :param name: (str) Name of the Docker Network.
         :param driver: (str) Name of the Network driver.
         :param driver_opts: (dict) Key-value driver options.
-        :param labels: (dict) Map of labels to set on the network.
         :return: A Network object.
         """
 
