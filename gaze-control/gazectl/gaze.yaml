@@ -1,0 +1,31 @@
+#               GAZE
+#     Turnkey Open Media Center
+#                 __        .-.
+#             .-"` .`'.    /\\|
+#     _(\-/)_" ,  .   ,\  /\\\/     =o O=
+#    {(=o^O=)} .   ./,  |/\\\/
+#    `-.(Y).-`  ,  |  , |\.-`
+#         /~/,_/~~~\,__.-`   =O o=
+#        ////~    // ~\\
+#      ==`==`   ==`   ==`
+#             monokal.io
+
+docker:
+  socket: 'unix://var/run/docker.sock'
+
+networks:
+  name: 'gaze-internal'
+
+volumes:
+  name: 'gaze-share'
+
+services:
+  gazeproxy:
+    port: 80
+  plex:
+  plexpy:
+  transmission:
+  sonarr:
+  radarr:
+  jackett:
+  ombi:

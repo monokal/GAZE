@@ -1,4 +1,15 @@
-site_name: GAZE Documentation
-pages:
-  - Home: index.md
+site_name: GAZE
+site_description: GAZE Documentation
+site_author: monokal.io
+site_url: http://gaze.monokal.io
+
+repo_name: 'GitHub'
+repo_url: 'https://github.com/monokal/gaze'
+
+docs_dir: 'docs'
 theme: readthedocs
+site_favicon: 'img/favicon.ico'
+copyright: "Copyright &copy; monokal.io"
+
+pages:
+  - Quick Start: index.md
