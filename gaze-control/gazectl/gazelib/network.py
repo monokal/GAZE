@@ -27,9 +27,6 @@ class GazeNetwork(object):
     """ Provides methods to interact with Docker Network. """
 
     def __init__(self):
-        """
-        """
-
         self.log = GazeLog()
 
         # Instantiate a Docker client.
@@ -50,15 +47,33 @@ class GazeNetwork(object):
         :return volume: Docker Network object.
         """
 
-        pass
+        try:
+            network = self.docker_client.networks.get(
+                network_id=network_id
+            )
 
-    def create(self, name, driver='local', driver_opts=None):
+        except docker.errors.NotFound:
+            self.log(
+                "The Docker Network ({}) does not already exist.".format(
+                    network_id), 'info'
+            )
+            raise GazeNetworkNotFound
+
+        except docker.errors.APIError:
+            self.log(
+                "Failed to get Docker Network ({}).".format(network_id),
+                'info'
+            )
+            sys.exit(1)
+
+        return network
+
+    def create(self, name, driver='local'):
         """
         Create a Docker Network.
 
         :param name: (str) Name of the Docker Network.
         :param driver: (str) Name of the Network driver.
-        :param driver_opts: (dict) Key-value driver options.
         :return: A Network object.
         """
 
@@ -75,7 +90,6 @@ class GazeNetwork(object):
                 network = self.docker_client.networks.create(
                     name=name,
                     driver=driver,
-                    driver_opts=driver_opts,
                     labels={"gaze.network": name}
                 )
 
