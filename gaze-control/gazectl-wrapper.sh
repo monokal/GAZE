@@ -31,7 +31,7 @@ if [ ! -S ${SOCKET} ]; then
 fi
 
 # Always ensure we're running the latest push.
-docker pull "${NAMESPACE}/${IMAGE}:${TAG}"; echo
+docker pull "${NAMESPACE}/${IMAGE}:${TAG}"; echo -e "\n"
 
 # Mount the host Docker daemon's socket so we can manage host containers from
 # within the "gazectl" container, and mount the host's Docker Volumes directory
