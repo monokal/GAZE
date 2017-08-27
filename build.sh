@@ -39,6 +39,10 @@ for i in "${DEPS[@]}"; do
 done
 
 #
+# TODO: Run tests before going any further.
+#
+
+#
 # Build & push the gazectl Docker Image.
 #
 
