@@ -12,7 +12,7 @@
          /~/,_/~~~\,__.-`   =O o=
         ////~    // ~\\
       ==`==`   ==`   ==`
-             monokal.io
+        gaze.monokal.io
 """
 
 import argparse
