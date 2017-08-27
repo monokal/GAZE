@@ -149,7 +149,7 @@ class Bootstrap(object):
         volume = self.volume.create(name='gaze-share')
 
         # Bootstrap the "gaze-internal" Docker Network.
-        # network = self.network.create(name='gaze-internal')
+        network = self.network.create(name='gaze-internal')
 
         # Render GAZE Proxy Nginx configuration.
         self.proxy.render_config(

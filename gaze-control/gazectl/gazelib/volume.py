@@ -27,9 +27,6 @@ class GazeVolume(object):
     """ Provides methods to manage Docker Volumes. """
 
     def __init__(self):
-        """
-        """
-
         self.log = GazeLog()
 
         # Instantiate a Docker client.
