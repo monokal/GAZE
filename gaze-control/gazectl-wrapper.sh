@@ -10,7 +10,7 @@
 #      /~/,_/~~~\,__.-`   =O o=
 #     ////~    // ~\\
 #   ==`==`   ==`   ==`
-#          monokal.io
+#     gaze.monokal.io
 
 # Set environment variable defaults.
 NAMESPACE=${GAZECTL_NAMESPACE:='monokal'}

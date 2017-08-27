@@ -8,7 +8,7 @@
 #      /~/,_/~~~\,__.-`   =O o=
 #     ////~    // ~\\
 #   ==`==`   ==`   ==`
-#          monokal.io
+#     gaze.monokal.io
 
 FROM python:3.6.1-alpine
 
