@@ -39,6 +39,21 @@
             "location": "/#disclaimer", 
             "text": "The maintainer(s) of the GAZE project do not advocate the illegal sharing of media in any way. The GAZE project is intended to be an educational programming exercise, and therefore the maintainer(s) assumes no responsibility of improper use.   README.md is copied from docs/index.md during the build process, so edit that instead.", 
             "title": "Disclaimer"
+        }, 
+        {
+            "location": "/control/", 
+            "text": "Sorry! This page is yet to be published. Check back soon.", 
+            "title": "GAZE Control"
+        }, 
+        {
+            "location": "/monitor/", 
+            "text": "Sorry! This page is yet to be published. Check back soon.", 
+            "title": "GAZE Monitor"
+        }, 
+        {
+            "location": "/proxy/", 
+            "text": "Sorry! This page is yet to be published. Check back soon.", 
+            "title": "GAZE Proxy"
         }
     ]
 }

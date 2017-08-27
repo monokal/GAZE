@@ -9,4 +9,28 @@
     </url>
     
 
+    
+    <url>
+     <loc>http://gaze.monokal.io/control/</loc>
+     <lastmod>2017-08-27</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>http://gaze.monokal.io/monitor/</loc>
+     <lastmod>2017-08-27</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>http://gaze.monokal.io/proxy/</loc>
+     <lastmod>2017-08-27</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
 </urlset>
