@@ -18,7 +18,8 @@ services:
 
 install:
   # Install build dependencies.
-  - pip install mkdocs mkdocs-material
+  - pip install mkdocs
+  - pip install mkdocs-material
 
   # Install gazectl.
   - curl -L https://raw.githubusercontent.com/monokal/GAZE/master/gaze-control/gazectl-wrapper.sh > /tmp/gaze
