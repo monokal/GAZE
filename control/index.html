@@ -59,6 +59,9 @@
     <a class="current" href="./">GAZE Control</a>
     <ul class="subnav">
             
+    <li class="toctree-l2"><a href="#gaze-control">GAZE Control</a></li>
+    
+
     </ul>
 	    </li>
           
@@ -112,9 +115,19 @@
           <div role="main">
             <div class="section">
               
-                <blockquote>
-<p><em>Sorry! This page is yet to be published. Check back soon.</em></p>
-</blockquote>
+                <h2 id="gaze-control">GAZE Control</h2>
+<p>To make life easy, the <code>gaze</code> command-line tool can be used to manage the full stack of media center services. Usage can be seen using the following command:</p>
+<pre><code class="sh">gaze --help
+</code></pre>
+
+<p>The <code>gaze</code> command-line tool also supports overriding various default runtime arguments using environment variables. Sane defaults have been chosen so you shouldn't need to, but if you do:</p>
+<ul>
+<li><code>GAZECTL_NAMESPACE</code> - The Docker Namespace of the <code>gazectl</code> container (default: <code>monokal</code>).</li>
+<li><code>GAZECTL_IMAGE</code> - The Docker Image of the <code>gazectl</code> container (default: <code>gazectl</code>).</li>
+<li><code>GAZECTL_VERSION</code> - The Docker Image Tag of the <code>gazectl</code> container (default: <code>latest</code>).</li>
+<li><code>GAZECTL_SOCKET</code> - The Docker socket of the host (default: <code>/var/run/docker.sock</code>).</li>
+<li><code>GAZECTL_VOLUMES</code> - Path to the Docker Volumes mountpoint on the host (default: <code>/var/lib/docker/volumes</code>).</li>
+</ul>
               
             </div>
           </div>
