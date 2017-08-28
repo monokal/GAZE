@@ -71,6 +71,10 @@ function run_build {
     echo -e "${GREEN}[GAZE] OK.${NONE}"
 }
 
+function run_test {
+   echo -e "${MAGENTA}[GAZE] Tests to come soon.${NONE}"
+}
+
 function run_push {
     # Push Docker Image.
     echo -e "${MAGENTA}[GAZE] Pushing the ${NAMESPACE}/${IMAGE}:${TAG} Docker Image...${NONE}"
@@ -86,10 +90,6 @@ function run_push {
     echo -e "${MAGENTA}[GAZE] Pushing all changes to Git...${NONE}"
     git add -A && git commit -m "Pushed by ${0}" && git push
     echo -e "${GREEN}[GAZE] OK.${NONE}"
-}
-
-function run_test {
-   echo -e "${MAGENTA}[GAZE] Tests to come soon.${NONE}"
 }
 
 check_deps

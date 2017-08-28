@@ -1,14 +1,14 @@
 site_name: GAZE
-site_description: GAZE Documentation
+site_description: 'GAZE - Turnkey Open Media Center'
 site_author: monokal.io
 site_url: http://gaze.monokal.io
+site_favicon: 'img/favicon.ico'
 
-repo_name: 'GitHub'
 repo_url: 'https://github.com/monokal/gaze'
 
 docs_dir: 'docs'
+
 theme: readthedocs
-site_favicon: 'img/favicon.ico'
 copyright: "Copyright &copy; monokal.io"
 
 pages:
