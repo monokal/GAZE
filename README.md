@@ -36,16 +36,10 @@ To make life easy, the `gaze` command-line tool can be used to manage the full s
 ```sh
 gaze --help
 ```
-The `gaze` command-line tool also supports overriding various default runtime arguments using environment variables. Sane defaults have been chosen so you shouldn't need to, but if you do:
-
-*  `GAZECTL_NAMESPACE` - The Docker Namespace of the `gazectl` container (default: `monokal`).
-*  `GAZECTL_IMAGE` - The Docker Image of the `gazectl` container (default: `gazectl`).
-*  `GAZECTL_VERSION` - The Docker Image Tag of the `gazectl` container (default: `latest`).
-*  `GAZECTL_SOCKET` - The Docker socket of the host (default: `/var/run/docker.sock`).
-*  `GAZECTL_VOLUMES` - Path to the Docker Volumes mountpoint on the host (default: `/var/lib/docker/volumes`).
+Further documentation on GAZE Control can be [found here](http://gaze.monokal.io/control).
 
 ## Documentation
-Full documentation on the GAZE project is available from a couple of places:
+Full documentation on the GAZE project is available from a couple of mirrors:
 
 * [GAZE Documentation on GitHub](http://gaze.monokal.io)
 * [GAZE Documentation on ReadTheDocs](http://gaze.readthedocs.io)
@@ -59,4 +53,4 @@ If you'd like to contribute to the GAZE project, please read the [developer guid
 ## Disclaimer
 The maintainer(s) of the GAZE project do not advocate the illegal sharing of media in any way. The GAZE project is intended to be an educational programming exercise, and therefore the maintainer(s) assumes no responsibility of improper use.
 
-> _README.md is copied from docs/index.md during the build process, so edit that instead._
+> _This `README.md` is overwritten by `docs/index.md` during the build process, so edit that instead._
