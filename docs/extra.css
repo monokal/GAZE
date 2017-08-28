@@ -1,3 +1,7 @@
 .md-header {
     background-color: #212121;
 }
+
+.md-nav--secondary {
+    border-left: .4rem solid #1082c2;
+}

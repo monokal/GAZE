@@ -1,5 +1,3 @@
-## GAZE Control
-
 To make life easy, the `gaze` command-line tool can be used to manage the full stack of media center services. Usage can be seen using the following command:
 ```sh
 gaze --help
