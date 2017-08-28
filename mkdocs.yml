@@ -9,6 +9,7 @@ repo_url: 'https://github.com/monokal/gaze'
 docs_dir: 'docs'
 
 theme: readthedocs
+extra_css: [extra.css]
 copyright: "Copyright &copy; monokal.io"
 
 pages:
