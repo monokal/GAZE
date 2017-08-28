@@ -88,7 +88,7 @@ function run_push {
 
     # Push everything else.
     echo -e "${MAGENTA}[GAZE] Pushing all changes to Git...${NONE}"
-    git add -A && git commit -m "Pushed by ${0}" && git push
+    git add -A && git commit -m "Pushed by gbuild." && git push
     echo -e "${GREEN}[GAZE] OK.${NONE}"
 }
 
