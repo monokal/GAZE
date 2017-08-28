@@ -2,7 +2,7 @@
 
 ![GAZE logo](https://raw.githubusercontent.com/monokal/GAZE/master/docs/img/gaze.png "GAZE")
 
-[![Documentation Status](http://readthedocs.org/projects/gaze/badge/?version=latest)](http://gaze.readthedocs.io/en/latest/?badge=latest) [![Build Status](https://travis-ci.org/monokal/GAZE.svg?branch=master)](https://travis-ci.org/monokal/GAZE) [![Docker Build Status](https://img.shields.io/badge/docker%20build-automated-brightgreen.svg)](https://hub.docker.com/r/monokal/gazectl/) [![GitHub](https://img.shields.io/badge/code-github-blue.svg)](https://github.com/monokal/gaze) [![Chat on Gitter](https://img.shields.io/badge/chat-gitter-blue.svg)](https://gitter.im/gaze-tomc/) [![GPLv3 license](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://github.com/monokal/GAZE/blob/master/LICENSE) [![Donate via PayPal](https://img.shields.io/badge/donate-paypal-blue.svg)](https://www.paypal.me/monokal/)
+[![Build Status](https://travis-ci.org/monokal/GAZE.svg?branch=master)](https://travis-ci.org/monokal/GAZE) [![Docker Build Status](https://img.shields.io/badge/docker%20build-automated-brightgreen.svg)](https://hub.docker.com/r/monokal/gazectl/) [![GitHub](https://img.shields.io/badge/code-github-blue.svg)](https://github.com/monokal/gaze) [![Chat on Gitter](https://img.shields.io/badge/chat-gitter-blue.svg)](https://gitter.im/gaze-tomc/) [![GPLv3 license](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://github.com/monokal/GAZE/blob/master/LICENSE) [![Donate via PayPal](https://img.shields.io/badge/donate-paypal-blue.svg)](https://www.paypal.me/monokal/)
 
 ## What's GAZE?
 It's a true turnkey open-source media center solution. It will deploy, configure and network the following services, making use of Docker's ecosystem:
@@ -39,10 +39,7 @@ gaze --help
 Further documentation on GAZE Control can be [found here](http://gaze.monokal.io/control).
 
 ## Documentation
-Full documentation on the GAZE project is available from a couple of mirrors:
-
-* [GAZE Documentation on GitHub](http://gaze.monokal.io)
-* [GAZE Documentation on ReadTheDocs](http://gaze.readthedocs.io)
+Full documentation on the GAZE project is [available here](http://gaze.monokal.io).
 
 ## Issues / Feature Requests
 If you experience any problems, bugs or would like to request a new feature, please first search for duplicates then [raise a ticket](https://github.com/monokal/GAZE/issues).
