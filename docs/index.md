@@ -7,20 +7,18 @@
 ## What's GAZE?
 It's a true turnkey open-source media center solution. It will deploy, configure and network the following services, making use of Docker's ecosystem:
 
-* `Sonarr`, to manage TV series downloads.
-* `Radarr`, to manage movie downloads.
-* `Jackett`, to manage torrent trackers.
-* `Transmission`, a torrent client.
-* `Plex Media Server`, to encode and stream media to devices.
-* `PlexPy`, a Plex monitoring dashboard.
-* `Ombi`, a unified web-UI for managing Sonarr/Radarr/Plex/etc.
-* `Prometheus`, to provide resource usage, performance metrics and alerts for services.
+* [Sonarr](https://sonarr.tv/), to manage TV series downloads.
+* [Radarr](https://radarr.video/), to manage movie downloads.
+* [Jackett](https://github.com/Jackett/Jackett), to manage torrent trackers.
+* [Transmission](https://transmissionbt.com/), a torrent client.
+* [Plex](https://www.plex.tv/), to encode and stream media to devices.
+* [Ombi](https://github.com/tidusjar/Ombi), a unified web-UI for managing Sonarr/Radarr/Plex/etc.
 
 Additionally, to aggregate all of the above in to a single user-friendly service, we also provide:
 
-* `GAZE Proxy`, a proxy service and web-UI to provide easy access to all of the above.
-* `GAZE Monitor`, a Grafana dashboard to display service metrics and alerts.
-* `GAZE Control`, a command-line tool to manage the full stack.
+* [GAZE Proxy](http://gaze.monokal.io/proxy), a proxy service and web-UI to provide easy access to all of the above.
+* [GAZE Monitor](http://gaze.monokal.io/monitor), a Grafana dashboard to display service metrics and alerts.
+* [GAZE Control](http://gaze.monokal.io/control), a command-line tool to manage the full stack.
 
 ## Installation
 Although GAZE should run on any system with Docker, we test builds on **Ubuntu 16.04 LTS and later** so suggest it as a known good configuration.
@@ -56,7 +54,7 @@ Full documentation on the GAZE project is available from a couple of places:
 If you experience any problems, bugs or would like to request a new feature, please first search for duplicates then [raise a ticket](https://github.com/monokal/GAZE/issues).
 
 ## Contributions
-If you'd like to contribute to the GAZE project, simply fork the `master` branch, make and test your changes then [open a Pull Request](https://github.com/monokal/GAZE/pulls).
+If you'd like to contribute to the GAZE project, please read the [developer guidelines](http://gaze.monokal.io/contribute).
 
 ## Disclaimer
 The maintainer(s) of the GAZE project do not advocate the illegal sharing of media in any way. The GAZE project is intended to be an educational programming exercise, and therefore the maintainer(s) assumes no responsibility of improper use.
