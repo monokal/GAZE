@@ -16,7 +16,7 @@ set -e
 
 function print_usage {
     cat <<EOF
-usage: gbuild.sh [-h] {build,test,push,all} ...
+usage: gbuild [-h] {build,test,push,all} ...
 
 GAZE build tool.
 

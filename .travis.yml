@@ -17,8 +17,17 @@ services:
   - docker
 
 install:
+  # Install build dependencies.
+  - pip install mkdocs
+
+  # Install gazectl.
   - curl -L https://raw.githubusercontent.com/monokal/GAZE/master/gaze-control/gazectl-wrapper.sh > /tmp/gaze
   - chmod +x /tmp/gaze
 
+  # Install gbuild.
+  - curl -L https://raw.githubusercontent.com/monokal/GAZE/master/gbuild.sh > /tmp/gbuild
+  - chmod +x /tmp/gbuild
+
 script:
-  - /tmp/gaze -d bootstrap
+  - /tmp/gbuild build
+  - /tmp/gbuild test
