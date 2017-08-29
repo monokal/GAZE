@@ -39,7 +39,6 @@ env:
     - GAZECTL_UPDATE=false # Disable Docker Image Pull as we're building locally.
 
 install:
-  # Install build dependencies.
   - pip install mkdocs
   - pip install mkdocs-material
 

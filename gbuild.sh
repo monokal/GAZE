@@ -72,7 +72,7 @@ function run_test {
     )
 
     for i in "${GAZECTL_COMMANDS[@]}"; do
-        GAZECTL_VERSION="${TAG}" GAZECTL_UPDATE=false gaze-control/gazectl-wrapper.sh ${i}
+        GAZECTL_VERSION="${TAG}" GAZECTL_UPDATE=${UPDATE} gaze-control/gazectl-wrapper.sh ${i}
     done
 
     echo -e "${GREEN}[GBUILD] OK.${NONE}"
@@ -96,9 +96,10 @@ function run_push {
 }
 
 # Environment variable overrides.
-NAMESPACE=${GAZECTL_NAMESPACE:='monokal'}
-IMAGE=${GAZECTL_IMAGE:='gazectl'}
-TAG=${GAZECTL_VERSION:='latest'}
+export NAMESPACE=${GAZECTL_NAMESPACE:='monokal'}
+export IMAGE=${GAZECTL_IMAGE:='gazectl'}
+export TAG=${GAZECTL_VERSION:='latest'}
+export UPDATE=${GAZECTL_UPDATE:=false} # Default false as we're probably building locally.
 
 MAGENTA=$(tput setaf 5)
 GREEN=$(tput setaf 2)
