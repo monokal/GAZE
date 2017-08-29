@@ -21,6 +21,10 @@ notifications:
 
 sudo: required
 
+os:
+  - linux
+  - osx
+
 language: python
 
 python:
