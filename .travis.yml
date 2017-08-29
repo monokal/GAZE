@@ -1,7 +1,20 @@
+#            GAZE
+#  Turnkey Open Media Center
+#              __        .-.
+#          .-"` .`'.    /\\|
+#  _(\-/)_" ,  .   ,\  /\\\/     =o O=
+# {(=o^O=)} .   ./,  |/\\\/
+# `-.(Y).-`  ,  |  , |\.-`
+#      /~/,_/~~~\,__.-`   =O o=
+#     ////~    // ~\\
+#   ==`==`   ==`   ==`
+#     gaze.monokal.io
+
 notifications:
   webhooks:
     urls:
-      - https://webhooks.gitter.im/e/96c2bf7be3231aee724b
+      - https://webhooks.gitter.im/e/96c2bf7be3231aee724b # Gitter.
+
     on_success: always
     on_failure: always
     on_start: always
@@ -16,19 +29,24 @@ python:
 services:
   - docker
 
+env:
+  - GAZECTL_VERSION='test'
+
 install:
-  # Install build dependencies.
-  - pip install mkdocs
-  - pip install mkdocs-material
-
-  # Install gazectl.
-  - curl -L https://raw.githubusercontent.com/monokal/GAZE/master/gaze-control/gazectl-wrapper.sh > /tmp/gaze
-  - chmod +x /tmp/gaze
-
-  # Install gbuild.
-  - curl -L https://raw.githubusercontent.com/monokal/GAZE/master/gbuild.sh > /tmp/gbuild
-  - chmod +x /tmp/gbuild
+#  # Install build dependencies.
+#  - pip install mkdocs
+#  - pip install mkdocs-material
+#
+#  # Install gazectl.
+#  - curl -L https://raw.githubusercontent.com/monokal/GAZE/master/gaze-control/gazectl-wrapper.sh > /usr/local/bin/gaze
+#  - chmod +x /usr/local/bin/gaze
+#
+#  # Install gbuild.
+#  - curl -L https://raw.githubusercontent.com/monokal/GAZE/master/gbuild.sh > /usr/local/bin/gbuild
+#  - chmod +x /usr/local/bin/gbuild
+  - chmod +x gbuild.sh
+  - chmod +x gaze-control/gazectl-wrapper.sh
 
 script:
-  - /tmp/gbuild build
-  - /tmp/gbuild test
+  - ./gbuild.sh build
+  - ./gbuild.sh test
