@@ -37,13 +37,6 @@ install:
   - pip install mkdocs
   - pip install mkdocs-material
 
-#  # Install gazectl.
-#  - curl -L https://raw.githubusercontent.com/monokal/GAZE/master/gaze-control/gazectl-wrapper.sh > /usr/local/bin/gaze
-#  - chmod +x /usr/local/bin/gaze
-#
-#  # Install gbuild.
-#  - curl -L https://raw.githubusercontent.com/monokal/GAZE/master/gbuild.sh > /usr/local/bin/gbuild
-#  - chmod +x /usr/local/bin/gbuild
   - chmod +x gbuild.sh
   - chmod +x gaze-control/gazectl-wrapper.sh
 

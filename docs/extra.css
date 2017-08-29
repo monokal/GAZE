@@ -5,3 +5,7 @@
 .md-nav--secondary {
     border-left: .4rem solid #1082c2;
 }
+
+nav__title--site {
+    background-color: #212121;
+}
