@@ -33,9 +33,9 @@ env:
   - GAZECTL_VERSION='test'
 
 install:
-#  # Install build dependencies.
-#  - pip install mkdocs
-#  - pip install mkdocs-material
+  # Install build dependencies.
+  - pip install mkdocs
+  - pip install mkdocs-material
 #
 #  # Install gazectl.
 #  - curl -L https://raw.githubusercontent.com/monokal/GAZE/master/gaze-control/gazectl-wrapper.sh > /usr/local/bin/gaze
