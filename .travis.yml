@@ -23,7 +23,6 @@ sudo: required
 
 os:
   - linux
-  - osx
 
 language: generic
 
