@@ -25,10 +25,7 @@ os:
   - linux
   - osx
 
-language: python
-
-python:
-  - "3.6"
+language: generic
 
 services:
   - docker
@@ -36,7 +33,7 @@ services:
 env:
   global:
     - GAZECTL_VERSION='test'
-    - GAZECTL_UPDATE=false # Disable Docker Image Pull as we're building locally.
+    - GAZECTL_UPDATE=false # Don't pull the gazectl image if building locally.
 
 install:
   - pip install mkdocs
@@ -48,3 +45,4 @@ install:
 script:
   - ./gbuild.sh build
   - ./gbuild.sh test
+
