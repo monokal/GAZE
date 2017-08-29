@@ -72,7 +72,7 @@ function run_test {
     )
 
     for i in "${GAZECTL_COMMANDS[@]}"; do
-        GAZECTL_VERSION="${TAG}" gaze-control/gazectl-wrapper.sh ${i}
+        GAZECTL_VERSION="${TAG}" GAZECTL_UPDATE=false gaze-control/gazectl-wrapper.sh ${i}
     done
 
     echo -e "${GREEN}[GBUILD] OK.${NONE}"

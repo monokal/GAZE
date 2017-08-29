@@ -29,8 +29,9 @@ python:
 services:
   - docker
 
-#env:
-#  - GAZECTL_VERSION='test'
+env:
+  - GAZECTL_VERSION='test'
+  - GAZECTL_UPDATE=false # Disable Docker Image Pull as we're building locally.
 
 install:
   # Install build dependencies.

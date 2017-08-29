@@ -10,3 +10,4 @@ The `gaze` command-line tool also supports overriding various default runtime ar
 *  `GAZECTL_VERSION` - The Docker Image Tag of the `gazectl` container (default: `latest`).
 *  `GAZECTL_SOCKET` - The Docker socket of the host (default: `/var/run/docker.sock`).
 *  `GAZECTL_VOLUMES` - Path to the Docker Volumes mountpoint on the host (default: `/var/lib/docker/volumes`).
+*  `GAZECTL_UPDATE` - Ensure we're running the latest version of Gaze Control (default: `true`)
