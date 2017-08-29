@@ -311,25 +311,6 @@ class _Proxy(object):
             destination=destination
         )
 
-    def render_index(self, template='index.html.j2'):
-        items = {
-            'services': {
-                'plex': '32400',
-                'plexpy': '8181',
-                'transmission': '9091',
-                'sonarr': '8989',
-                'radarr': '7878',
-                'jackett': '9117',
-                'ombi': '3579'
-            }
-        }
-
-        self.template.render(
-            template=template,
-            items=items,
-            destination='/some/path/index.html'
-        )
-
 
 def main():
     # Configure argument parsing.
