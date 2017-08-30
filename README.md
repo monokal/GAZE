@@ -43,6 +43,7 @@ Full documentation on the GAZE project is [available here](http://gaze.monokal.i
 
 ## Support
 If you experience any problems, would like to request a new feature or just chat, there are a couple of support channels available:
+
 * [Gitter Chat](https://gitter.im/gaze-tomc/)
 * [GitHub Issues](https://github.com/monokal/GAZE/issues)
 
