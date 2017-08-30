@@ -2,7 +2,7 @@
 
 ## Tools
 
-#### gbuild.sh
+#### gbuild
 At the root of this repository you'll find the [gbuild.sh](https://github.com/monokal/GAZE/blob/master/gbuild.sh) script. This wraps some useful functions for building and testing (currently primitively) GAZE code, Docker Images, documentation, etc.
 
 As always, usage can be seen using the `--help` argument:
