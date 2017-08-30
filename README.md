@@ -41,8 +41,10 @@ Further documentation on GAZE Control can be [found here](http://gaze.monokal.io
 ## Documentation
 Full documentation on the GAZE project is [available here](http://gaze.monokal.io).
 
-## Issues / Feature Requests
-If you experience any problems, bugs or would like to request a new feature, please first search for duplicates then [raise a ticket](https://github.com/monokal/GAZE/issues).
+## Support
+If you experience any problems, would like to request a new feature or just chat, there are a couple of support channels available:
+* [Gitter Chat](https://gitter.im/gaze-tomc/)
+* [GitHub Issues](https://github.com/monokal/GAZE/issues)
 
 ## Development
 If you'd like to contribute to the GAZE project, please read the [development documentation](http://gaze.monokal.io/development).
