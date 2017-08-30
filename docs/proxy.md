@@ -1,1 +1,1 @@
-> _Sorry! This page is yet to be published. Check back soon._
+> _This documentation is currently incomplete, but feel free to contribute!_
