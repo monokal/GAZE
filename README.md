@@ -51,6 +51,4 @@ If you'd like to contribute to the GAZE project, please read the [development do
 GAZE is released under the [GNU General Public License v3.0](https://github.com/monokal/GAZE/blob/master/LICENSE).
 Maintainers of the GAZE project do not advocate the illegal sharing of media in any way, and assume no responsibility for improper use of GAZE or any linked software.
 
----
-
 > _This `README.md` is overwritten by `docs/index.md` during the build process, so edit that instead._
