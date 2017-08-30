@@ -23,8 +23,8 @@ optional arguments:
 ```
 
 ## Steps
-The development process currently goes something like this:
 
+The development process currently goes something like this:
 1. Fork this repository.
 2. Make your changes.
 3. Use the `gbuild` tool (see above) to `build` and `test` your changes locally.
