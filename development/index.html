@@ -74,6 +74,9 @@
     <a class="current" href="./">Development</a>
     <ul class="subnav">
             
+    <li class="toctree-l2"><a href="#gbuildsh">gbuild.sh</a></li>
+    
+
     </ul>
 	    </li>
           
@@ -112,8 +115,26 @@
           <div role="main">
             <div class="section">
               
-                <blockquote>
-<p><em>Sorry! This page is yet to be published. Check back soon.</em></p>
+                <h2 id="gbuildsh">gbuild.sh</h2>
+<p>At the root of this repository you'll find the <a href="https://github.com/monokal/GAZE/blob/master/gbuild.sh">gbuild.sh</a> script. This wraps some useful functions for building and testing (currently primitively) GAZE code, Docker Images, documentation, etc.</p>
+<p>As always, usage can be seen using the <code>--help</code> argument:</p>
+<pre><code class="bash">usage: gbuild [-h] {build,test,push,all} ...
+
+GAZE build tool.
+
+positional arguments:
+  {build,test,push,all}
+    build               build the gazectl Docker Image and documentation
+    test                test gazectl functionality
+    push                push the gazectl Docker Image, documentation and code
+    all                 do all of the above in that order
+
+optional arguments:
+  -h, --help            show this help message and exit
+</code></pre>
+
+<blockquote>
+<p><em>This documentation is currently incomplete, but feel free to contribute!</em></p>
 </blockquote>
               
             </div>

@@ -42,23 +42,28 @@
         }, 
         {
             "location": "/control/", 
-            "text": "To make life easy, the \ngaze\n command-line tool can be used to manage the full stack of media center services. Usage can be seen using the following command:\n\n\ngaze --help\n\n\n\n\nThe \ngaze\n command-line tool also supports overriding various default runtime arguments using environment variables. Sane defaults have been chosen so you shouldn't need to, but if you do:\n\n\n\n\nGAZECTL_NAMESPACE\n - The Docker Namespace of the \ngazectl\n container (default: \nmonokal\n).\n\n\nGAZECTL_IMAGE\n - The Docker Image of the \ngazectl\n container (default: \ngazectl\n).\n\n\nGAZECTL_VERSION\n - The Docker Image Tag of the \ngazectl\n container (default: \nlatest\n).\n\n\nGAZECTL_SOCKET\n - The Docker socket of the host (default: \n/var/run/docker.sock\n).\n\n\nGAZECTL_VOLUMES\n - Path to the Docker Volumes mountpoint on the host (default: \n/var/lib/docker/volumes\n).\n\n\nGAZECTL_UPDATE\n - Ensure we're running the latest version of Gaze Control (default: \ntrue\n)", 
+            "text": "To make life easy, the \ngaze\n command-line tool can be used to manage the full stack of media center services. Usage can be seen using the following command:\n\n\ngaze --help\n\n\n\n\nThe \ngaze\n command-line tool also supports overriding various default runtime arguments using environment variables. Sane defaults have been chosen so you shouldn't need to, but if you do:\n\n\n\n\nGAZECTL_NAMESPACE\n - The Docker Namespace of the \ngazectl\n container (default: \nmonokal\n).\n\n\nGAZECTL_IMAGE\n - The Docker Image of the \ngazectl\n container (default: \ngazectl\n).\n\n\nGAZECTL_VERSION\n - The Docker Image Tag of the \ngazectl\n container (default: \nlatest\n).\n\n\nGAZECTL_SOCKET\n - The Docker socket of the host (default: \n/var/run/docker.sock\n).\n\n\nGAZECTL_VOLUMES\n - Path to the Docker Volumes mountpoint on the host (default: \n/var/lib/docker/volumes\n).\n\n\nGAZECTL_UPDATE\n - Ensure we're running the latest version of Gaze Control (default: \ntrue\n)\n\n\n\n\n\n\nThis documentation is currently incomplete, but feel free to contribute!", 
             "title": "GAZE Control"
         }, 
         {
             "location": "/monitor/", 
-            "text": "Sorry! This page is yet to be published. Check back soon.", 
+            "text": "This documentation is currently incomplete, but feel free to contribute!", 
             "title": "GAZE Monitor"
         }, 
         {
             "location": "/proxy/", 
-            "text": "Sorry! This page is yet to be published. Check back soon.", 
+            "text": "This documentation is currently incomplete, but feel free to contribute!", 
             "title": "GAZE Proxy"
         }, 
         {
             "location": "/development/", 
-            "text": "Sorry! This page is yet to be published. Check back soon.", 
+            "text": "gbuild.sh\n\n\nAt the root of this repository you'll find the \ngbuild.sh\n script. This wraps some useful functions for building and testing (currently primitively) GAZE code, Docker Images, documentation, etc.\n\n\nAs always, usage can be seen using the \n--help\n argument:\n\n\nusage: gbuild [-h] {build,test,push,all} ...\n\nGAZE build tool.\n\npositional arguments:\n  {build,test,push,all}\n    build               build the gazectl Docker Image and documentation\n    test                test gazectl functionality\n    push                push the gazectl Docker Image, documentation and code\n    all                 do all of the above in that order\n\noptional arguments:\n  -h, --help            show this help message and exit\n\n\n\n\n\n\nThis documentation is currently incomplete, but feel free to contribute!", 
             "title": "Development"
+        }, 
+        {
+            "location": "/development/#gbuildsh", 
+            "text": "At the root of this repository you'll find the  gbuild.sh  script. This wraps some useful functions for building and testing (currently primitively) GAZE code, Docker Images, documentation, etc.  As always, usage can be seen using the  --help  argument:  usage: gbuild [-h] {build,test,push,all} ...\n\nGAZE build tool.\n\npositional arguments:\n  {build,test,push,all}\n    build               build the gazectl Docker Image and documentation\n    test                test gazectl functionality\n    push                push the gazectl Docker Image, documentation and code\n    all                 do all of the above in that order\n\noptional arguments:\n  -h, --help            show this help message and exit   This documentation is currently incomplete, but feel free to contribute!", 
+            "title": "gbuild.sh"
         }
     ]
 }
