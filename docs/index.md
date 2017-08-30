@@ -48,6 +48,6 @@ If you experience any problems, bugs or would like to request a new feature, ple
 If you'd like to contribute to the GAZE project, please read the [development documentation](http://gaze.monokal.io/development).
 
 ## Disclaimer
-The maintainer(s) of the GAZE project do not advocate the illegal sharing of media in any way. The GAZE project is intended to be an educational programming exercise, and therefore the maintainer(s) assumes no responsibility of improper use.
+GAZE is released under the [GNU General Public License v3.0](https://github.com/monokal/GAZE/blob/master/LICENSE). Additionally, The maintainer(s) of the GAZE project do not advocate the illegal sharing of media in any way. The GAZE project is intended to be an educational programming exercise, and therefore the maintainer(s) assumes no responsibility of improper use.
 
 > _This `README.md` is overwritten by `docs/index.md` during the build process, so edit that instead._
