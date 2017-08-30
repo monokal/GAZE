@@ -57,13 +57,23 @@
         }, 
         {
             "location": "/development/", 
-            "text": "This documentation is currently incomplete, but feel free to contribute!\n\n\n\n\ngbuild.sh\n\n\nAt the root of this repository you'll find the \ngbuild.sh\n script. This wraps some useful functions for building and testing (currently primitively) GAZE code, Docker Images, documentation, etc.\n\n\nAs always, usage can be seen using the \n--help\n argument:\n\n\nusage: gbuild [-h] {build,test,push,all} ...\n\nGAZE build tool.\n\npositional arguments:\n  {build,test,push,all}\n    build               build the gazectl Docker Image and documentation\n    test                test gazectl functionality\n    push                push the gazectl Docker Image, documentation and code\n    all                 do all of the above in that order\n\noptional arguments:\n  -h, --help            show this help message and exit\n\n\n\n\nSupport\n\n\nIf you'd like a hand with anything, there are a couple of support channels available:\n\n\n\n\nGitter Chat\n\n\nGitHub Issues", 
+            "text": "This documentation is currently incomplete, but feel free to contribute!\n\n\n\n\nTools\n\n\ngbuild.sh\n\n\nAt the root of this repository you'll find the \ngbuild.sh\n script. This wraps some useful functions for building and testing (currently primitively) GAZE code, Docker Images, documentation, etc.\n\n\nAs always, usage can be seen using the \n--help\n argument:\n\n\nusage: gbuild [-h] {build,test,push,all} ...\n\nGAZE build tool.\n\npositional arguments:\n  {build,test,push,all}\n    build               build the gazectl Docker Image and documentation\n    test                test gazectl functionality\n    push                push the gazectl Docker Image, documentation and code\n    all                 do all of the above in that order\n\noptional arguments:\n  -h, --help            show this help message and exit\n\n\n\n\nSteps\n\n\nThe development process currently goes something like this:\n1. Fork this repository.\n2. Make your changes.\n3. Use the \ngbuild\n tool (see above) to \nbuild\n and \ntest\n your changes locally.\n4. Open a \nPull Request\n.\n5. Our \nTravis CI pipeline\n will build and test everything.\n6. If successful, your changes will be merged.\n\n\nSupport\n\n\nIf you'd like a hand with anything, there are a couple of support channels available:\n\n\n\n\nGitter Chat\n\n\nGitHub Issues", 
             "title": "Development"
+        }, 
+        {
+            "location": "/development/#tools", 
+            "text": "", 
+            "title": "Tools"
         }, 
         {
             "location": "/development/#gbuildsh", 
             "text": "At the root of this repository you'll find the  gbuild.sh  script. This wraps some useful functions for building and testing (currently primitively) GAZE code, Docker Images, documentation, etc.  As always, usage can be seen using the  --help  argument:  usage: gbuild [-h] {build,test,push,all} ...\n\nGAZE build tool.\n\npositional arguments:\n  {build,test,push,all}\n    build               build the gazectl Docker Image and documentation\n    test                test gazectl functionality\n    push                push the gazectl Docker Image, documentation and code\n    all                 do all of the above in that order\n\noptional arguments:\n  -h, --help            show this help message and exit", 
             "title": "gbuild.sh"
+        }, 
+        {
+            "location": "/development/#steps", 
+            "text": "The development process currently goes something like this:\n1. Fork this repository.\n2. Make your changes.\n3. Use the  gbuild  tool (see above) to  build  and  test  your changes locally.\n4. Open a  Pull Request .\n5. Our  Travis CI pipeline  will build and test everything.\n6. If successful, your changes will be merged.", 
+            "title": "Steps"
         }, 
         {
             "location": "/development/#support", 

@@ -74,7 +74,16 @@
     <a class="current" href="./">Development</a>
     <ul class="subnav">
             
-    <li class="toctree-l2"><a href="#gbuildsh">gbuild.sh</a></li>
+    <li class="toctree-l2"><a href="#tools">Tools</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#gbuildsh">gbuild.sh</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l2"><a href="#steps">Steps</a></li>
     
 
     <li class="toctree-l2"><a href="#support">Support</a></li>
@@ -121,7 +130,8 @@
                 <blockquote>
 <p><em>This documentation is currently incomplete, but feel free to contribute!</em></p>
 </blockquote>
-<h2 id="gbuildsh">gbuild.sh</h2>
+<h2 id="tools">Tools</h2>
+<h4 id="gbuildsh">gbuild.sh</h4>
 <p>At the root of this repository you'll find the <a href="https://github.com/monokal/GAZE/blob/master/gbuild.sh">gbuild.sh</a> script. This wraps some useful functions for building and testing (currently primitively) GAZE code, Docker Images, documentation, etc.</p>
 <p>As always, usage can be seen using the <code>--help</code> argument:</p>
 <pre><code class="bash">usage: gbuild [-h] {build,test,push,all} ...
@@ -139,6 +149,14 @@ optional arguments:
   -h, --help            show this help message and exit
 </code></pre>
 
+<h2 id="steps">Steps</h2>
+<p>The development process currently goes something like this:
+1. Fork this repository.
+2. Make your changes.
+3. Use the <code>gbuild</code> tool (see above) to <code>build</code> and <code>test</code> your changes locally.
+4. Open a <a href="https://github.com/monokal/gaze/pulls">Pull Request</a>.
+5. Our <a href="https://travis-ci.org/monokal/GAZE">Travis CI pipeline</a> will build and test everything.
+6. If successful, your changes will be merged.</p>
 <h2 id="support">Support</h2>
 <p>If you'd like a hand with anything, there are a couple of support channels available:</p>
 <ul>
