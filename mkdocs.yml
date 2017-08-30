@@ -9,7 +9,7 @@ repo_url: 'https://github.com/monokal/gaze'
 docs_dir: 'docs'
 
 theme: readthedocs
-# extra_css: [extra.css]
+extra_css: [extra.css]
 copyright: "Copyright &copy; monokal.io"
 
 pages:
@@ -17,4 +17,4 @@ pages:
   - GAZE Control: control.md
   - GAZE Monitor: monitor.md
   - GAZE Proxy: proxy.md
-  - Contribute: contribute.md
+  - Development: development.md

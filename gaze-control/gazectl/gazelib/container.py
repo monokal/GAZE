@@ -54,7 +54,7 @@ class GazeContainer(object):
         :param ports: (dict) Ports to bind inside the container.
         :param restart_policy: (dict) Restart policy of the container.
         :param labels: (dict or list) Labels to set on the container.
-        :return logs: A Container object.
+        :return logs: (object) A Container object.
         """
 
         try:
