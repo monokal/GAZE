@@ -21,6 +21,10 @@ notifications:
 
 sudo: required
 
+branches:
+  only:
+    - master
+
 os:
   - linux
 
