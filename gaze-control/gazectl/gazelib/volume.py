@@ -94,8 +94,6 @@ class GazeVolume(object):
         :return:
         """
 
-        self.log("Creating Docker Volume ({})...".format(name), 'info')
-
         try:
             volume = self.get(name)
             self.log(
@@ -103,6 +101,7 @@ class GazeVolume(object):
             )
 
         except GazeVolumeNotFound:
+            self.log("Creating Docker Volume ({})...".format(name), 'info')
             try:
                 volume = self.docker_client.volumes.create(
                     name=name,

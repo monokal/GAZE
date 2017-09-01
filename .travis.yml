@@ -35,7 +35,6 @@ services:
 
 env:
   global:
-    - GAZECTL_VERSION='test'
     - GAZECTL_UPDATE=false # Don't pull the gazectl image if building locally.
 
 install:

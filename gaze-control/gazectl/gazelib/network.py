@@ -73,19 +73,14 @@ class GazeNetwork(object):
         Create a Docker Network.
 
         :param name: (str) Name of the Docker Network.
-        :param driver: (str) Name of the Network driver.
         :return: (object) A Network object.
         """
 
-        self.log("Creating Docker Network ({})...".format(name), 'info')
-
         try:
             network = self.get(name)
-            self.log(
-                "The Docker Network ({}) already exists.".format(name), 'info'
-            )
 
         except GazeNetworkNotFound:
+            self.log("Creating Docker Network ({})...".format(name), 'info')
             try:
                 network = self.docker_client.networks.create(
                     name=name,
@@ -98,6 +93,10 @@ class GazeNetwork(object):
                     'exception'
                 )
                 sys.exit(1)
+
+        self.log(
+            "The Docker Network ({}) already exists.".format(name), 'info'
+        )
 
         self.log("    * Success!", 'success')
 

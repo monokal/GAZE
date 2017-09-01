@@ -23,7 +23,7 @@ import docker
 from tabulate import tabulate
 from termcolor import colored
 
-from gazelib.compose import GazeCompose
+# from gazelib.compose import GazeCompose
 from gazelib.config import GazeConfig
 from gazelib.container import GazeContainer
 from gazelib.log import GazeLog
@@ -146,10 +146,10 @@ class Bootstrap(object):
             self.log("    * {}: {}".format(i[0], docker_info[i[1]]), 'success')
 
         # Bootstrap the "gaze-share" Docker Volume.
-        volume = self.volume.create(name='gaze-share')
+        volume = self.volume.create(name='gaze_share')
 
         # Bootstrap the "gaze-internal" Docker Network.
-        network = self.network.create(name='gaze-internal')
+        network = self.network.create(name='gaze_internal')
 
         # Render GAZE Proxy Nginx configuration.
         self.proxy.render_config(
@@ -173,20 +173,28 @@ class Up(object):
         self.config = config
         self.status = Status(self.args, self.config)
         self.log = GazeLog()
+        self.container = GazeContainer()
         # self.compose = GazeCompose()
 
     def __call__(self):
-        items = {
-            'gazeproxy_port': '8080',
-            'plex_claim': 'test',
-            'plex_ip': '0.0.0.0',
-            'uid': '1000',
-            'gid': '1000'
-        }
+        self.log("Deploying GAZE services...", 'info')
 
-        self.log("TODO: Deploying GAZE services...", 'info')
-        # self.compose.up(items, '-d')
-        self.log("That's it!", 'success')
+        self.container.run(
+            name='gaze_plex',
+            image='plexinc/pms-docker:latest',
+            environment=[
+                "PLEX_CLAIM=TODO",
+                "ADVERTISE_IP=TODO"
+            ],
+            volumes={
+                '/etc/localtime': {'bind': '/etc/localtime', 'mode': 'ro'}
+            },
+            networks=['gaze_internal'],
+            ports={'32400/tcp': 32400},
+            restart_policy={"Name": "on-failure", "MaximumRetryCount": 5},
+            labels={"gaze.service": "plex"}
+        )
+
         self.status()
 
 
