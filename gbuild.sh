@@ -79,10 +79,10 @@ function run_test {
 }
 
 function run_push {
-    # Push Docker Image.
-    echo -e "${MAGENTA}[GBUILD] Pushing the ${NAMESPACE}/${IMAGE}:${TAG} Docker Image...${NONE}"
-    docker push "${NAMESPACE}/${IMAGE}:${TAG}"
-    echo -e "${GREEN}[GBUILD] OK.${NONE}"
+#    # Push Docker Image.
+#    echo -e "${MAGENTA}[GBUILD] Pushing the ${NAMESPACE}/${IMAGE}:${TAG} Docker Image...${NONE}"
+#    docker push "${NAMESPACE}/${IMAGE}:${TAG}"
+#    echo -e "${GREEN}[GBUILD] OK.${NONE}"
 
     # Push docs.
     echo -e "${MAGENTA}[GBUILD] Pushing documentation...${NONE}"
@@ -93,6 +93,8 @@ function run_push {
     echo -e "${MAGENTA}[GBUILD] Pushing all changes to Git...${NONE}"
     git add -A && git commit -m "Pushed by gbuild." && git push
     echo -e "${GREEN}[GBUILD] OK.${NONE}"
+
+    echo -e "${MAGENTA}[GBUILD] The ${NAMESPACE}/${IMAGE}:latest Docker Image will be built automatically by Docker Hub on successful merge.${NONE}"
 }
 
 # Environment variable overrides.
