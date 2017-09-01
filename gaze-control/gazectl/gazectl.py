@@ -189,7 +189,7 @@ class Up(object):
             image='plexinc/pms-docker:latest',
             environment=[
                 "PLEX_CLAIM=TODO",
-                "ADVERTISE_IP=TODO"
+                "ADVERTISE_IP=0.0.0.0"
             ],
             volumes={
                 '/etc/localtime': {'bind': '/etc/localtime', 'mode': 'ro'}
@@ -199,6 +199,18 @@ class Up(object):
             restart_policy={"Name": "on-failure", "MaximumRetryCount": 5},
             labels={"gaze.service": "plex"}
         )
+
+        # Transmission.
+
+        # Sonarr.
+
+        # Radarr.
+
+        # Jackett.
+
+        # Ombi.
+
+        # GAZE Proxy.
 
         #
         # END OF SERVICE DEPLOYMENTS.

@@ -32,21 +32,6 @@ services:
     labels:
       - "gaze.service=plex"
 
-  plexpy:
-    image: linuxserver/plexpy:latest
-    volumes:
-      - ./media/plexpy:/config
-      - ./media/plex/config/Library/Application\ Support/Plex\ Media\ Server/Logs:/logs:ro
-    depends_on:
-      - plex
-    networks:
-      - internal
-    ports:
-      - "8181:8181"
-    restart: always
-    labels:
-      - "gaze.service=plexpy"
-
   transmission:
     image: linuxserver/transmission:latest
     networks:

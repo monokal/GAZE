@@ -10,22 +10,23 @@
 #      ==`==`   ==`   ==`
 #        gaze.monokal.io
 
-docker:
-  socket: 'unix://var/run/docker.sock'
-
 networks:
-  name: 'gaze-internal'
-
-volumes:
-  name: 'gaze-share'
+  gaze_internal:
 
 services:
-  gazeproxy:
-    port: 80
   plex:
-  plexpy:
+    image: 'plexinc/pms-docker:latest'
+    ports:
+      - '32400:32400'
+    environment:
+      - 'PLEX_CLAIM=TODO'
+
   transmission:
+
   sonarr:
+
   radarr:
+
   jackett:
+
   ombi:
