@@ -173,7 +173,7 @@ class Up(object):
         self.config = config
         self.status = Status(self.args, self.config)
         self.log = GazeLog()
-        self.compose = GazeCompose()
+        # self.compose = GazeCompose()
 
     def __call__(self):
         items = {
@@ -184,8 +184,8 @@ class Up(object):
             'gid': '1000'
         }
 
-        self.log("Deploying GAZE services...", 'info')
-        self.compose.up(items, '-d')
+        self.log("TODO: Deploying GAZE services...", 'info')
+        # self.compose.up(items, '-d')
         self.log("That's it!", 'success')
         self.status()
 
@@ -195,11 +195,11 @@ class Down(object):
         self.args = args
         self.config = config
         self.log = GazeLog()
-        self.compose = GazeCompose()
+        # self.compose = GazeCompose()
 
     def __call__(self):
-        self.log("Removing GAZE services...", 'info')
-        self.compose.down('/opt/gazectl/gaze-compose.yaml')
+        self.log("TODO: Removing GAZE services...", 'info')
+        # self.compose.down('/opt/gazectl/gaze-compose.yaml')
         self.log(
             "GAZE services have been removed. Use the \"gaze up\" command to "
             "redeploy.", 'success'

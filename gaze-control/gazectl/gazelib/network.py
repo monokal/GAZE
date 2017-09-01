@@ -68,13 +68,13 @@ class GazeNetwork(object):
 
         return network
 
-    def create(self, name, driver='local'):
+    def create(self, name):
         """
         Create a Docker Network.
 
         :param name: (str) Name of the Docker Network.
         :param driver: (str) Name of the Network driver.
-        :return: A Network object.
+        :return: (object) A Network object.
         """
 
         self.log("Creating Docker Network ({})...".format(name), 'info')
@@ -89,7 +89,6 @@ class GazeNetwork(object):
             try:
                 network = self.docker_client.networks.create(
                     name=name,
-                    driver=driver,
                     labels={"gaze.network": name}
                 )
 
