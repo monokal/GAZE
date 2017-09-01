@@ -179,6 +179,11 @@ class Up(object):
     def __call__(self):
         self.log("Deploying GAZE services...", 'info')
 
+        #
+        # START OF SERVICE DEPLOYMENTS.
+        #
+
+        # Plex.
         self.container.run(
             name='gaze_plex',
             image='plexinc/pms-docker:latest',
@@ -194,6 +199,10 @@ class Up(object):
             restart_policy={"Name": "on-failure", "MaximumRetryCount": 5},
             labels={"gaze.service": "plex"}
         )
+
+        #
+        # END OF SERVICE DEPLOYMENTS.
+        #
 
         self.status()
 
