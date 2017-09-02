@@ -177,28 +177,31 @@ class Up(object):
         # self.compose = GazeCompose()
 
     def __call__(self):
-        self.log("Deploying GAZE services...", 'info')
-
         #
         # START OF SERVICE DEPLOYMENTS.
         #
 
         # Plex.
-        self.container.run(
-            name='gaze_plex',
-            image='plexinc/pms-docker:latest',
-            environment=[
-                "PLEX_CLAIM=TODO",
-                "ADVERTISE_IP=0.0.0.0"
-            ],
-            volumes={
-                '/etc/localtime': {'bind': '/etc/localtime', 'mode': 'ro'}
-            },
-            networks=['gaze_internal'],
-            ports={'32400/tcp': 32400},
-            restart_policy={"Name": "on-failure", "MaximumRetryCount": 5},
-            labels={"gaze.service": "plex"}
-        )
+        for service in self.config['services']:
+            self.log("Deploying {} service...".format(service), 'info')
+
+            self.container.run(
+                name='gaze_plex',
+                image='plexinc/pms-docker:latest',
+                environment=[
+                    "PLEX_CLAIM=TODO",
+                    "ADVERTISE_IP=0.0.0.0"
+                ],
+                volumes={
+                    '/etc/localtime': {'bind': '/etc/localtime', 'mode': 'ro'}
+                },
+                networks=['gaze_internal'],
+                ports={'32400/tcp': 32400},
+                restart_policy={"Name": "on-failure", "MaximumRetryCount": 5},
+                labels={"gaze.service": "plex"}
+            )
+
+            self.log("    * Success!", 'success')
 
         # Transmission.
 
@@ -310,8 +313,10 @@ class _Gaze(object):
         self.config = GazeConfig()
 
     def __call__(self):
+        config = self.config.load(self.args.config)
+
         # Instantiate and call the given class.
-        target_class = self.args.func(self.args, self.config)
+        target_class = self.args.func(self.args, config)
         return target_class()
 
 
@@ -355,6 +360,17 @@ def main():
         required=False,
         action="store_true",
         help="output in debug verbosity"
+    )
+
+    parser.add_argument(
+        "-c",
+        "--config",
+        required=False,
+        type=str,
+        nargs=1,
+        metavar='CONFIG_PATH',
+        help="path tp the gaze.yaml file",
+        default="/gaze/gaze.yaml"
     )
 
     # Subparser arguments.

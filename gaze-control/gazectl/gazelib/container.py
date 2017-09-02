@@ -124,6 +124,4 @@ class GazeContainer(object):
                     )
                     sys.exit(1)
 
-                self.log("    * Success!", 'success')
-
         return container
