@@ -21,7 +21,6 @@ import sys
 
 import docker
 from tabulate import tabulate
-from termcolor import colored
 
 # from gazelib.compose import GazeCompose
 from gazelib.config import GazeConfig

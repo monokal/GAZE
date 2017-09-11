@@ -46,6 +46,6 @@ class GazeHelper(object):
  ╚██████╔╝  ██║  ██║  ███████╗  ███████╗
   ╚═════╝   ╚═╝  ╚═╝  ╚══════╝  ╚══════╝
    Turnkey Open Media Center
-                 ''', 'blue')
+                 ''', 'cyan')
 
         return banner
