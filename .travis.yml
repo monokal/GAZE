@@ -39,7 +39,6 @@ env:
 
 install:
   - pip install mkdocs
-  - pip install mkdocs-material
 
   - chmod +x gbuild.sh
   - chmod +x gaze-control/gazectl-wrapper.sh

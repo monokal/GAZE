@@ -30,6 +30,8 @@ from gazelib.log import GazeLog
 from gazelib.network import GazeNetwork
 from gazelib.template import GazeTemplate
 from gazelib.volume import GazeVolume
+from gazelib.helpers import GazeHelper
+
 
 # Initialise a global logger.
 try:
@@ -69,6 +71,7 @@ class Bootstrap(object):
         self.volume = GazeVolume()
         self.network = GazeNetwork()
         self.container = GazeContainer()
+        self.helpers = GazeHelper()
 
         self.proxy = _Proxy(self.args)
         self.up = Up(self.args, self.config)
@@ -84,23 +87,7 @@ class Bootstrap(object):
             sys.exit(1)
 
     def __call__(self):
-        print(colored(r'''
-                                       __        .-.
-                                   .-"` .`'.    /\\|
-                           _(\-/)_" ,  .   ,\  /\\\/
-                          {(=o^O=)} .   ./,  |/\\\/
-                          `-.(Y).-`  ,  |  , |\.-`
-                               /~/,_/~~~\,__.-`
-                              ////~     //~\\
-                            ==`==`    ==`  ==`''', 'magenta'))
-        print(colored(r'''        ██████╗    █████╗   ███████╗  ███████╗
-       ██╔════╝   ██╔══██╗  ╚══███╔╝  ██╔════╝
-       ██║  ███╗  ███████║    ███╔╝   █████╗  
-       ██║   ██║  ██╔══██║   ███╔╝    ██╔══╝  
-       ╚██████╔╝  ██║  ██║  ███████╗  ███████╗
-        ╚═════╝   ╚═╝  ╚═╝  ╚══════╝  ╚══════╝
-         Turnkey Open Media Center
-         ''', 'blue'))
+        self.helpers.print_ascii_banner()
 
         self.log("Welcome to GAZE! Let's prepare your system...", 'info')
 
@@ -116,7 +103,7 @@ class Bootstrap(object):
             )
             sys.exit(1)
 
-        self.log("    * Success!", 'success')
+        self.log("Success!", 'success')
 
         self.log("Checking Docker system configuration...", 'info')
         try:
@@ -201,7 +188,7 @@ class Up(object):
                 labels={"gaze.service": "plex"}
             )
 
-            self.log("    * Success!", 'success')
+            self.log("Success!", 'success')
 
         # Transmission.
 
@@ -347,10 +334,13 @@ class _Proxy(object):
 
 
 def main():
+    helpers = GazeHelper()
+
     # Configure argument parsing.
     parser = argparse.ArgumentParser(
         prog="gaze",
-        description="Turnkey Open Media Center."
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        description=helpers.print_ascii_banner()
     )
 
     # Top-level arguments.
@@ -460,7 +450,12 @@ def main():
         logger.setLevel(logging.DEBUG)
 
     client = _Gaze(args)
-    return client()
+
+    try:
+        return client()
+
+    except AttributeError:
+        parser.print_help()
 
 
 if __name__ == "__main__":

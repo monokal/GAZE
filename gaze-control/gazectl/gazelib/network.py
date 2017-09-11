@@ -43,8 +43,8 @@ class GazeNetwork(object):
         """
         Get information about a Docker Network.
 
-        :param network_id: String: ID of the Docker Network.
-        :return volume: Docker Network object.
+        :param network_id: (str) ID of the Docker Network.
+        :return volume: (object) A Network object.
         """
 
         try:
@@ -98,7 +98,7 @@ class GazeNetwork(object):
             "The Docker Network ({}) already exists.".format(name), 'info'
         )
 
-        self.log("    * Success!", 'success')
+        self.log("Success!", 'success')
 
         self.log("Got Docker Network:\n{}".format(network.attrs), 'debug')
         return network

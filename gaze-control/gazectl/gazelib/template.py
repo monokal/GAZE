@@ -52,7 +52,7 @@ class GazeTemplate(object):
             )
             sys.exit(1)
 
-        self.log("    * Success!", 'success')
+        self.log("Success!", 'success')
 
         self.log("Writing template to file ({})...".format(destination), 'info')
         try:
@@ -66,4 +66,4 @@ class GazeTemplate(object):
             )
             sys.exit(1)
 
-        self.log("    * Success!", 'success')
+        self.log("Success!", 'success')

@@ -117,7 +117,7 @@ class GazeVolume(object):
                 )
                 sys.exit(1)
 
-        self.log("    * Success!", 'success')
+        self.log("Success!", 'success')
 
         # self.log("Got Docker Volume:\n{}".format(volume.attrs['Mountpoint']), 'debug')
         self.log("Got Docker Volume:\n{}".format(volume.attrs), 'debug')
