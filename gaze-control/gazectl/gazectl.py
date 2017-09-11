@@ -41,9 +41,7 @@ try:
     # We're in Docker, so just log to stdout.
     out = logging.StreamHandler(sys.stdout)
     out.setLevel(logging.DEBUG)
-    formatter = logging.Formatter("{} %(message)s".format(
-        colored('[GAZE]', 'magenta'))
-    )
+    formatter = logging.Formatter("%(message)s")
     out.setFormatter(formatter)
     logger.addHandler(out)
 
@@ -130,7 +128,7 @@ class Bootstrap(object):
         ]
 
         for i in info_items:
-            self.log("    * {}: {}".format(i[0], docker_info[i[1]]), 'success')
+            self.log("{}: {}".format(i[0], docker_info[i[1]]), 'success')
 
         # Bootstrap the "gaze-share" Docker Volume.
         volume = self.volume.create(name='gaze_share')
@@ -360,7 +358,7 @@ def main():
         nargs=1,
         metavar='CONFIG_PATH',
         help="path tp the gaze.yaml file",
-        default="/gaze/gaze.yaml"
+        default="gaze.yaml"
     )
 
     # Subparser arguments.

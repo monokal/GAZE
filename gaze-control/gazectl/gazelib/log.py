@@ -49,7 +49,7 @@ class GazeLog(object):
         # WARNING
         elif level == 'warning':
             colour = 'yellow'
-            prompt = '\u2620'  # Skull and crossbones.
+            prompt = '\u25C9'  # Fish-eye.
 
         # DEBUG
         elif level == 'debug':
@@ -65,12 +65,12 @@ class GazeLog(object):
         # EXCEPTION
         elif level == 'exception':
             colour = 'red'
-            prompt = '\u2620'  # Skull and crossbones.
+            prompt = '\u25C9'  # Fish-eye.
 
         # If we don't recognise the level, format it as an exception.
         else:
             colour = 'red'
-            prompt = '\u2620'  # Skull and crossbones.
+            prompt = '\u25C9'  # Fish-eye.
 
         if not prompt:
             prompt = ''
