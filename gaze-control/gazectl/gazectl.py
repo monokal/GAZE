@@ -113,18 +113,18 @@ class Bootstrap(object):
             )
             sys.exit(1)
 
-        info_items = [
-            ['System time', 'SystemTime'],
-            ['Server version', 'ServerVersion'],
-            ['Operating System', 'OperatingSystem'],
-            ['Architecture', 'Architecture'],
-            ['Kernel version', 'KernelVersion'],
-            ['CPUs', 'NCPU'],
-            ['Memory', 'MemTotal'],
-            ['Driver', 'Driver'],
-            ['Runtime', 'DefaultRuntime'],
-            ['Debug', 'Debug']
-        ]
+        info_items = (
+            ('System time', 'SystemTime'),
+            ('Server version', 'ServerVersion'),
+            ('Operating System', 'OperatingSystem'),
+            ('Architecture', 'Architecture'),
+            ('Kernel version', 'KernelVersion'),
+            ('CPUs', 'NCPU'),
+            ('Memory', 'MemTotal'),
+            ('Driver', 'Driver'),
+            ('Runtime', 'DefaultRuntime'),
+            ('Debug', 'Debug'),
+        )
 
         for i in info_items:
             self.log("{}: {}".format(i[0], docker_info[i[1]]), 'success')
@@ -166,26 +166,24 @@ class Up(object):
         #
 
         # Plex.
-        for service in self.config['services']:
-            self.log("Deploying {} service...".format(service), 'info')
+        self.log("Deploying Plex service...", 'info')
+        self.container.run(
+            name="gaze_plex",
+            image='plexinc/pms-docker:latest',
+            environment=[
+                "PLEX_CLAIM=TODO",
+                "ADVERTISE_IP=0.0.0.0"
+            ],
+            volumes={
+                '/etc/localtime': {'bind': '/etc/localtime', 'mode': 'ro'}
+            },
+            networks=['gaze_internal'],
+            ports={'32400/tcp': 32400},
+            restart_policy={"Name": "on-failure", "MaximumRetryCount": 5},
+            labels={"gaze.service": "plex"}
+        )
 
-            self.container.run(
-                name='gaze_plex',
-                image='plexinc/pms-docker:latest',
-                environment=[
-                    "PLEX_CLAIM=TODO",
-                    "ADVERTISE_IP=0.0.0.0"
-                ],
-                volumes={
-                    '/etc/localtime': {'bind': '/etc/localtime', 'mode': 'ro'}
-                },
-                networks=['gaze_internal'],
-                ports={'32400/tcp': 32400},
-                restart_policy={"Name": "on-failure", "MaximumRetryCount": 5},
-                labels={"gaze.service": "plex"}
-            )
-
-            self.log("Success!", 'success')
+        self.log("Success!", 'success')
 
         # Transmission.
 
@@ -337,7 +335,7 @@ def main():
     parser = argparse.ArgumentParser(
         prog="gaze",
         formatter_class=argparse.RawDescriptionHelpFormatter,
-        description=helpers.ascii_banner()
+        description=helpers.ascii_banner().rstrip()
     )
 
     # Top-level arguments.

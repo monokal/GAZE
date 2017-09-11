@@ -10,23 +10,3 @@
 #      ==`==`   ==`   ==`
 #        gaze.monokal.io
 
-networks:
-  gaze_internal:
-
-services:
-  plex:
-    image: 'plexinc/pms-docker:latest'
-    ports:
-      - '32400:32400'
-    environment:
-      - 'PLEX_CLAIM=TODO'
-
-  transmission:
-
-  sonarr:
-
-  radarr:
-
-  jackett:
-
-  ombi:

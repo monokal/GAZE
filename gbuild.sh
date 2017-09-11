@@ -65,8 +65,8 @@ function run_test {
     echo -e "${MAGENTA}[GBUILD] Running tests...${NONE}"
 
     GAZECTL_COMMANDS=( \
-        'bootstrap --noup' \
-        'up' \
+        '--help' \
+        'bootstrap' \
         'down' \
         'status' \
     )

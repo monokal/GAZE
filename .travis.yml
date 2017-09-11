@@ -39,11 +39,9 @@ env:
 
 install:
   - pip install mkdocs
-
   - chmod +x gbuild.sh
   - chmod +x gaze-control/gazectl-wrapper.sh
 
 script:
   - ./gbuild.sh build
   - ./gbuild.sh test
-
