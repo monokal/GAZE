@@ -85,7 +85,7 @@ class Bootstrap(object):
             sys.exit(1)
 
     def __call__(self):
-        print(self.helpers.print_ascii_banner())
+        print(self.helpers.ascii_banner())
 
         self.log("Welcome to GAZE! Let's prepare your system...", 'info')
 
@@ -338,7 +338,7 @@ def main():
     parser = argparse.ArgumentParser(
         prog="gaze",
         formatter_class=argparse.RawDescriptionHelpFormatter,
-        description=helpers.print_ascii_banner()
+        description=helpers.ascii_banner()
     )
 
     # Top-level arguments.

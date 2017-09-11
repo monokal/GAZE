@@ -27,7 +27,7 @@ class GazeHelper(object):
         self.log = GazeLog()
 
     @staticmethod
-    def print_ascii_banner():
+    def ascii_banner():
         banner = colored(r'''
                                  __        .-.
                              .-"` .`'.    /\\|
@@ -38,7 +38,8 @@ class GazeHelper(object):
                         ////~     //~\\
                       ==`==`    ==`  ==`''', 'magenta')
 
-        banner += colored(r'''  ██████╗    █████╗   ███████╗  ███████╗
+        banner += colored(r'''
+  ██████╗    █████╗   ███████╗  ███████╗
  ██╔════╝   ██╔══██╗  ╚══███╔╝  ██╔════╝
  ██║  ███╗  ███████║    ███╔╝   █████╗  
  ██║   ██║  ██╔══██║   ███╔╝    ██╔══╝  
