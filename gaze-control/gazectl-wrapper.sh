@@ -26,11 +26,6 @@ if ! hash docker &>/dev/null; then
     exit 1
 fi
 
-if [ ! -S ${SOCKET} ]; then
-    echo "[GAZE] The Docker daemon socket (${SOCKET}) could not be found. Please ensure it's running then run \"gaze bootstrap\" again."
-    exit 1
-fi
-
 # Always ensure we're running the latest push.
 if [ "$UPDATE" = true ] ; then
     docker pull "${NAMESPACE}/${IMAGE}:${TAG}"

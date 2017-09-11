@@ -85,7 +85,7 @@ class Bootstrap(object):
             sys.exit(1)
 
     def __call__(self):
-        self.helpers.print_ascii_banner()
+        print(self.helpers.print_ascii_banner())
 
         self.log("Welcome to GAZE! Let's prepare your system...", 'info')
 

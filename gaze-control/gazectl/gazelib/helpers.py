@@ -28,7 +28,7 @@ class GazeHelper(object):
 
     @staticmethod
     def print_ascii_banner():
-        print(colored(r'''
+        banner = colored(r'''
                                  __        .-.
                              .-"` .`'.    /\\|
                      _(\-/)_" ,  .   ,\  /\\\/
@@ -36,13 +36,15 @@ class GazeHelper(object):
                     `-.(Y).-`  ,  |  , |\.-`
                          /~/,_/~~~\,__.-`
                         ////~     //~\\
-                      ==`==`    ==`  ==`''', 'magenta'))
+                      ==`==`    ==`  ==`''', 'magenta')
 
-        print(colored(r'''  ██████╗    █████╗   ███████╗  ███████╗
+        banner += colored(r'''  ██████╗    █████╗   ███████╗  ███████╗
  ██╔════╝   ██╔══██╗  ╚══███╔╝  ██╔════╝
  ██║  ███╗  ███████║    ███╔╝   █████╗  
  ██║   ██║  ██╔══██║   ███╔╝    ██╔══╝  
  ╚██████╔╝  ██║  ██║  ███████╗  ███████╗
   ╚═════╝   ╚═╝  ╚═╝  ╚══════╝  ╚══════╝
    Turnkey Open Media Center
-                 ''', 'blue'))
+                 ''', 'blue')
+
+        return banner
