@@ -68,7 +68,7 @@ function run_test {
         '--help' \
         'bootstrap' \
         'down' \
-        'status' \
+        'destroy' \
     )
 
     for i in "${GAZECTL_COMMANDS[@]}"; do

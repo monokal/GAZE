@@ -26,9 +26,6 @@ class GazeContainer(object):
     """ Provides methods to interact with Docker Containers. """
 
     def __init__(self):
-        """
-        """
-
         self.log = GazeLog()
 
         # Instantiate a Docker client.
@@ -91,7 +88,7 @@ class GazeContainer(object):
 
         # If more than network was provided, attach the container to additional
         # networks using "Network.connect()" once it's running. Skip the first
-        # element/network as we've already added it during run.
+        # network as we've already added it during run.
         if len(networks) > 1:
             for i in networks[1:]:
                 self.log(
@@ -125,3 +122,9 @@ class GazeContainer(object):
                     sys.exit(1)
 
         return container
+
+    def stop(self):
+        pass
+
+    def rm(self):
+        pass

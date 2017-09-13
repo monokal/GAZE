@@ -30,6 +30,7 @@ from gazelib.network import GazeNetwork
 from gazelib.template import GazeTemplate
 from gazelib.volume import GazeVolume
 from gazelib.helpers import GazeHelper
+from gazelib.service import GazeServices
 
 
 # Initialise a global logger.
@@ -72,6 +73,7 @@ class Bootstrap(object):
 
         self.proxy = _Proxy(self.args)
         self.up = Up(self.args, self.config)
+        self.status = Status(self.args, self.config)
 
         # Instantiate a Docker client.
         try:
@@ -149,6 +151,7 @@ class Bootstrap(object):
                      'info')
         else:
             self.up()
+            self.status()
 
 
 class Up(object):
@@ -161,46 +164,7 @@ class Up(object):
         # self.compose = GazeCompose()
 
     def __call__(self):
-        #
-        # START OF SERVICE DEPLOYMENTS.
-        #
-
-        # Plex.
-        self.log("Deploying Plex service...", 'info')
-        self.container.run(
-            name="gaze_plex",
-            image='plexinc/pms-docker:latest',
-            environment=[
-                "PLEX_CLAIM=TODO",
-                "ADVERTISE_IP=0.0.0.0"
-            ],
-            volumes={
-                '/etc/localtime': {'bind': '/etc/localtime', 'mode': 'ro'}
-            },
-            networks=['gaze_internal'],
-            ports={'32400/tcp': 32400},
-            restart_policy={"Name": "on-failure", "MaximumRetryCount": 5},
-            labels={"gaze.service": "plex"}
-        )
-
-        self.log("Success!", 'success')
-
-        # Transmission.
-
-        # Sonarr.
-
-        # Radarr.
-
-        # Jackett.
-
-        # Ombi.
-
-        # GAZE Proxy.
-
-        #
-        # END OF SERVICE DEPLOYMENTS.
-        #
-
+        # Deploy all media center services.
         self.status()
 
 
@@ -212,12 +176,22 @@ class Down(object):
         # self.compose = GazeCompose()
 
     def __call__(self):
-        self.log("TODO: Removing GAZE services...", 'info')
+        self.log("TODO: Stopping GAZE services...", 'info')
         # self.compose.down('/opt/gazectl/gaze-compose.yaml')
         self.log(
             "GAZE services have been removed. Use the \"gaze up\" command to "
             "redeploy.", 'success'
         )
+
+
+class Destroy(object):
+    def __init__(self, args, config):
+        self.args = args
+        self.config = config
+        self.log = GazeLog()
+
+    def __call__(self):
+        self.log("Removing GAZE services...", 'info')
 
 
 # class Volume(object):
@@ -396,13 +370,26 @@ def main():
     # Start "down" subparser.
     parser_down = subparsers.add_parser(
         'down',
-        help='remove media center services'
+        help='stop media center services'
     )
 
     group_down = parser_down.add_argument_group('required arguments')
 
     parser_down.set_defaults(func=Down)
     # End "down" subparser.
+    #
+
+    #
+    # Start "destroy" subparser.
+    parser_destroy = subparsers.add_parser(
+        'destroy',
+        help='remove media center services'
+    )
+
+    group_destroy = parser_destroy.add_argument_group('required arguments')
+
+    parser_destroy.set_defaults(func=Destroy)
+    # End "destroy" subparser.
     #
 
     #
