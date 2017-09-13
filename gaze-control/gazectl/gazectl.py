@@ -25,13 +25,11 @@ from tabulate import tabulate
 # from gazelib.compose import GazeCompose
 from gazelib.config import GazeConfig
 from gazelib.container import GazeContainer
+from gazelib.helpers import GazeHelper
 from gazelib.log import GazeLog
 from gazelib.network import GazeNetwork
 from gazelib.template import GazeTemplate
 from gazelib.volume import GazeVolume
-from gazelib.helpers import GazeHelper
-from gazelib.service import GazeServices
-
 
 # Initialise a global logger.
 try:

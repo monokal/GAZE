@@ -15,8 +15,8 @@
         gaze.monokal.io
 """
 
-from .log import GazeLog
 from .container import GazeContainer
+from .log import GazeLog
 
 
 class GazeServices(object):
