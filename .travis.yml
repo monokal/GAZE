@@ -38,7 +38,7 @@ env:
     - GAZECTL_UPDATE=false # Don't pull the gazectl image if building locally.
 
 install:
-  - pip install mkdocs
+  - sudo pip install mkdocs
   - chmod +x gbuild.sh
   - chmod +x gaze-control/gazectl-wrapper.sh
 
