@@ -123,8 +123,9 @@ class GazeContainer(object):
 
         return container
 
-    def stop(self):
-        pass
+    def stop(self, name):
+        # TODO: Dafuq is there no stop method?
+        # self.docker_client.containers.stop()
 
     def rm(self):
         pass

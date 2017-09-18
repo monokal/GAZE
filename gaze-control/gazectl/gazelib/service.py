@@ -114,7 +114,7 @@ class GazePlex(object):
         :return:
         """
 
-        pass
+        self.container.stop(name=)
 
     def destroy(self):
         """
