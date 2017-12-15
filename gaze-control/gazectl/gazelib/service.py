@@ -97,12 +97,22 @@ class GazePlex(object):
                 "ADVERTISE_IP=0.0.0.0"
             ],
             volumes={
-                '/etc/localtime': {'bind': '/etc/localtime', 'mode': 'ro'}
+                '/etc/localtime': {
+                    'bind': '/etc/localtime',
+                    'mode': 'ro'
+                }
             },
             networks=['gaze_internal'],
-            ports={'32400/tcp': 32400},
-            restart_policy={"Name": "on-failure", "MaximumRetryCount": 5},
-            labels={"gaze.service": "plex"}
+            ports={
+                '32400/tcp': 32400
+            },
+            restart_policy={
+                "Name": "on-failure",
+                "MaximumRetryCount": 5
+            },
+            labels={
+                "gaze.service": "plex"
+            }
         )
 
         self.log("Success!", 'success')

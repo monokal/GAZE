@@ -20,8 +20,6 @@ import logging
 import sys
 
 import docker
-from tabulate import tabulate
-
 # from gazelib.compose import GazeCompose
 from gazelib.config import GazeConfig
 from gazelib.container import GazeContainer
@@ -30,6 +28,7 @@ from gazelib.log import GazeLog
 from gazelib.network import GazeNetwork
 from gazelib.template import GazeTemplate
 from gazelib.volume import GazeVolume
+from tabulate import tabulate
 
 # Initialise a global logger.
 try:
@@ -225,7 +224,9 @@ class Status(object):
         try:
             containers = self.docker_client.containers.list(
                 all=True,
-                filters={'label': 'gaze.service'}
+                filters={
+                    'label': 'gaze.service'
+                }
             )
 
         except docker.errors.APIError:

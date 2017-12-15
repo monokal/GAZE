@@ -16,7 +16,8 @@
 """
 import sys
 
-from jinja2 import Environment, FileSystemLoader
+from jinja2 import Environment, \
+    FileSystemLoader
 
 from .log import GazeLog
 
@@ -54,7 +55,8 @@ class GazeTemplate(object):
 
         self.log("Success!", 'success')
 
-        self.log("Writing template to file ({})...".format(destination), 'info')
+        self.log("Writing template to file ({})...".format(destination),
+                 'info')
         try:
             with open(destination, "w") as file:
                 file.write(rendered)

@@ -84,7 +84,9 @@ class GazeNetwork(object):
             try:
                 network = self.docker_client.networks.create(
                     name=name,
-                    labels={"gaze.network": name}
+                    labels={
+                        "gaze.network": name
+                    }
                 )
 
             except docker.errors.APIError:

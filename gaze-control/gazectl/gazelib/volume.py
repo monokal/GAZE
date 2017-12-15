@@ -107,7 +107,9 @@ class GazeVolume(object):
                     name=name,
                     driver=driver,
                     driver_opts=driver_opts,
-                    labels={"gaze.volume": name}
+                    labels={
+                        "gaze.volume": name
+                    }
                 )
 
             except docker.errors.APIError:

@@ -81,7 +81,8 @@ class GazeContainer(object):
 
         except docker.errors.APIError as e:
             self.log(
-                "The Docker daemon returned the following error:\n{}".format(e),
+                "The Docker daemon returned the following error:\n{}".format(
+                    e),
                 'exception'
             )
             sys.exit(1)
@@ -124,6 +125,7 @@ class GazeContainer(object):
         return container
 
     def stop(self, name):
+        pass
         # TODO: Dafuq is there no stop method?
         # self.docker_client.containers.stop()
 
