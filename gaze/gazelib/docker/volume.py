@@ -19,8 +19,8 @@ import sys
 
 import docker
 
-from .error import *
-from .log import GazeLog
+from gazelib.core.error import *
+from gazelib.core.log import GazeLog
 
 
 class GazeVolume(object):
@@ -112,14 +112,14 @@ class GazeVolume(object):
                     }
                 )
 
+                self.log("OK!", 'success')
+
             except docker.errors.APIError:
                 self.log(
                     "Failed to create Docker Volume ({}).".format(name),
                     'exception'
                 )
                 sys.exit(1)
-
-        self.log("Success!", 'success')
 
         # self.log("Got Docker Volume:\n{}".format(volume.attrs['Mountpoint']), 'debug')
         self.log("Got Docker Volume:\n{}".format(volume.attrs), 'debug')

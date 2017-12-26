@@ -22,3 +22,11 @@ class GazeVolumeNotFound(Exception):
 
 class GazeNetworkNotFound(Exception):
     pass
+
+
+class GazeContainerNotFound(Exception):
+    pass
+
+
+class GazeImageNotFound(Exception):
+    pass

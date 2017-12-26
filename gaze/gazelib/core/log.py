@@ -41,45 +41,49 @@ class GazeLog(object):
         # Unicode "prompt" characters:
         #     https://en.wikibooks.org/wiki/Unicode/List_of_useful_symbols
 
+        default_color = 'cyan'
+
         # INFO
         if level == 'info':
-            colour = 'cyan'
-            prompt = '\u25C9'  # Fish-eye.
+            colour = default_color
 
         # WARNING
         elif level == 'warning':
             colour = 'yellow'
-            prompt = '\u25C9'  # Fish-eye.
 
         # DEBUG
         elif level == 'debug':
             colour = 'magenta'
-            prompt = '\u25C9'  # Fish-eye.
 
         # SUCCESS
         elif level == 'success':
             level = 'info'
             colour = 'green'
-            prompt = '    \u2714 '  # Heavy check mark.
 
         # EXCEPTION
         elif level == 'exception':
             colour = 'red'
-            prompt = '\u25C9'  # Fish-eye.
+
+        # RAW
+        elif level == 'raw':
+            level = 'info'
+            colour = default_color
 
         # If we don't recognise the level, format it as an exception.
         else:
             colour = 'red'
-            prompt = '\u25C9'  # Fish-eye.
-
-        if not prompt:
-            prompt = ''
 
         target_method = getattr(self.logger, level)
 
-        target_method(
-            colored(
-                " {} {}".format(prompt, message),
-                colour
+        if prompt:
+            target_method(
+                "{} {}".format(
+                    colored('GAZE >', default_color, attrs=['bold']),
+                    colored(message, colour)
+                )
             )
-        )
+
+        else:
+            target_method(
+                "{}".format(colored(message, colour))
+            )

@@ -31,7 +31,6 @@ class GazeTemplate(object):
     def render(self, template, items, destination):
         """
         Render a Jinja2 template to file.
-
         :param template: String: Path of the Jinja2 template file.
         :param items: Dict: Values required to render the template.
         :param destination: String: Path of the rendered file.

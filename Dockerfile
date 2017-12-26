@@ -10,40 +10,43 @@
 #   ==`==`   ==`   ==`
 #     gaze.monokal.io
 
-FROM python:3.6.1-alpine
+FROM python:alpine
 
 # Alpine packages to install.
 ENV APK_PACKAGES \
     alpine-sdk \
     libffi-dev \
     openssl-dev \
-    tzdata
+    tzdata \
+    nodejs \
+    nginx
 
 # PyPI packages to install.
 ENV PIP_PACKAGES \
     docker \
-    docker-compose \
     termcolor \
     jinja2 \
-    tabulate
+    tabulate \
+    pyyaml \
+    flask \
+    gunicorn
 
 # Install the Alpine packages.
 RUN apk --no-cache add $APK_PACKAGES
 
-# Configure the system time.
-RUN apk add tzdata && \
+# Install the above packages, configure system time and create the gazectl directory.
+RUN apk --no-cache add $APK_PACKAGES && \
+    pip --no-cache-dir install $PIP_PACKAGES && \
     cp /usr/share/zoneinfo/Europe/London /etc/localtime && \
     echo "Europe/London" > /etc/timezone && \
-    apk del tzdata
-
-# Install the PyPI packages.
-RUN pip install $PIP_PACKAGES
-
-# Drop gazectl in place.
-RUN mkdir -p /opt/gazectl
+    apk del tzdata && \
+    mkdir -p /opt/gazectl
 
 WORKDIR /opt/gazectl
+COPY gaze .
 
-COPY gazectl .
+# Compile Python source, then remove it.
+RUN python -m compileall -b .; \
+    find . -name "*.py" -type f -print -delete
 
-ENTRYPOINT ["python", "gazectl.py"]
+ENTRYPOINT ["python", "gazectl.pyc"]

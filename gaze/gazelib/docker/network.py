@@ -19,12 +19,12 @@ import sys
 
 import docker
 
-from .error import *
-from .log import GazeLog
+from gazelib.core.error import *
+from gazelib.core.log import GazeLog
 
 
 class GazeNetwork(object):
-    """ Provides methods to interact with Docker Network. """
+    """ Provides methods to manage Docker Networks. """
 
     def __init__(self):
         self.log = GazeLog()
@@ -36,15 +36,29 @@ class GazeNetwork(object):
             )
 
         except docker.errors.APIError:
-            self.log("Failed to instantiate the Docker client.", 'exception')
+            self.log("Failed to instantiate a Docker client.", 'exception')
             sys.exit(1)
+
+    def list(self):
+        """
+        Return all Docker Networks.
+        :return networks: List: Docker Network objects.
+        """
+
+        try:
+            networks = self.docker_client.networks.list()
+
+        except docker.errors.APIError:
+            self.log("Failed to get Docker Networks.", 'exception')
+            sys.exit(1)
+
+        return networks
 
     def get(self, network_id):
         """
         Get information about a Docker Network.
-
-        :param network_id: (str) ID of the Docker Network.
-        :return volume: (object) A Network object.
+        :param network_id: String: ID of the Docker Network.
+        :return network: A Network object.
         """
 
         try:
@@ -53,10 +67,6 @@ class GazeNetwork(object):
             )
 
         except docker.errors.NotFound:
-            self.log(
-                "The Docker Network ({}) does not already exist.".format(
-                    network_id), 'info'
-            )
             raise GazeNetworkNotFound
 
         except docker.errors.APIError:
@@ -71,23 +81,24 @@ class GazeNetwork(object):
     def create(self, name):
         """
         Create a Docker Network.
-
         :param name: (str) Name of the Docker Network.
         :return: (object) A Network object.
         """
 
         try:
             network = self.get(name)
+            self.log(
+                "The Docker Network ({}) already exists.".format(name), 'info'
+            )
 
         except GazeNetworkNotFound:
             self.log("Creating Docker Network ({})...".format(name), 'info')
             try:
                 network = self.docker_client.networks.create(
-                    name=name,
-                    labels={
-                        "gaze.network": name
-                    }
+                    name=name
                 )
+
+                self.log("OK!", 'success')
 
             except docker.errors.APIError:
                 self.log(
@@ -95,12 +106,6 @@ class GazeNetwork(object):
                     'exception'
                 )
                 sys.exit(1)
-
-        self.log(
-            "The Docker Network ({}) already exists.".format(name), 'info'
-        )
-
-        self.log("Success!", 'success')
 
         self.log("Got Docker Network:\n{}".format(network.attrs), 'debug')
         return network

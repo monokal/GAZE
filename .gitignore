@@ -129,8 +129,8 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
-gaze-control/docs/source/_static/
-gaze-control/docs/source/_templates/
+gaze/docs/source/_static/
+gaze/docs/source/_templates/
 gaze-web/gazeweb/
 !/docs/build/
 /site/

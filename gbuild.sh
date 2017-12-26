@@ -34,11 +34,12 @@ EOF
 
 function check_deps {
     # Dependencies which should be in PATH.
+    # TODO: Run mkdocs in the container to remove the local dependency.
     DEPS=( 'docker' 'mkdocs' )
 
     for i in "${DEPS[@]}"; do
         if ! hash "${i}" 2>/dev/null; then
-            echo -e "${RED}[GBUILD] "${i}" is required to build GAZE. Please install it then try again.${NONE}"
+            echo -e "${RED}GBUILD > "${i}" is required to build GAZE. Please install it then try again.${NONE}"
             exit 1
         fi
     done
@@ -46,53 +47,50 @@ function check_deps {
 
 function run_build {
     # Build Docker Image.
-    echo -e "${MAGENTA}[GBUILD] Building the ${NAMESPACE}/${IMAGE}:${TAG} Docker Image...${NONE}"
-    docker build -t "${NAMESPACE}/${IMAGE}:${TAG}" gaze-control/
-    echo -e "${GREEN}[GBUILD] OK.${NONE}"
+    echo -e "${MAGENTA}GBUILD > Building the ${NAMESPACE}/${IMAGE}:${TAG} Docker Image...${NONE}"
+    docker build -t "${NAMESPACE}/${IMAGE}:${TAG}" .
+    echo -e "${GREEN}GBUILD > OK.${NONE}"
 
     # Copy docs/index.md to README.md
-    echo -e "${MAGENTA}[GBUILD] Copying docs/index.md to README.md...${NONE}"
+    echo -e "${MAGENTA}GBUILD > Copying docs/index.md to README.md...${NONE}"
     cp -v docs/index.md README.md
-    echo -e "${GREEN}[GBUILD] OK.${NONE}"
+    echo -e "${GREEN}GBUILD > OK.${NONE}"
 
     # Build docs.
-    echo -e "${MAGENTA}[GBUILD] Building documentation...${NONE}"
+    echo -e "${MAGENTA}GBUILD > Building documentation...${NONE}"
     mkdocs build --clean
-    echo -e "${GREEN}[GBUILD] OK.${NONE}"
+    echo -e "${GREEN}GBUILD > OK.${NONE}"
 }
 
 function run_test {
-    echo -e "${MAGENTA}[GBUILD] Running tests...${NONE}"
+    echo -e "${MAGENTA}GBUILD > Running tests...${NONE}"
 
     GAZECTL_COMMANDS=( \
-        '--help' \
         'bootstrap' \
-        'down' \
-        'destroy' \
     )
 
     for i in "${GAZECTL_COMMANDS[@]}"; do
-        GAZECTL_VERSION="${TAG}" GAZECTL_UPDATE=${UPDATE} gaze-control/gazectl-wrapper.sh ${i}
+        GAZECTL_VERSION="${TAG}" GAZECTL_UPDATE=${UPDATE} ./wrapper.sh ${i}
     done
 
-    echo -e "${GREEN}[GBUILD] OK.${NONE}"
+    echo -e "${GREEN}GBUILD > OK.${NONE}"
 }
 
 function run_push {
     # Push Docker Image.
-    echo -e "${MAGENTA}[GBUILD] Pushing the ${NAMESPACE}/${IMAGE}:${TAG} Docker Image...${NONE}"
+    echo -e "${MAGENTA}GBUILD > Pushing the ${NAMESPACE}/${IMAGE}:${TAG} Docker Image...${NONE}"
     docker push "${NAMESPACE}/${IMAGE}:${TAG}"
-    echo -e "${GREEN}[GBUILD] OK.${NONE}"
+    echo -e "${GREEN}GBUILD > OK.${NONE}"
 
     # Push docs.
-    echo -e "${MAGENTA}[GBUILD] Pushing documentation...${NONE}"
+    echo -e "${MAGENTA}GBUILD > Pushing documentation...${NONE}"
     mkdocs gh-deploy
-    echo -e "${GREEN}[GBUILD] OK.${NONE}"
+    echo -e "${GREEN}GBUILD > OK.${NONE}"
 
     # Push everything else.
-    echo -e "${MAGENTA}[GBUILD] Pushing all changes to Git...${NONE}"
+    echo -e "${MAGENTA}GBUILD > Pushing all changes to Git...${NONE}"
     git add -A && git commit -m "Pushed by gbuild." && git push
-    echo -e "${GREEN}[GBUILD] OK.${NONE}"
+    echo -e "${GREEN}GBUILD > OK.${NONE}"
 }
 
 # Environment variable overrides.
@@ -128,4 +126,4 @@ case $1 in
         exit 1
 esac
 
-echo -e "${GREEN}[GBUILD] Finished.${NONE}"
+echo -e "${GREEN}GBUILD > Finished.${NONE}"
