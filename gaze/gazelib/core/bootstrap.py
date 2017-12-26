@@ -18,6 +18,7 @@
 import sys
 
 import docker
+
 from gazelib.core.helpers import GazeHelper
 from gazelib.core.log import GazeLog
 from gazelib.docker.container import GazeContainer

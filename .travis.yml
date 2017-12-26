@@ -40,7 +40,7 @@ env:
 install:
   - sudo pip install mkdocs
   - chmod +x gbuild.sh
-  - chmod +x gaze-control/gazectl-wrapper.sh
+  - chmod +x wrapper.sh
 
 script:
   - ./gbuild.sh build
