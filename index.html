@@ -62,6 +62,14 @@
 
     <li class="toctree-l2"><a href="#usage">Usage</a></li>
     
+        <ul>
+        
+            <li><a class="toctree-l3" href="#web-interface">Web interface</a></li>
+        
+            <li><a class="toctree-l3" href="#command-line-interface">Command-line interface</a></li>
+        
+        </ul>
+    
 
     <li class="toctree-l2"><a href="#documentation">Documentation</a></li>
     
@@ -85,12 +93,7 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="monitor/">GAZE Monitor</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="proxy/">GAZE Proxy</a>
+    <a class="" href="web/">GAZE Web</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -136,7 +139,7 @@
                 <blockquote>
 <p><em>Please note that GAZE is currently under active alpha development and as such is <strong>likely to be in a broken state</strong>.</em></p>
 </blockquote>
-<p><img alt="GAZE logo" src="https://raw.githubusercontent.com/monokal/GAZE/master/docs/img/gaze.png" title="GAZE" /></p>
+<p><img alt="GAZE banner" src="https://raw.githubusercontent.com/monokal/GAZE/master/docs/img/github-banner.png" title="GAZE" /></p>
 <p><a href="https://travis-ci.org/monokal/GAZE"><img alt="Build Status" src="https://travis-ci.org/monokal/GAZE.svg?branch=master" /></a> <a href="https://hub.docker.com/r/monokal/gazectl/"><img alt="Docker Build Status" src="https://img.shields.io/badge/docker%20build-automated-brightgreen.svg" /></a> <a href="http://gaze.readthedocs.io/en/latest/?badge=latest"><img alt="Documentation Status" src="https://readthedocs.org/projects/gaze/badge/?version=latest" /></a> <a href="https://github.com/monokal/gaze"><img alt="GitHub" src="https://img.shields.io/badge/code-github-blue.svg" /></a> <a href="https://gitter.im/gaze-tomc/"><img alt="Chat on Gitter" src="https://img.shields.io/badge/chat-gitter-blue.svg" /></a> <a href="https://github.com/monokal/GAZE/blob/master/LICENSE"><img alt="GPLv3 license" src="https://img.shields.io/badge/license-GPLv3-blue.svg" /></a></p>
 <h2 id="whats-gaze">What's GAZE?</h2>
 <p>It's a true turnkey open-source media center solution. It will deploy, configure and network the following services, making use of Docker's ecosystem:</p>
@@ -146,24 +149,25 @@
 <li><a href="https://github.com/Jackett/Jackett">Jackett</a>, to manage torrent trackers.</li>
 <li><a href="https://transmissionbt.com/">Transmission</a>, a torrent client.</li>
 <li><a href="https://www.plex.tv/">Plex</a>, to encode and stream media to devices.</li>
-<li><a href="https://github.com/tidusjar/Ombi">Ombi</a>, a unified web-UI for managing Sonarr/Radarr/Plex/etc.</li>
 </ul>
 <p>Additionally, to aggregate all of the above in to a single user-friendly service, we also provide:</p>
 <ul>
-<li><a href="http://gaze.monokal.io/proxy">GAZE Proxy</a>, a proxy service and web-UI to provide easy access to all of the above.</li>
-<li><a href="http://gaze.monokal.io/monitor">GAZE Monitor</a>, a Grafana dashboard to display service metrics and alerts.</li>
 <li><a href="http://gaze.monokal.io/control">GAZE Control</a>, a command-line tool to manage the full stack.</li>
+<li><a href="http://gaze.monokal.io/web">GAZE Web</a>, a web-UI to aggregate all of the above.</li>
 </ul>
 <h2 id="installation">Installation</h2>
 <p>Although GAZE should run on any system with Docker, we test builds on <strong>Ubuntu 16.04 LTS and later</strong> so suggest it as a known good configuration.</p>
 <p>To install the <code>gaze</code> command-line tool and deploy the full media center stack, simply paste the following command into a shell. On completion, you will be presented with all the details you need to access your services:</p>
-<pre><code class="bash">curl -L https://raw.githubusercontent.com/monokal/GAZE/master/gaze-control/gazectl-wrapper.sh &gt; /usr/local/bin/gaze &amp;&amp; chmod +x /usr/local/bin/gaze &amp;&amp; gaze bootstrap
+<pre><code class="bash">curl -L https://raw.githubusercontent.com/monokal/GAZE/master/wrapper.sh &gt; /usr/local/bin/gaze &amp;&amp; chmod +x /usr/local/bin/gaze &amp;&amp; gaze bootstrap
 </code></pre>
 
 <p>If you get a <code>Permission denied</code> error, try <code>sudo -i</code> then the above command again.</p>
-<p><strong>That's it!</strong></p>
 <h2 id="usage">Usage</h2>
-<p>To make life easy, the <code>gaze</code> command-line tool can be used to manage the full stack of media center services. Usage can be seen using the following command:</p>
+<h4 id="web-interface">Web interface</h4>
+<p>GAZE comes complete with a web-UI which can be accessed via browser at https://localhost:</p>
+<p>Further documentation on GAZE Web can be <a href="http://gaze.monokal.io/web">found here</a>.</p>
+<h4 id="command-line-interface">Command-line interface</h4>
+<p>To make life easy, the <code>gaze</code> command-line tool can be used to manage the full stack of media center services, including the GAZE web-UI service. Usage can be seen using the following command:</p>
 <pre><code class="bash">gaze --help
 </code></pre>
 
@@ -238,5 +242,5 @@ By using GAZE, you agree that you will not share or take any action using GAZE t
 
 <!--
 MkDocs version : 0.17.2
-Build Date UTC : 2017-12-26 11:51:33
+Build Date UTC : 2018-01-02 02:42:34
 -->
