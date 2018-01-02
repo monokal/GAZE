@@ -84,7 +84,7 @@ class GazeBootstrap(object):
             )
             sys.exit(1)
 
-        info_items = (
+        config_items = (
             ('System time', 'SystemTime'),
             ('Server version', 'ServerVersion'),
             ('Operating System', 'OperatingSystem'),
@@ -97,7 +97,7 @@ class GazeBootstrap(object):
             ('Debug', 'Debug'),
         )
 
-        for i in info_items:
+        for i in config_items:
             self.log("{}: {}".format(i[0], docker_info[i[1]]), 'success')
 
         # Bootstrap the "gaze-share" Docker Volume.

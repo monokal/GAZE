@@ -69,10 +69,6 @@ class GazeVolume(object):
             )
 
         except docker.errors.NotFound:
-            self.log(
-                "The Docker Volume ({}) does not already exist.".format(
-                    volume_id), 'info'
-            )
             raise GazeVolumeNotFound
 
         except docker.errors.APIError:

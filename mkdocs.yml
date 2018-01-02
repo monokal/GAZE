@@ -15,6 +15,5 @@ copyright: "Copyright &copy; monokal.io"
 pages:
   - Quick Start: index.md
   - GAZE Control: control.md
-  - GAZE Monitor: monitor.md
-  - GAZE Proxy: proxy.md
+  - GAZE Web: web.md
   - Development: development.md
